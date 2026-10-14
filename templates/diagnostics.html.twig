@@ -1,0 +1,145 @@
+{% extends '@mailbridge/layout.html.twig' %}
+{% import '@mailbridge/macros.html.twig' as f %}
+
+{% block content %}
+   <div class="row g-3">
+      <div class="col-12 col-xl-7">
+         {# ---------- Verificações ---------- #}
+         <div class="card mb-3">
+            <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Verificações', 'mailbridge') }}</h2></div>
+            <ul class="list-group list-group-flush">
+               {% for check in checks %}
+                  <li class="list-group-item d-flex flex-wrap align-items-center gap-2">
+                     <span class="flex-fill tm-minw">
+                        {{ f.level_icon(check.level) }}
+                        <strong>{{ check.title }}</strong>
+                        {% if check.detail %}<span class="d-block tm-soft">{{ check.detail }}</span>{% endif %}
+                     </span>
+                     {% if check.action and check.url %}
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ check.url }}">{{ check.action }}</a>
+                     {% endif %}
+                  </li>
+               {% endfor %}
+            </ul>
+         </div>
+
+         {# ---------- Alterações recentes ---------- #}
+         <div class="card">
+            <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Quem alterou o quê', 'mailbridge') }}</h2></div>
+            {% if changes is empty %}
+               <div class="card-body tm-soft">{{ __('Nenhuma alteração registrada ainda.', 'mailbridge') }}</div>
+            {% else %}
+               <div class="tm-table-wrap">
+                  <table class="table table-vcenter tm-table mb-0">
+                     <caption class="visually-hidden">{{ __('Últimas alterações na configuração de e-mail e nas regras', 'mailbridge') }}</caption>
+                     <thead>
+                        <tr>
+                           <th scope="col">{{ __('Quando', 'mailbridge') }}</th>
+                           <th scope="col">{{ __('Quem', 'mailbridge') }}</th>
+                           <th scope="col">{{ __('O quê', 'mailbridge') }}</th>
+                           <th scope="col">{{ __('De', 'mailbridge') }}</th>
+                           <th scope="col">{{ __('Para', 'mailbridge') }}</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        {% for change in changes %}
+                           <tr>
+                              <td class="text-nowrap">{{ change.date }}</td>
+                              <td>{{ change.user }}</td>
+                              <td class="tm-break">{{ change.what }}</td>
+                              <td class="tm-break tm-soft">{{ change.old }}</td>
+                              <td class="tm-break">{{ change.new }}</td>
+                           </tr>
+                        {% endfor %}
+                     </tbody>
+                  </table>
+               </div>
+               <div class="card-footer tm-soft">{{ __('São as 15 alterações mais recentes guardadas no histórico do próprio GLPI. Senhas nunca aparecem.', 'mailbridge') }}</div>
+            {% endif %}
+         </div>
+      </div>
+
+      <div class="col-12 col-xl-5">
+         {# ---------- Cópia da configuração ---------- #}
+         <div class="card mb-3">
+            <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Cópia da configuração', 'mailbridge') }}</h2></div>
+            <div class="card-body">
+               <p class="tm-soft">{{ __('Guarda num arquivo as regras, os modelos, os ajustes e o servidor de envio. A senha do servidor nunca vai no arquivo.', 'mailbridge') }}</p>
+               {% if tm.can.manage %}
+                  <a class="btn btn-outline-secondary" href="{{ export_url }}">
+                     <i class="ti ti-download" aria-hidden="true"></i> {{ __('Exportar', 'mailbridge') }}
+                  </a>
+
+                  <hr>
+                  <form method="post" action="{{ tm.action_url }}" enctype="multipart/form-data">
+                     <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                     <input type="hidden" name="action" value="import">
+                     <div class="mb-3">
+                        <label class="form-label" for="tm_file">{{ __('Importar de um arquivo', 'mailbridge') }}</label>
+                        <input class="form-control" type="file" id="tm_file" name="file" accept=".json,application/json" aria-describedby="tm_file_help">
+                        <div class="form-text" id="tm_file_help">{{ __('O arquivo .json gerado pelo botão Exportar. Regras com o mesmo nome e acontecimento são atualizadas; as outras são criadas.', 'mailbridge') }}</div>
+                     </div>
+                     <label class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="with_sending" value="1">
+                        <span class="form-check-label">{{ __('Importar também o servidor de envio e os remetentes', 'mailbridge') }}</span>
+                     </label>
+                     <button type="submit" class="btn btn-outline-secondary"
+                             data-tm-confirm="{{ __('Importar este arquivo? Regras com o mesmo nome serão atualizadas com o conteúdo do arquivo.', 'mailbridge') }}">
+                        <i class="ti ti-upload" aria-hidden="true"></i> {{ __('Importar', 'mailbridge') }}
+                     </button>
+                  </form>
+               {% else %}
+                  <p class="mb-0">{{ __('Seu perfil não tem permissão para exportar ou importar.', 'mailbridge') }}</p>
+               {% endif %}
+            </div>
+         </div>
+
+         {# ---------- Manutenção ---------- #}
+         {% if tm.can.manage %}
+            <div class="card mb-3">
+               <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Manutenção', 'mailbridge') }}</h2></div>
+               <div class="card-body">
+                  <form method="post" action="{{ tm.action_url }}" class="mb-3">
+                     <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                     <input type="hidden" name="action" value="save_options">
+                     {{ f.switch('purge_on_uninstall', __('Apagar os dados do MailBridge ao desinstalar o plugin', 'mailbridge'), purge, {
+                        help: __('Desligado (recomendado): ao desinstalar, regras, modelos e ajustes ficam guardados para uma reinstalação.', 'mailbridge'),
+                        confirm_off: ''
+                     }) }}
+                     <button type="submit" class="btn btn-outline-secondary">{{ __('Salvar', 'mailbridge') }}</button>
+                  </form>
+                  <hr>
+                  <form method="post" action="{{ tm.action_url }}">
+                     <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                     <input type="hidden" name="action" value="restore_defaults">
+                     <p class="tm-soft">{{ __('Volta os ajustes próprios do MailBridge ao padrão (avisos ligados, sem remetente próprio, sem listas, sem escolhas por entidade). Não mexe nas regras, nos modelos nem no servidor de envio.', 'mailbridge') }}</p>
+                     <button type="submit" class="btn btn-outline-danger"
+                             data-tm-confirm="{{ __('Restaurar os ajustes do MailBridge para o padrão? Remetente próprio, listas e escolhas por entidade serão apagados.', 'mailbridge') }}">
+                        <i class="ti ti-arrow-back-up" aria-hidden="true"></i> {{ __('Restaurar padrões', 'mailbridge') }}
+                     </button>
+                  </form>
+               </div>
+            </div>
+         {% endif %}
+
+         {# ---------- Permissões e versões ---------- #}
+         <div class="card">
+            <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Permissões e versões', 'mailbridge') }}</h2></div>
+            <div class="card-body">
+               <p>{{ __('Quem pode alterar a configuração geral do GLPI tem acesso total ao MailBridge. Para liberar só uma parte a outros perfis, use a aba MailBridge no cadastro do perfil:', 'mailbridge') }}</p>
+               <ul>
+                  {% for label in rights %}<li>{{ label }}</li>{% endfor %}
+               </ul>
+               <a class="btn btn-sm btn-outline-secondary mb-3" href="{{ profile_url }}">{{ __('Abrir os perfis', 'mailbridge') }}</a>
+               {% if imported %}
+                  <p class="tm-soft">
+                     {{ __('Os dados do plugin antigo (Techmail %1$s) foram trazidos em %2$s: %3$d regras, %4$d traduções de modelos e %5$d perfis com permissão. Nada do plugin antigo foi apagado.', 'mailbridge')|format(imported.version, imported.date, imported.rules, imported.translations, imported.rights) }}
+                     {{ __('Depois de conferir que está tudo aqui, desinstale o Techmail em Configurar > Plugins.', 'mailbridge') }}
+                  </p>
+               {% endif %}
+               <p class="tm-soft mb-0">MailBridge {{ about.plugin }} · GLPI {{ about.glpi }} · PHP {{ about.php }}</p>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

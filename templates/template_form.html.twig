@@ -1,0 +1,169 @@
+{% extends '@mailbridge/layout.html.twig' %}
+{% import '@mailbridge/macros.html.twig' as f %}
+
+{% block content %}
+   <p class="mb-2">
+      <a href="{{ back_url }}"><i class="ti ti-arrow-left" aria-hidden="true"></i> {{ __('Voltar para os modelos', 'mailbridge') }}</a>
+   </p>
+   <h2 class="h3 mb-1 tm-break">{{ __('Mensagem de: %s', 'mailbridge')|format(rule_name) }}</h2>
+   <p class="tm-soft">
+      {{ __('Enviada quando: %s.', 'mailbridge')|format(event_label) }}
+      <a href="{{ rule_url }}">{{ __('Ver quem recebe', 'mailbridge') }}</a>
+   </p>
+
+   {# ---------- Idiomas ---------- #}
+   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+      <ul class="nav nav-pills tm-nav flex-fill" aria-label="{{ __('Idiomas do modelo', 'mailbridge') }}">
+         {% for item in tabs %}
+            <li class="nav-item">
+               <a class="nav-link{{ item.current ? ' active' }}" href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>{{ item.label }}</a>
+            </li>
+         {% endfor %}
+      </ul>
+      {% if addable and tm.can.manage %}
+         <form method="get" action="{{ base_url }}" class="d-flex gap-2">
+            <input type="hidden" name="section" value="templates">
+            <input type="hidden" name="rule" value="{{ id }}">
+            <label class="visually-hidden" for="tm_add_lang">{{ __('Idioma da nova tradução', 'mailbridge') }}</label>
+            <select class="form-select form-select-sm" id="tm_add_lang" name="lang">
+               {% for code, name in addable %}<option value="{{ code }}"{{ code == suggested ? ' selected' }}>{{ name }}</option>{% endfor %}
+            </select>
+            <button type="submit" class="btn btn-sm btn-outline-secondary text-nowrap">
+               <i class="ti ti-language" aria-hidden="true"></i> {{ __('Traduzir', 'mailbridge') }}
+            </button>
+         </form>
+      {% endif %}
+   </div>
+   {% if lang %}
+      <p class="tm-soft">{{ __('Quem usa o GLPI em %s recebe esta versão. Os demais recebem o modelo padrão.', 'mailbridge')|format(lang_name) }}</p>
+   {% endif %}
+
+   <div class="row g-3">
+      <div class="col-12 col-xl-7">
+         <form method="post" action="{{ tm.action_url }}" id="tm-template-form" data-track-changes="true" novalidate
+               data-tm-default="{{ defaults|json_encode }}">
+            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="save_template">
+            <input type="hidden" name="id" value="{{ id }}">
+            <input type="hidden" name="lang" value="{{ lang }}">
+
+            {{ f.error_summary(errors) }}
+
+            <div class="card mb-3">
+               <div class="card-body">
+                  {{ f.input('subject', __('Assunto', 'mailbridge'), v.subject, {
+                     errors: errors, required: true, maxlength: 255,
+                     msg_required: __('Escreva o assunto do e-mail. Exemplo: Chamado ##ticket.id## atribuído a você', 'mailbridge'),
+                     help: __('A primeira coisa que a pessoa vê. Pode usar variáveis, como ##ticket.id##.', 'mailbridge')
+                  }) }}
+
+                  <div class="mb-3 tm-field">
+                     <label class="form-label required" for="tm_body">{{ __('Mensagem', 'mailbridge') }}</label>
+                     <textarea class="form-control font-monospace{{ errors.body is defined ? ' is-invalid' }}" id="tm_body" name="body" rows="14"
+                               aria-describedby="tm_body_err tm_body_help" data-tm-rich="{{ rich|json_encode }}">{{ v.body }}</textarea>
+                     <div class="invalid-feedback{{ errors.body is defined ? ' d-block' }}" id="tm_body_err">{{ errors.body|default('') }}</div>
+                     <div class="form-text" id="tm_body_help">{{ __('Escreva como num editor de texto. As variáveis (entre ##) são trocadas pelos dados do chamado na hora do envio.', 'mailbridge') }}</div>
+                  </div>
+
+                  <fieldset class="mb-3">
+                     <legend class="form-label">{{ __('Variáveis: clique para inserir onde está o cursor', 'mailbridge') }}</legend>
+                     <div class="tm-vars">
+                        {% for item in placeholders %}
+                           <button type="button" class="btn btn-sm btn-outline-secondary" data-tm-var="{{ item.name }}"
+                                   title="{{ item.description }}"
+                                   aria-label="{{ __('Inserir %1$s: %2$s', 'mailbridge')|format('##' ~ item.name ~ '##', item.description) }}">
+                              ##{{ item.name }}##
+                           </button>
+                        {% endfor %}
+                     </div>
+                     <div class="form-text">{{ __('Passe o mouse sobre uma variável para ver o que ela traz. Só estas variáveis funcionam.', 'mailbridge') }}</div>
+                  </fieldset>
+
+                  <details class="tm-advanced"{{ v.body_text ? ' open' }}>
+                     <summary>{{ __('Opções avançadas: versão em texto simples', 'mailbridge') }}</summary>
+                     {{ f.textarea('body_text', __('Versão em texto simples (opcional)', 'mailbridge'), v.body_text, {
+                        errors: errors, rows: 8, mono: true, class: 'mb-0',
+                        help: __('Para programas de e-mail que não mostram formatação. Em branco, é gerada sozinha a partir da mensagem acima.', 'mailbridge')
+                     }) }}
+                  </details>
+               </div>
+            </div>
+
+            {% if tm.can.manage %}
+               <div class="card tm-savebar mb-3">
+                  <div class="card-body d-flex flex-wrap align-items-center gap-2 py-2">
+                     <button type="submit" class="btn btn-primary">
+                        <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ __('Salvar', 'mailbridge') }}
+                     </button>
+                     <button type="button" class="btn btn-outline-secondary" id="tm-restore"
+                             data-tm-question="{{ __('Trocar o assunto e a mensagem pelo texto padrão deste acontecimento? O texto atual só é substituído de vez quando você clicar em Salvar.', 'mailbridge') }}"
+                             data-tm-done="{{ __('Texto padrão colocado no editor. Clique em Salvar para manter.', 'mailbridge') }}">
+                        <i class="ti ti-arrow-back-up" aria-hidden="true"></i> {{ __('Restaurar padrão', 'mailbridge') }}
+                     </button>
+                     {% if is_translation %}
+                        <button type="submit" name="action" value="delete_translation" class="btn btn-outline-danger"
+                                data-tm-confirm="{{ __('Apagar a tradução em %s? Quem usa esse idioma volta a receber o modelo padrão. Isso não pode ser desfeito.', 'mailbridge')|format(lang_name) }}">
+                           <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Apagar esta tradução', 'mailbridge') }}
+                        </button>
+                     {% endif %}
+                     <span class="tm-soft" id="tm-dirty-note" hidden>{{ __('Há alterações não salvas.', 'mailbridge') }}</span>
+                  </div>
+               </div>
+            {% endif %}
+
+            {% if tm.can.test %}
+               <div class="card">
+                  <div class="card-header"><h3 class="card-title h4 m-0">{{ __('Enviar um teste deste modelo', 'mailbridge') }}</h3></div>
+                  <div class="card-body">
+                     <div class="d-flex flex-wrap align-items-end gap-2">
+                        <div class="flex-fill tm-minw">
+                           {{ f.input('test_email', __('Enviar o teste para', 'mailbridge'), test_email, {
+                              type: 'email', validate: 'email', autocomplete: 'email', class: 'mb-0 tm-skip-validate',
+                              msg: __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge'),
+                              placeholder: 'voce@suaempresa.com.br',
+                              help: __('Vai com dados de exemplo e com o que está no editor agora, mesmo sem salvar.', 'mailbridge')
+                           }) }}
+                        </div>
+                     </div>
+                     <button type="submit" name="action" value="test_template" id="tm-test-template" class="btn btn-outline-secondary mt-2">
+                        <i class="ti ti-send" aria-hidden="true"></i> {{ __('Enviar teste deste modelo', 'mailbridge') }}
+                     </button>
+                     <div id="tm-test-result" class="mt-3" role="status" aria-live="polite">
+                        {% include '@mailbridge/_test_result.html.twig' %}
+                     </div>
+                  </div>
+               </div>
+            {% endif %}
+         </form>
+      </div>
+
+      {# ---------- Prévia ---------- #}
+      <div class="col-12 col-xl-5">
+         <div class="card">
+            <div class="card-header">
+               <h3 class="card-title h4 m-0">{{ __('Prévia com dados de exemplo', 'mailbridge') }}</h3>
+               <button type="button" class="btn btn-sm btn-outline-secondary ms-auto" id="tm-preview-now" form="tm-template-form">
+                  <i class="ti ti-refresh" aria-hidden="true"></i> {{ __('Atualizar', 'mailbridge') }}
+               </button>
+            </div>
+            <div class="card-body">
+               <p class="tm-soft mb-2" id="tm-preview-status" role="status" aria-live="polite"></p>
+               <p class="mb-2 tm-break">
+                  <span class="tm-soft">{{ __('Assunto:', 'mailbridge') }}</span>
+                  <strong id="tm-preview-subject">{{ preview.subject }}</strong>
+               </p>
+               <iframe class="tm-preview" id="tm-preview-frame" sandbox="" title="{{ __('Prévia do e-mail', 'mailbridge') }}"
+                       srcdoc="{{ '<!doctype html><meta charset="utf-8"><body style="font-family:sans-serif;font-size:14px;margin:12px;color:#222;background:#fff">' ~ preview.html ~ '</body>' }}"></iframe>
+               <div class="alert alert-warning mt-2 mb-0" id="tm-preview-unknown"{{ unknown ? '' : ' hidden' }}>
+                  {{ __('Estas variáveis não existem e vão aparecer como texto:', 'mailbridge') }}
+                  <span class="fw-bold">{{ unknown ? '##' ~ unknown|join('##, ##') ~ '##' : '' }}</span>
+               </div>
+               <details class="mt-2">
+                  <summary>{{ __('Ver a versão em texto simples', 'mailbridge') }}</summary>
+                  <pre class="tm-pre mb-0" id="tm-preview-text">{{ preview.text }}</pre>
+               </details>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

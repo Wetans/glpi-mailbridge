@@ -1,0 +1,2815 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MailBridge\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ajax/action.php
+msgid "O MailBridge está desativado. Ative-o em Configurar > Plugins."
+msgstr "MailBridge is turned off. Activate it in Setup > Plugins."
+
+#: src/Actions.php
+msgid "Muitos testes em pouco tempo. Espere %d segundo e tente de novo."
+msgid_plural "Muitos testes em pouco tempo. Espere %d segundos e tente de novo."
+msgstr[0] "Too many tests in a short time. Wait %d second and try again."
+msgstr[1] "Too many tests in a short time. Wait %d seconds and try again."
+
+#: src/Actions.php
+msgid "%d e-mail reenviado."
+msgid_plural "%d e-mails reenviados."
+msgstr[0] "%d email resent."
+msgstr[1] "%d emails resent."
+
+#: src/Actions.php
+msgid "%d e-mail não pôde ser reenviado."
+msgid_plural "%d e-mails não puderam ser reenviados."
+msgstr[0] "%d email could not be resent."
+msgstr[1] "%d emails could not be resent."
+
+#: src/Actions.php
+msgid "%d e-mail cancelado."
+msgid_plural "%d e-mails cancelados."
+msgstr[0] "%d email cancelled."
+msgstr[1] "%d emails cancelled."
+
+#: src/Actions.php
+msgid "%d e-mail não pôde ser cancelado (só dá para cancelar o que ainda está na fila)."
+msgid_plural "%d e-mails não puderam ser cancelados (só dá para cancelar o que ainda está na fila)."
+msgstr[0] "%d email could not be cancelled (only emails still in the queue can be cancelled)."
+msgstr[1] "%d emails could not be cancelled (only emails still in the queue can be cancelled)."
+
+#: src/Actions.php
+msgid "%d e-mail apagado."
+msgid_plural "%d e-mails apagados."
+msgstr[0] "%d email deleted."
+msgstr[1] "%d emails deleted."
+
+#: src/Actions.php
+msgid "%d e-mail não pôde ser apagado (cancele antes o que ainda está na fila)."
+msgid_plural "%d e-mails não puderam ser apagados (cancele antes o que ainda está na fila)."
+msgstr[0] "%d email could not be deleted (cancel what is still in the queue first)."
+msgstr[1] "%d emails could not be deleted (cancel what is still in the queue first)."
+
+#: src/Actions.php
+msgid "%d e-mail cancelado: a fila está vazia."
+msgid_plural "%d e-mails cancelados: a fila está vazia."
+msgstr[0] "%d email cancelled: the queue is empty."
+msgstr[1] "%d emails cancelled: the queue is empty."
+
+#: src/Actions.php
+msgid "Fila processada: %d e-mail enviado."
+msgid_plural "Fila processada: %d e-mails enviados."
+msgstr[0] "Queue processed: %d email sent."
+msgstr[1] "Queue processed: %d emails sent."
+
+#: src/Actions.php
+msgid "%d e-mail continua na fila (agendado para depois ou com falha)."
+msgid_plural "%d e-mails continuam na fila (agendados para depois ou com falha)."
+msgstr[0] "%d email is still in the queue (scheduled for later or failing)."
+msgstr[1] "%d emails are still in the queue (scheduled for later or failing)."
+
+#: src/Actions.php
+msgid "Não entendi o que foi pedido. Recarregue a página e tente de novo."
+msgstr "The request was not understood. Reload the page and try again."
+
+#: src/Actions.php
+msgid "Seu perfil não tem permissão para fazer isso no MailBridge."
+msgstr "Your profile is not allowed to do this in MailBridge."
+
+#: src/Actions.php
+msgid "Algo deu errado ao executar a ação. Nada foi alterado; tente de novo."
+msgstr "Something went wrong while running the action. Nothing was changed; try again."
+
+#: src/Actions.php
+msgid "Configuração de envio salva."
+msgstr "Sending settings saved."
+
+#: src/Actions.php
+msgid "Configuração salva. O envio de e-mails do GLPI foi DESLIGADO."
+msgstr "Settings saved. GLPI email sending was turned OFF."
+
+#: src/Actions.php
+msgid "Configuração salva. O envio de e-mails do GLPI foi LIGADO."
+msgstr "Settings saved. GLPI email sending was turned ON."
+
+#: src/Actions.php
+msgid "Conexão com o servidor de envio funcionando."
+msgstr "The connection to the mail server is working."
+
+#: src/Actions.php templates/sending.html.twig templates/template_form.html.twig
+msgid "Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br"
+msgstr "Enter a valid email address to receive the test. Example: you@yourcompany.com"
+
+#: src/Actions.php
+msgid "Enviar o e-mail para %s"
+msgstr "Send the email to %s"
+
+#: src/Actions.php
+msgid "E-mail de teste enviado para %s. Confira a caixa de entrada (e a pasta de spam)."
+msgstr "Test email sent to %s. Check the inbox (and the spam folder)."
+
+#: src/Actions.php
+msgid "Falta informar o servidor de envio e a porta."
+msgstr "The mail server and port are missing."
+
+#: src/Actions.php
+msgid "Preencha o servidor e a porta, clique em Salvar e teste de novo."
+msgstr "Fill in the server and the port, click Save and test again."
+
+#: src/Actions.php src/Health.php
+msgid "Falta informar o e-mail do remetente."
+msgstr "The sender email address is missing."
+
+#: src/Actions.php
+msgid "Preencha o e-mail do remetente, clique em Salvar e teste de novo."
+msgstr "Fill in the sender email address, click Save and test again."
+
+#: src/Actions.php src/Health.php
+msgid "O remetente \"%s\" não é um endereço de e-mail de verdade."
+msgstr "The sender \"%s\" is not a real e-mail address."
+
+#: src/Actions.php
+msgid "O %s recusa e-mails com esse remetente. Em \"E-mail do remetente\", informe o endereço da conta que faz o login, clique em Salvar e teste de novo."
+msgstr "%s refuses e-mails from that sender. In \"Sender email\", enter the address of the account that signs in, click Save and test again."
+
+#: src/Actions.php
+msgid "Avisos do MailBridge ligados."
+msgstr "MailBridge notices turned on."
+
+#: src/Actions.php
+msgid "Avisos do MailBridge desligados: as regras não geram e-mails até você ligar de novo."
+msgstr "MailBridge notices turned off: the rules create no emails until you turn them on again."
+
+#: src/Actions.php
+msgid "Essa regra não existe mais. Recarregue a página."
+msgstr "This rule no longer exists. Reload the page."
+
+#: src/Actions.php
+msgid "Regra \"%s\" ligada."
+msgstr "Rule \"%s\" turned on."
+
+#: src/Actions.php
+msgid "Regra \"%s\" desligada: ela não gera mais e-mails."
+msgstr "Rule \"%s\" turned off: it no longer creates emails."
+
+#: src/Actions.php
+msgid "Regra \"%s\" salva."
+msgstr "Rule \"%s\" saved."
+
+#: src/Actions.php
+msgid "Não foi possível criar a regra. Tente de novo."
+msgstr "The rule could not be created. Try again."
+
+#: src/Actions.php
+msgid "Regra \"%s\" criada com a mensagem padrão. Você pode ajustar o texto em Modelos."
+msgstr "Rule \"%s\" created with the default message. You can adjust the text under Templates."
+
+#: src/Actions.php
+msgid "Regra \"%s\" apagada, junto com a mensagem dela."
+msgstr "Rule \"%s\" deleted, together with its message."
+
+#: src/Actions.php
+msgid "Escolhas por entidade salvas."
+msgstr "Choices per entity saved."
+
+#: src/Actions.php
+msgid "Esse aviso do GLPI não existe mais. Recarregue a página."
+msgstr "This GLPI notice no longer exists. Reload the page."
+
+#: src/Actions.php
+msgid "Aviso do GLPI ligado."
+msgstr "GLPI notice turned on."
+
+#: src/Actions.php
+msgid "Aviso do GLPI desligado."
+msgstr "GLPI notice turned off."
+
+#: src/Actions.php
+msgid "Modelo salvo."
+msgstr "Template saved."
+
+#: src/Actions.php
+msgid "Estas variáveis não existem e vão aparecer no e-mail como texto: %s"
+msgstr "These variables do not exist and will appear in the email as plain text: %s"
+
+#: src/Actions.php
+msgid "Tradução apagada. Quem usa esse idioma volta a receber o modelo padrão."
+msgstr "Translation deleted. People using that language get the default template again."
+
+#: src/Actions.php
+msgid "[TESTE] %s"
+msgstr "[TEST] %s"
+
+#: src/Actions.php
+msgid "Escolha o que fazer com os e-mails marcados."
+msgstr "Choose what to do with the selected emails."
+
+#: src/Actions.php src/Page.php
+msgid "Marque pelo menos um e-mail da lista."
+msgstr "Select at least one email from the list."
+
+#: src/Actions.php src/Page.php templates/_test_result.html.twig templates/queue_detail.html.twig
+msgid "O que tentar:"
+msgstr "What to try:"
+
+#: src/Actions.php
+msgid "Não havia e-mails esperando na fila."
+msgstr "There were no emails waiting in the queue."
+
+#: src/Actions.php
+msgid "Fila processada: não havia e-mails prontos para envio."
+msgstr "Queue processed: there were no emails ready to send."
+
+#: src/Actions.php
+msgid "Rotina automática reativada: a fila volta a ser enviada sozinha."
+msgstr "Automatic routine re-enabled: the queue is sent on its own again."
+
+#: src/Actions.php
+msgid "Regras da fila salvas."
+msgstr "Queue rules saved."
+
+#: src/Actions.php
+msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge SERÃO apagados."
+msgstr "Saved: when the plugin is uninstalled, MailBridge rules, templates and settings WILL be deleted."
+
+#: src/Actions.php
+msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge ficam guardados."
+msgstr "Saved: when the plugin is uninstalled, MailBridge rules, templates and settings are kept."
+
+#: src/Actions.php
+msgid "Escolha o arquivo .json gerado pelo botão \"Exportar\" antes de importar."
+msgstr "Choose the .json file created by the \"Export\" button before importing."
+
+#: src/Actions.php src/Porter.php
+msgid "Arquivo grande demais: o limite é 2 MB."
+msgstr "File too large: the limit is 2 MB."
+
+#: src/Actions.php
+msgid "Importação concluída: %1$d regra(s) criada(s), %2$d atualizada(s)."
+msgstr "Import finished: %1$d rule(s) created, %2$d updated."
+
+#: src/Actions.php
+msgid "Servidor de envio importado: digite a senha de novo em Envio."
+msgstr "Mail server imported: type the password again under Sending."
+
+#: src/Actions.php
+msgid "Ajustes do MailBridge restaurados para o padrão. As regras, os modelos e o servidor de envio não foram alterados."
+msgstr "MailBridge settings restored to their defaults. Rules, templates and the mail server were not changed."
+
+#: src/Audit.php src/Template.php
+msgid "Sistema"
+msgstr "System"
+
+#: src/Audit.php
+msgid "campo"
+msgstr "field"
+
+#: src/Audit.php
+msgid "regra criada"
+msgstr "rule created"
+
+#: src/Audit.php
+msgid "Regra \"%1$s\": %2$s"
+msgstr "Rule \"%1$s\": %2$s"
+
+#: src/Audit.php
+msgid "Envio de e-mails (liga/desliga)"
+msgstr "Email sending (on/off)"
+
+#: src/Audit.php
+msgid "Notificações do GLPI (liga/desliga)"
+msgstr "GLPI notifications (on/off)"
+
+#: src/Audit.php
+msgid "Forma de envio e segurança"
+msgstr "Sending method and security"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Servidor"
+msgstr "Server"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Porta"
+msgstr "Port"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Usuário"
+msgstr "User name"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Senha"
+msgstr "Password"
+
+#: src/Audit.php
+msgid "Conferir o certificado"
+msgstr "Check the certificate"
+
+#: src/Audit.php
+msgid "Endereço de retorno"
+msgstr "Return address"
+
+#: src/Audit.php
+msgid "Novas tentativas"
+msgstr "Retries"
+
+#: src/Audit.php templates/queue.html.twig
+msgid "Minutos entre as tentativas"
+msgstr "Minutes between retries"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "E-mail do remetente"
+msgstr "Sender email"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Nome do remetente"
+msgstr "Sender name"
+
+#: src/Audit.php
+msgid "E-mail para respostas"
+msgstr "Reply-to email"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Nome para respostas"
+msgstr "Reply-to name"
+
+#: src/Audit.php
+msgid "E-mail \"não responda\""
+msgstr "\"No-reply\" email"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Nome do \"não responda\""
+msgstr "\"No-reply\" name"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "E-mail do administrador"
+msgstr "Administrator email"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Nome do administrador"
+msgstr "Administrator name"
+
+#: src/Audit.php templates/sending.html.twig
+msgid "Assinatura"
+msgstr "Signature"
+
+#: src/Audit.php
+msgid "Anexar documentos do chamado"
+msgstr "Attach ticket documents"
+
+#: src/Audit.php
+msgid "Avisos do MailBridge (liga/desliga)"
+msgstr "MailBridge notices (on/off)"
+
+#: src/Audit.php
+msgid "MailBridge: enviar na hora"
+msgstr "MailBridge: send immediately"
+
+#: src/Audit.php
+msgid "MailBridge: remetente próprio"
+msgstr "MailBridge: own sender"
+
+#: src/Audit.php
+msgid "MailBridge: nome do remetente próprio"
+msgstr "MailBridge: own sender name"
+
+#: src/Audit.php
+msgid "MailBridge: registro detalhado"
+msgstr "MailBridge: detailed log"
+
+#: src/Audit.php
+msgid "MailBridge: nunca enviar para"
+msgstr "MailBridge: never send to"
+
+#: src/Audit.php
+msgid "MailBridge: só enviar para"
+msgstr "MailBridge: only send to"
+
+#: src/Audit.php
+msgid "MailBridge: escolhas por entidade"
+msgstr "MailBridge: choices per entity"
+
+#: src/Audit.php
+msgid "MailBridge: último teste com sucesso"
+msgstr "MailBridge: last successful test"
+
+#: src/Audit.php
+msgid "MailBridge: apagar dados ao desinstalar"
+msgstr "MailBridge: delete data on uninstall"
+
+#: src/Audit.php
+msgid "MailBridge: dados trazidos do plugin antigo"
+msgstr "MailBridge: data brought over from the old plugin"
+
+#: src/Audit.php
+msgid "MailBridge: configuração usada no último teste"
+msgstr "MailBridge: settings used in the last test"
+
+#: src/ErrorExplainer.php src/Health.php
+msgid "Falta guardar a senha do servidor de envio."
+msgstr "The mail server password has not been saved."
+
+#: src/ErrorExplainer.php
+msgid "Digite a senha no campo \"Senha\" e clique em Salvar. Os testes e os envios só usam o que está salvo."
+msgstr "Type the password in the \"Password\" field and click Save. Tests and sending only use what has been saved."
+
+#: src/ErrorExplainer.php
+msgid "Gmail e Outlook pedem uma \"senha de app\" ou login pelo provedor (OAuth); a senha normal da conta não funciona."
+msgstr "Gmail and Outlook require an \"app password\" or sign-in through the provider (OAuth); the normal account password does not work."
+
+#: src/ErrorExplainer.php
+msgid "Se o servidor não pede login, apague o usuário e salve."
+msgstr "If the server does not ask for a login, clear the user name and save."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio exige login e nenhum usuário foi informado."
+msgstr "The mail server requires sign-in and no user was entered."
+
+#: src/ErrorExplainer.php
+msgid "Em Envio, informe como usuário o endereço completo da conta e a senha dela, clique em Salvar e teste de novo."
+msgstr "In Sending, enter the full account address as the user and its password, click Save and test again."
+
+#: src/ErrorExplainer.php
+msgid "No Gmail a senha é uma \"senha de app\" criada na Conta Google (com a verificação em duas etapas ligada); a senha normal da conta não funciona."
+msgstr "For Gmail the password is an \"app password\" created in the Google Account (with 2-Step Verification on); the normal account password does not work."
+
+#: src/ErrorExplainer.php
+msgid "Use como remetente o mesmo endereço da conta."
+msgstr "Use the account address as the sender."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio não foi encontrado."
+msgstr "The mail server was not found."
+
+#: src/ErrorExplainer.php
+msgid "Confira se o nome do servidor foi digitado certo (exemplo: smtp.suaempresa.com.br)."
+msgstr "Check that the server name was typed correctly (example: smtp.yourcompany.com)."
+
+#: src/ErrorExplainer.php
+msgid "Veja se o servidor do GLPI tem acesso à internet ou à rede onde fica o servidor de e-mail."
+msgstr "Check that the GLPI server can reach the internet or the network where the mail server is."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio recusou a conexão nessa porta."
+msgstr "The mail server refused the connection on this port."
+
+#: src/ErrorExplainer.php
+msgid "Confira a porta: as mais comuns são 587 (STARTTLS), 465 (SSL/TLS) e 25 (sem segurança)."
+msgstr "Check the port: the most common are 587 (STARTTLS), 465 (SSL/TLS) and 25 (no security)."
+
+#: src/ErrorExplainer.php
+msgid "Peça a quem cuida da rede para liberar a saída do GLPI até esse servidor e porta."
+msgstr "Ask whoever manages the network to allow GLPI to reach this server and port."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio não respondeu a tempo."
+msgstr "The mail server did not answer in time."
+
+#: src/ErrorExplainer.php
+msgid "Confira o servidor e a porta."
+msgstr "Check the server and the port."
+
+#: src/ErrorExplainer.php
+msgid "Um firewall pode estar bloqueando a saída: peça para liberar a porta usada."
+msgstr "A firewall may be blocking the connection: ask for the port to be opened."
+
+#: src/ErrorExplainer.php
+msgid "Tente de novo em alguns minutos: o servidor de e-mail pode estar fora do ar."
+msgstr "Try again in a few minutes: the mail server may be down."
+
+#: src/ErrorExplainer.php
+msgid "O certificado de segurança do servidor de envio não foi aceito."
+msgstr "The mail server's security certificate was not accepted."
+
+#: src/ErrorExplainer.php
+msgid "Use o mesmo nome de servidor que aparece no certificado (o que o provedor informa)."
+msgstr "Use the same server name that appears in the certificate (the one given by the provider)."
+
+#: src/ErrorExplainer.php
+msgid "Em servidor interno com certificado próprio, desligue \"Conferir o certificado de segurança\" nas opções avançadas."
+msgstr "On an internal server with its own certificate, turn off \"Check the server's security certificate\" in the advanced options."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio exige conexão segura."
+msgstr "The mail server requires a secure connection."
+
+#: src/ErrorExplainer.php
+msgid "Em \"Segurança da conexão\", escolha STARTTLS (normalmente na porta 587) ou SSL/TLS (porta 465)."
+msgstr "Under \"Connection security\", choose STARTTLS (usually port 587) or SSL/TLS (port 465)."
+
+#: src/ErrorExplainer.php
+msgid "Não foi possível iniciar a conexão segura com o servidor de envio."
+msgstr "The secure connection to the mail server could not be started."
+
+#: src/ErrorExplainer.php
+msgid "A segurança escolhida precisa combinar com a porta: STARTTLS com 587, SSL/TLS com 465, nenhuma com 25."
+msgstr "The chosen security must match the port: STARTTLS with 587, SSL/TLS with 465, none with 25."
+
+#: src/ErrorExplainer.php
+msgid "Se o servidor não oferece segurança, escolha \"Nenhuma\"."
+msgstr "If the server offers no security, choose \"None\"."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio não aceitou o usuário e a senha."
+msgstr "The mail server did not accept the user name and password."
+
+#: src/ErrorExplainer.php
+msgid "Digite de novo o usuário (normalmente o e-mail completo) e a senha."
+msgstr "Type the user name (usually the full email address) and the password again."
+
+#: src/ErrorExplainer.php
+msgid "Se o servidor não pede login, deixe usuário e senha em branco."
+msgstr "If the server does not ask for a login, leave user name and password empty."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio não permite que o GLPI envie por ele."
+msgstr "The mail server does not allow GLPI to send through it."
+
+#: src/ErrorExplainer.php
+msgid "Informe usuário e senha, se o servidor exigir login."
+msgstr "Enter a user name and password, if the server requires a login."
+
+#: src/ErrorExplainer.php
+msgid "Ou peça a quem cuida do e-mail para autorizar o servidor do GLPI."
+msgstr "Or ask whoever manages the email to authorise the GLPI server."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio recusou o endereço do remetente."
+msgstr "The mail server refused the sender address."
+
+#: src/ErrorExplainer.php
+msgid "Use como remetente um endereço da mesma conta ou do mesmo domínio do usuário de login."
+msgstr "Use a sender address from the same account or the same domain as the login user."
+
+#: src/ErrorExplainer.php
+msgid "Confira se o e-mail do remetente foi digitado certo."
+msgstr "Check that the sender email address was typed correctly."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio recusou o endereço de quem ia receber."
+msgstr "The mail server refused the recipient's address."
+
+#: src/ErrorExplainer.php
+msgid "Confira o e-mail no cadastro da pessoa (pode ter erro de digitação ou a caixa não existe mais)."
+msgstr "Check the email address in the person's record (there may be a typo, or the mailbox no longer exists)."
+
+#: src/ErrorExplainer.php
+msgid "Depois de corrigir o cadastro, o próximo aviso sai certo; este pode ser cancelado."
+msgstr "Once the record is fixed, the next notice goes out correctly; this one can be cancelled."
+
+#: src/ErrorExplainer.php
+msgid "O e-mail é grande demais para o servidor de envio."
+msgstr "The email is too large for the mail server."
+
+#: src/ErrorExplainer.php
+msgid "Desligue \"Anexar os documentos do chamado\" ou reduza o texto do modelo."
+msgstr "Turn off \"Attach the ticket's documents\" or shorten the template text."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio pediu para esperar (limite de envios ou ocupado)."
+msgstr "The mail server asked to wait (sending limit reached or busy)."
+
+#: src/ErrorExplainer.php
+msgid "Espere alguns minutos: o GLPI tenta de novo sozinho."
+msgstr "Wait a few minutes: GLPI tries again by itself."
+
+#: src/ErrorExplainer.php
+msgid "Se acontecer sempre, a conta pode ter atingido o limite diário: use um servidor de e-mail da empresa."
+msgstr "If it always happens, the account may have reached its daily limit: use a company mail server."
+
+#: src/ErrorExplainer.php
+msgid "A função de e-mail do servidor do GLPI não funcionou."
+msgstr "The mail function of the GLPI server did not work."
+
+#: src/ErrorExplainer.php
+msgid "Em \"Como enviar\", escolha \"Servidor de e-mail (SMTP)\" e informe os dados do seu provedor."
+msgstr "Under \"How to send\", choose \"Mail server (SMTP)\" and enter your provider's details."
+
+#: src/ErrorExplainer.php
+msgid "Não foi possível conectar ao servidor de envio."
+msgstr "Could not connect to the mail server."
+
+#: src/ErrorExplainer.php
+msgid "Confira o servidor, a porta e a segurança da conexão."
+msgstr "Check the server, the port and the connection security."
+
+#: src/ErrorExplainer.php
+msgid "Use \"Testar conexão\" na tela Envio para ver em que passo parou."
+msgstr "Use \"Test connection\" on the Sending screen to see at which step it stopped."
+
+#: src/ErrorExplainer.php
+msgid "O servidor de envio devolveu um erro."
+msgstr "The mail server returned an error."
+
+#: src/ErrorExplainer.php
+msgid "Mostre o detalhe técnico abaixo para quem cuida do servidor de e-mail."
+msgstr "Show the technical detail below to whoever manages the mail server."
+
+#: src/Health.php
+msgid "%1$d e-mail esperando na fila (o mais antigo %2$s)."
+msgid_plural "%1$d e-mails esperando na fila (o mais antigo %2$s)."
+msgstr[0] "%1$d email waiting in the queue (the oldest one %2$s)."
+msgstr[1] "%1$d emails waiting in the queue (the oldest one %2$s)."
+
+#: src/Health.php
+msgid "%d e-mail na fila, dentro do prazo."
+msgid_plural "%d e-mails na fila, dentro do prazo."
+msgstr[0] "%d email in the queue, within the expected time."
+msgstr[1] "%d emails in the queue, within the expected time."
+
+#: src/Health.php
+msgid "%d e-mail com falha nos últimos 7 dias."
+msgid_plural "%d e-mails com falha nos últimos 7 dias."
+msgstr[0] "%d email failed in the last 7 days."
+msgstr[1] "%d emails failed in the last 7 days."
+
+#: src/Health.php
+msgid "%d usuário ativo sem e-mail cadastrado."
+msgid_plural "%d usuários ativos sem e-mail cadastrado."
+msgstr[0] "%d active user without an email address."
+msgstr[1] "%d active users without an email address."
+
+#: src/Health.php
+msgid "há %d minuto"
+msgid_plural "há %d minutos"
+msgstr[0] "%d minute ago"
+msgstr[1] "%d minutes ago"
+
+#: src/Health.php
+msgid "há %d hora"
+msgid_plural "há %d horas"
+msgstr[0] "%d hour ago"
+msgstr[1] "%d hours ago"
+
+#: src/Health.php
+msgid "há %d dia"
+msgid_plural "há %d dias"
+msgstr[0] "%d day ago"
+msgstr[1] "%d days ago"
+
+#: src/Health.php
+msgid "O envio de e-mails do GLPI está ligado."
+msgstr "GLPI email sending is on."
+
+#: src/Health.php
+msgid "O envio de e-mails do GLPI está desligado."
+msgstr "GLPI email sending is off."
+
+#: src/Health.php
+msgid "Nenhum e-mail de notificação sai enquanto estiver desligado."
+msgstr "No notification email goes out while it is off."
+
+#: src/Health.php
+msgid "Ligar o envio"
+msgstr "Turn sending on"
+
+#: src/Health.php
+msgid "Os avisos do MailBridge estão ligados."
+msgstr "MailBridge notices are on."
+
+#: src/Health.php
+msgid "Os avisos do MailBridge estão desligados."
+msgstr "MailBridge notices are off."
+
+#: src/Health.php
+msgid "As regras do MailBridge não geram e-mails enquanto estiver desligado."
+msgstr "MailBridge rules create no emails while it is off."
+
+#: src/Health.php
+msgid "Ligar os avisos"
+msgstr "Turn notices on"
+
+#: src/Health.php
+msgid "O plugin antigo (Techmail) está ativo junto com o MailBridge."
+msgstr "The old plugin (Techmail) is active together with MailBridge."
+
+#: src/Health.php
+msgid "Para não mandar o mesmo aviso duas vezes, os avisos do MailBridge ficam parados. Desative o Techmail em Configurar > Plugins."
+msgstr "To avoid sending the same notice twice, MailBridge notices are paused. Deactivate Techmail in Setup > Plugins."
+
+#: src/Health.php
+msgid "Envio pela função de e-mail do próprio servidor do GLPI."
+msgstr "Sending through the mail function of the GLPI server itself."
+
+#: src/Health.php
+msgid "A função de e-mail do servidor do GLPI não está disponível."
+msgstr "The mail function of the GLPI server is not available."
+
+#: src/Health.php
+msgid "Escolha \"Servidor de e-mail (SMTP)\" e informe os dados do seu provedor."
+msgstr "Choose \"Mail server (SMTP)\" and enter your provider's details."
+
+#: src/Health.php
+msgid "Configurar o envio"
+msgstr "Set up sending"
+
+#: src/Health.php
+msgid "Servidor de envio: %s (login pelo provedor, OAuth)."
+msgstr "Mail server: %s (sign-in through the provider, OAuth)."
+
+#: src/Health.php
+msgid "A autorização no provedor de e-mail (OAuth) não foi concluída."
+msgstr "The authorisation at the email provider (OAuth) was not completed."
+
+#: src/Health.php
+msgid "Conclua a autorização na tela de e-mail do GLPI."
+msgstr "Complete the authorisation on GLPI's email screen."
+
+#: src/Health.php
+msgid "Ver o envio"
+msgstr "View sending"
+
+#: src/Health.php
+msgid "O %s exige login: falta informar o usuário e a senha."
+msgstr "%s requires sign-in: the user and password are missing."
+
+#: src/Health.php
+msgid "Sem login o %s recusa todos os e-mails. Informe como usuário o endereço completo da conta e a senha dela."
+msgstr "Without sign-in %s refuses every e-mail. Enter the full account address as the user, and its password."
+
+#: src/Health.php
+msgid "Informar o usuário"
+msgstr "Enter the user"
+
+#: src/Health.php
+msgid "Há um usuário de login, mas nenhuma senha guardada: o servidor vai recusar todos os e-mails."
+msgstr "A login user name is set but no password is stored: the server will refuse every email."
+
+#: src/Health.php
+msgid "Informar a senha"
+msgstr "Enter the password"
+
+#: src/Health.php
+msgid "Servidor de envio: %1$s, porta %2$d."
+msgstr "Mail server: %1$s, port %2$d."
+
+#: src/Health.php
+msgid "Falta informar o servidor de envio."
+msgstr "The mail server is missing."
+
+#: src/Health.php
+msgid "Sem o servidor e a porta, o GLPI não tem por onde mandar os e-mails."
+msgstr "Without the server and the port, GLPI has no way to send the emails."
+
+#: src/Health.php
+msgid "O %s recusa e-mails com esse remetente. Informe o endereço da conta que faz o login."
+msgstr "%s refuses e-mails from that sender. Enter the address of the account that signs in."
+
+#: src/Health.php
+msgid "Informar o remetente"
+msgstr "Enter the sender"
+
+#: src/Health.php
+msgid "Remetente: %s."
+msgstr "Sender: %s."
+
+#: src/Health.php
+msgid "Os e-mails precisam de um endereço de origem válido."
+msgstr "Emails need a valid sender address."
+
+#: src/Health.php
+msgid "Último e-mail de teste com sucesso: %s."
+msgstr "Last successful test email: %s."
+
+#: src/Health.php
+msgid "A configuração de envio mudou depois do último teste com sucesso."
+msgstr "The sending settings changed after the last successful test."
+
+#: src/Health.php
+msgid "Nenhum e-mail de teste foi enviado com sucesso ainda."
+msgstr "No test email has been sent successfully yet."
+
+#: src/Health.php
+msgid "Envie um teste para confirmar que o servidor aceita os e-mails."
+msgstr "Send a test to confirm that the server accepts the emails."
+
+#: src/Health.php templates/overview.html.twig templates/sending.html.twig
+msgid "Enviar e-mail de teste"
+msgstr "Send test email"
+
+#: src/Health.php
+msgid "Nenhum e-mail esperando na fila."
+msgstr "No email waiting in the queue."
+
+#: src/Health.php
+msgid "A fila deveria esvaziar em poucos minutos. Veja se a rotina automática está rodando."
+msgstr "The queue should empty within a few minutes. Check that the automatic routine is running."
+
+#: src/Health.php templates/overview.html.twig
+msgid "Ver a fila"
+msgstr "View the queue"
+
+#: src/Health.php
+msgid "Nenhuma falha de envio nos últimos 7 dias."
+msgstr "No sending failure in the last 7 days."
+
+#: src/Health.php
+msgid "Abra a lista para ver o motivo de cada um e reenviar."
+msgstr "Open the list to see the reason for each one and resend."
+
+#: src/Health.php templates/overview.html.twig
+msgid "Ver falhas"
+msgstr "View failures"
+
+#: src/Health.php
+msgid "%1$d de %2$d regras de aviso ligadas."
+msgstr "%1$d of %2$d notice rules turned on."
+
+#: src/Health.php
+msgid "Nenhuma regra de aviso está ligada."
+msgstr "No notice rule is turned on."
+
+#: src/Health.php
+msgid "Sem regras ligadas, o MailBridge não avisa ninguém."
+msgstr "With no rule turned on, MailBridge notifies nobody."
+
+#: src/Health.php
+msgid "Ver as regras"
+msgstr "View the rules"
+
+#: src/Health.php
+msgid "Todos os usuários ativos têm e-mail cadastrado."
+msgstr "Every active user has an email address."
+
+#: src/Health.php
+msgid "Quem não tem e-mail no cadastro não recebe avisos. Confira os técnicos em Administração > Usuários."
+msgstr "People without an email address in their record receive no notices. Check the technicians under Administration > Users."
+
+#: src/Health.php
+msgid "O registro em arquivos do GLPI está desligado."
+msgstr "GLPI logging to files is turned off."
+
+#: src/Health.php
+msgid "Sem ele o MailBridge não consegue mostrar o motivo das falhas de envio. Ligue em Configurar > Geral > Sistema."
+msgstr "Without it MailBridge cannot show why an email failed. Turn it on under Setup > General > System."
+
+#: src/Health.php
+msgid "Os links dos e-mails apontam para \"%s\"."
+msgstr "Links in the emails point to \"%s\"."
+
+#: src/Health.php
+msgid "Esse endereço só abre neste computador. Em produção, ajuste o endereço do GLPI em Configurar > Geral."
+msgstr "This address only opens on this computer. In production, set the GLPI address under Setup > General."
+
+#: src/Health.php templates/overview.html.twig
+msgid "Último e-mail enviado: %s."
+msgstr "Last email sent: %s."
+
+#: src/Health.php
+msgid "Nenhum e-mail enviado ainda (dentro do período guardado)."
+msgstr "No email sent yet (within the period kept)."
+
+#: src/Health.php
+msgid "Configurar o servidor de envio e o remetente"
+msgstr "Set up the mail server and the sender"
+
+#: src/Health.php
+msgid "Enviar um e-mail de teste com sucesso"
+msgstr "Send a test email successfully"
+
+#: src/Health.php
+msgid "Ligar o envio de e-mails e os avisos do MailBridge"
+msgstr "Turn on email sending and MailBridge notices"
+
+#: src/Health.php
+msgid "Ela só roda enquanto alguém usa o GLPI; para envio contínuo, peça para agendar o \"cron\" do GLPI no servidor."
+msgstr "It only runs while someone is using GLPI; for continuous sending, ask for the GLPI \"cron\" to be scheduled on the server."
+
+#: src/Health.php
+msgid "A rotina automática que envia a fila está desativada."
+msgstr "The automatic routine that sends the queue is disabled."
+
+#: src/Health.php
+msgid "Os e-mails ficam parados na fila até ela ser reativada."
+msgstr "Emails stay in the queue until it is re-enabled."
+
+#: src/Health.php templates/queue.html.twig
+msgid "Reativar a rotina"
+msgstr "Re-enable the routine"
+
+#: src/Health.php
+msgid "A rotina automática que envia a fila ainda não rodou nenhuma vez."
+msgstr "The automatic routine that sends the queue has never run."
+
+#: src/Health.php
+msgid "Use \"Processar a fila agora\" para enviar o que estiver esperando."
+msgstr "Use \"Process the queue now\" to send what is waiting."
+
+#: src/Health.php
+msgid "Ver a rotina"
+msgstr "View the routine"
+
+#: src/Health.php
+msgid "A rotina automática que envia a fila parou: rodou pela última vez %s."
+msgstr "The automatic routine that sends the queue has stopped: it last ran %s."
+
+#: src/Health.php
+msgid "Use \"Processar a fila agora\" e avise quem cuida do servidor."
+msgstr "Use \"Process the queue now\" and tell whoever manages the server."
+
+#: src/Health.php
+msgid "A rotina automática que envia a fila está rodando (última vez %s)."
+msgstr "The automatic routine that sends the queue is running (last time %s)."
+
+#: src/Health.php
+msgid "há menos de 1 minuto"
+msgstr "less than 1 minute ago"
+
+#: src/Notifier.php
+msgid "Este é um e-mail de teste do plugin MailBridge. Se você está lendo isto, o envio de e-mails do GLPI está funcionando."
+msgstr "This is a test email from the MailBridge plugin. If you are reading this, GLPI email sending is working."
+
+#: src/Notifier.php
+msgid "[GLPI] E-mail de teste do MailBridge"
+msgstr "[GLPI] MailBridge test email"
+
+#: src/Page.php
+msgid "Visão geral"
+msgstr "Overview"
+
+#: src/Page.php
+msgid "Envio"
+msgstr "Sending"
+
+#: src/Page.php
+msgid "Eventos e destinatários"
+msgstr "Events and recipients"
+
+#: src/Page.php
+msgid "Modelos"
+msgstr "Templates"
+
+#: src/Page.php
+msgid "Fila e histórico"
+msgstr "Queue and history"
+
+#: src/Page.php
+msgid "Diagnóstico"
+msgstr "Diagnostics"
+
+#: src/Page.php
+msgid "Ativo"
+msgstr "Active"
+
+#: src/Page.php
+msgid "Inativo"
+msgstr "Inactive"
+
+#: src/Page.php
+msgid "Precisa de atenção"
+msgstr "Needs attention"
+
+#: src/Page.php
+msgid "Aguarde…"
+msgstr "Please wait…"
+
+#: src/Page.php
+msgid "Não foi possível concluir a ação. Recarregue a página e tente de novo."
+msgstr "The action could not be completed. Reload the page and try again."
+
+#: src/Page.php
+msgid "Preencha este campo."
+msgstr "Fill in this field."
+
+#: src/Page.php templates/_test_result.html.twig
+msgid "Feito"
+msgstr "Done"
+
+#: src/Page.php templates/_test_result.html.twig
+msgid "Falhou"
+msgstr "Failed"
+
+#: src/Page.php templates/_test_result.html.twig
+msgid "Não se aplica"
+msgstr "Not applicable"
+
+#: src/Page.php templates/_test_result.html.twig templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Detalhe técnico"
+msgstr "Technical detail"
+
+#: src/Page.php
+msgid "Atualizando a prévia…"
+msgstr "Updating the preview…"
+
+#: src/Page.php
+msgid "Você alterou a configuração e ainda não salvou."
+msgstr "You changed the settings and have not saved them yet."
+
+#: src/Page.php
+msgid "Os testes usam a configuração salva: clique em Salvar e teste de novo."
+msgstr "Tests use the saved settings: click Save and test again."
+
+#: src/Porter.php
+msgid "Não consegui ler o arquivo: ele precisa ser o arquivo .json gerado pelo botão \"Exportar\"."
+msgstr "The file could not be read: it must be the .json file created by the \"Export\" button."
+
+#: src/Porter.php
+msgid "Este arquivo não é uma exportação do MailBridge."
+msgstr "This file is not a MailBridge export."
+
+#: src/Porter.php
+msgid "Este arquivo foi gerado por uma versão mais nova do MailBridge. Atualize o plugin antes de importar."
+msgstr "This file was created by a newer version of MailBridge. Update the plugin before importing."
+
+#: src/Porter.php
+msgid "A configuração do servidor de envio do arquivo tem erros e não foi importada."
+msgstr "The mail server settings in the file have errors and were not imported."
+
+#: src/Porter.php
+msgid "Regra \"%s\" ignorada: %s"
+msgstr "Rule \"%s\" skipped: %s"
+
+#: src/Profile.php
+msgid "MailBridge (e-mails de notificação)"
+msgstr "MailBridge (notification emails)"
+
+#: src/Profile.php
+msgid "Quem já tem o direito de alterar a configuração geral do GLPI tem acesso total ao MailBridge, mesmo sem marcar nada aqui."
+msgstr "Anyone allowed to change GLPI's general setup has full access to MailBridge, even with nothing ticked here."
+
+#: src/Queue.php
+msgid "MailBridge: e-mail de teste"
+msgstr "MailBridge: test email"
+
+#: src/Queue.php
+msgid "MailBridge: %s"
+msgstr "MailBridge: %s"
+
+#: src/Queue.php
+msgid "Aviso do GLPI"
+msgstr "GLPI notice"
+
+#: src/Queue.php
+msgid "Aviso do GLPI (%s)"
+msgstr "GLPI notice (%s)"
+
+#: src/QueueState.php src/Screen/QueueScreen.php
+msgid "Na fila"
+msgstr "In the queue"
+
+#: src/QueueState.php
+msgid "Falhou, vai tentar de novo"
+msgstr "Failed, will try again"
+
+#: src/QueueState.php
+msgid "Enviado"
+msgstr "Sent"
+
+#: src/QueueState.php
+msgid "Não foi entregue"
+msgstr "Not delivered"
+
+#: src/QueueState.php
+msgid "Cancelado"
+msgstr "Cancelled"
+
+#: src/Rights.php
+msgid "Ver"
+msgstr "View"
+
+#: src/Rights.php
+msgid "Gerenciar"
+msgstr "Manage"
+
+#: src/Rights.php
+msgid "Testar envio"
+msgstr "Test sending"
+
+#: src/Rights.php
+msgid "Operar a fila"
+msgstr "Operate the queue"
+
+#: src/Rule.php
+msgid "Regra de notificação para técnicos"
+msgid_plural "Regras de notificação para técnicos"
+msgstr[0] "Notification rule for technicians"
+msgstr[1] "Notification rules for technicians"
+
+#: src/Rule.php
+msgid "Novo chamado aberto"
+msgstr "New ticket opened"
+
+#: src/Rule.php
+msgid "Chamado atribuído (técnico ou grupo)"
+msgstr "Ticket assigned (technician or group)"
+
+#: src/Rule.php
+msgid "Novo acompanhamento"
+msgstr "New follow-up"
+
+#: src/Rule.php
+msgid "Nova tarefa"
+msgstr "New task"
+
+#: src/Rule.php
+msgid "Solução registrada"
+msgstr "Solution recorded"
+
+#: src/Rule.php
+msgid "Mudança de status"
+msgstr "Status change"
+
+#: src/Rule.php
+msgid "Nome"
+msgstr "Name"
+
+#: src/Rule.php
+msgid "Evento"
+msgstr "Event"
+
+#: src/Rule.php
+msgid "Ativa"
+msgstr "Active"
+
+#: src/Rule.php templates/queue.html.twig templates/template_form.html.twig
+msgid "Assunto"
+msgstr "Subject"
+
+#: src/Rule.php templates/template_form.html.twig
+msgid "Mensagem"
+msgstr "Message"
+
+#: src/Rule.php
+msgid "Versão em texto simples"
+msgstr "Plain text version"
+
+#: src/Rule.php
+msgid "E-mails fixos"
+msgstr "Fixed email addresses"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Técnicos atribuídos ao chamado"
+msgstr "Technicians assigned to the ticket"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Membros dos grupos técnicos atribuídos"
+msgstr "Members of the assigned technician groups"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Solicitantes do chamado"
+msgstr "Requesters of the ticket"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Observadores do chamado"
+msgstr "Watchers of the ticket"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Não avisar quem executou a ação"
+msgstr "Do not notify whoever did the action"
+
+#: src/Rule.php
+msgid "Entidade (inclui subentidades)"
+msgstr "Entity (includes sub-entities)"
+
+#: src/Rule.php
+msgid "Categoria (inclui subcategorias)"
+msgstr "Category (includes sub-categories)"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Tipo do chamado"
+msgstr "Ticket type"
+
+#: src/Rule.php templates/rule_form.html.twig
+msgid "Prioridade mínima"
+msgstr "Minimum priority"
+
+#: src/Rule.php
+msgid "Características"
+msgstr "Characteristics"
+
+#: src/Rule.php
+msgid "ID"
+msgstr "ID"
+
+#: src/Rule.php
+msgid "Última atualização"
+msgstr "Last update"
+
+#: src/Rule.php
+msgid "Data de criação"
+msgstr "Creation date"
+
+#: src/Rule.php
+msgid "o técnico que acabou de ser atribuído"
+msgstr "the technician who has just been assigned"
+
+#: src/Rule.php
+msgid "os técnicos atribuídos ao chamado"
+msgstr "the technicians assigned to the ticket"
+
+#: src/Rule.php
+msgid "os membros do grupo que acabou de ser atribuído"
+msgstr "the members of the group that has just been assigned"
+
+#: src/Rule.php
+msgid "os membros dos grupos técnicos atribuídos"
+msgstr "the members of the assigned technician groups"
+
+#: src/Rule.php
+msgid "os solicitantes do chamado"
+msgstr "the requesters of the ticket"
+
+#: src/Rule.php
+msgid "os observadores do chamado"
+msgstr "the watchers of the ticket"
+
+#: src/Rule.php
+msgid "%d e-mails fixos"
+msgstr "%d fixed email addresses"
+
+#: src/Rule.php
+msgid "entidade %s e as que estão dentro dela"
+msgstr "entity %s and the ones inside it"
+
+#: src/Rule.php
+msgid "categoria %s e as que estão dentro dela"
+msgstr "category %s and the ones inside it"
+
+#: src/Rule.php
+msgid "tipo %s"
+msgstr "type %s"
+
+#: src/Rule.php
+msgid "prioridade a partir de %s"
+msgstr "priority from %s up"
+
+#: src/Rule.php
+msgid "Quem fez a ação não recebe."
+msgstr "Whoever did the action does not receive it."
+
+#: src/Rule.php
+msgid "Evento inválido."
+msgstr "Invalid event."
+
+#: src/Screen/EventsScreen.php templates/events.html.twig
+msgid "Avisos do MailBridge"
+msgstr "MailBridge notices"
+
+#: src/Screen/EventsScreen.php
+msgid "Por entidade"
+msgstr "Per entity"
+
+#: src/Screen/EventsScreen.php
+msgid "Avisos nativos do GLPI (%d)"
+msgstr "Native GLPI notices (%d)"
+
+#: src/Screen/EventsScreen.php
+msgid "Qualquer tipo"
+msgstr "Any type"
+
+#: src/Screen/EventsScreen.php
+msgid "Qualquer prioridade"
+msgstr "Any priority"
+
+#: src/Screen/EventsScreen.php
+msgid "Qualquer categoria"
+msgstr "Any category"
+
+#: src/Screen/QueueScreen.php
+msgid "Parou após %d tentativa"
+msgid_plural "Parou após %d tentativas"
+msgstr[0] "Stopped after %d attempt"
+msgstr[1] "Stopped after %d attempts"
+
+#: src/Screen/QueueScreen.php
+msgid "O GLPI não registrou o motivo desta falha."
+msgstr "GLPI did not record the reason for this failure."
+
+#: src/Screen/QueueScreen.php
+msgid "Todos"
+msgstr "All"
+
+#: src/Screen/QueueScreen.php
+msgid "Com falha"
+msgstr "Failing"
+
+#: src/Screen/QueueScreen.php
+msgid "Enviados"
+msgstr "Sent"
+
+#: src/Screen/QueueScreen.php
+msgid "Cancelados"
+msgstr "Cancelled"
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhum e-mail no histórico ainda."
+msgstr "No email in the history yet."
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhum e-mail na fila: tudo em dia."
+msgstr "No email in the queue: all caught up."
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhuma falha de envio. Tudo certo por aqui."
+msgstr "No sending failure. All good here."
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhum e-mail enviado no período guardado."
+msgstr "No email sent within the period kept."
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhum e-mail cancelado."
+msgstr "No cancelled email."
+
+#: src/Screen/QueueScreen.php
+msgid "Nenhum e-mail encontrado com essa busca."
+msgstr "No email found for this search."
+
+#: src/Screen/QueueScreen.php
+msgid "Enviado em %s"
+msgstr "Sent on %s"
+
+#: src/Screen/QueueScreen.php
+msgid "Na fila desde %s"
+msgstr "In the queue since %s"
+
+#: src/Screen/QueueScreen.php
+msgid "Tentativa %1$d de %2$d falhou. Próxima: %3$s"
+msgstr "Attempt %1$d of %2$d failed. Next: %3$s"
+
+#: src/Screen/QueueScreen.php
+msgid "Criado em %s"
+msgstr "Created on %s"
+
+#: src/Screen/SendingScreen.php
+msgid "Servidor de e-mail (SMTP) - recomendado"
+msgstr "Mail server (SMTP) - recommended"
+
+#: src/Screen/SendingScreen.php
+msgid "Função de e-mail do próprio servidor do GLPI"
+msgstr "Mail function of the GLPI server itself"
+
+#: src/Screen/SendingScreen.php
+msgid "STARTTLS (o mais comum, porta 587)"
+msgstr "STARTTLS (the most common, port 587)"
+
+#: src/Screen/SendingScreen.php
+msgid "SSL/TLS (porta 465)"
+msgstr "SSL/TLS (port 465)"
+
+#: src/Screen/SendingScreen.php
+msgid "Nenhuma (porta 25, só em rede interna)"
+msgstr "None (port 25, internal network only)"
+
+#: src/Screen/TemplatesScreen.php
+msgid "Padrão (todos os idiomas)"
+msgstr "Default (all languages)"
+
+#: src/Screen/TemplatesScreen.php
+msgid "%s (nova tradução)"
+msgstr "%s (new translation)"
+
+#: src/SmtpProbe.php
+msgid "Função de e-mail do servidor do GLPI disponível"
+msgstr "Mail function of the GLPI server available"
+
+#: src/SmtpProbe.php
+msgid "Conectar ao servidor de envio"
+msgstr "Connect to the mail server"
+
+#: src/SmtpProbe.php
+msgid "Conectar a %s"
+msgstr "Connect to %s"
+
+#: src/SmtpProbe.php
+msgid "Conexão segura (SSL/TLS)"
+msgstr "Secure connection (SSL/TLS)"
+
+#: src/SmtpProbe.php
+msgid "Conexão segura (STARTTLS)"
+msgstr "Secure connection (STARTTLS)"
+
+#: src/SmtpProbe.php
+msgid "Entrar com usuário e senha"
+msgstr "Sign in with user name and password"
+
+#: src/SmtpProbe.php
+msgid "Conexão segura"
+msgstr "Secure connection"
+
+#: src/SmtpProbe.php
+msgid "Não usada: a segurança está em \"Nenhuma\"."
+msgstr "Not used: security is set to \"None\"."
+
+#: src/SmtpProbe.php
+msgid "Nenhuma senha está guardada."
+msgstr "No password is stored."
+
+#: src/SmtpProbe.php
+msgid "O %s exige login e nenhum usuário foi informado."
+msgstr "%s requires sign-in and no user was entered."
+
+#: src/SmtpProbe.php
+msgid "Não usado: nenhum usuário foi informado."
+msgstr "Not used: no user name was given."
+
+#: src/SmtpProbe.php
+msgid "Conectar e entrar em %s (login pelo provedor)"
+msgstr "Connect and sign in to %s (sign-in through the provider)"
+
+#: src/Template.php
+msgid "Número do chamado"
+msgstr "Ticket number"
+
+#: src/Template.php
+msgid "Título do chamado"
+msgstr "Ticket title"
+
+#: src/Template.php
+msgid "Descrição do chamado"
+msgstr "Ticket description"
+
+#: src/Template.php
+msgid "Link para abrir o chamado"
+msgstr "Link to open the ticket"
+
+#: src/Template.php
+msgid "Status atual"
+msgstr "Current status"
+
+#: src/Template.php
+msgid "Status anterior (evento de mudança de status)"
+msgstr "Previous status (status change event)"
+
+#: src/Template.php
+msgid "Prioridade"
+msgstr "Priority"
+
+#: src/Template.php
+msgid "Urgência"
+msgstr "Urgency"
+
+#: src/Template.php
+msgid "Tipo (incidente ou requisição)"
+msgstr "Type (incident or request)"
+
+#: src/Template.php
+msgid "Categoria"
+msgstr "Category"
+
+#: src/Template.php templates/events.html.twig
+msgid "Entidade"
+msgstr "Entity"
+
+#: src/Template.php
+msgid "Data de abertura"
+msgstr "Opening date"
+
+#: src/Template.php
+msgid "Solicitantes"
+msgstr "Requesters"
+
+#: src/Template.php
+msgid "Técnicos atribuídos"
+msgstr "Assigned technicians"
+
+#: src/Template.php
+msgid "Grupos técnicos atribuídos"
+msgstr "Assigned technician groups"
+
+#: src/Template.php
+msgid "Nome de quem recebe o e-mail"
+msgstr "Name of the person receiving the email"
+
+#: src/Template.php
+msgid "Frase que descreve o evento"
+msgstr "Sentence describing the event"
+
+#: src/Template.php
+msgid "Quem executou a ação"
+msgstr "Who did the action"
+
+#: src/Template.php
+msgid "Texto do acompanhamento, tarefa ou solução"
+msgstr "Text of the follow-up, task or solution"
+
+#: src/Template.php
+msgid "Em atendimento (atribuído)"
+msgstr "Processing (assigned)"
+
+#: src/Template.php
+msgid "Novo"
+msgstr "New"
+
+#: src/Template.php
+msgid "Solucionado"
+msgstr "Solved"
+
+#: src/Template.php
+msgid "João Lima"
+msgstr "John Miller"
+
+#: src/Template.php
+msgid "Desde hoje cedo a impressora do financeiro não imprime. Já tentei desligar e ligar."
+msgstr "The finance printer has not printed since this morning. I already tried turning it off and on."
+
+#: src/Template.php
+msgid "Troquei o cabo de rede e a impressora voltou a funcionar."
+msgstr "I replaced the network cable and the printer is working again."
+
+#: src/Template.php
+msgid "Impressora do 2º andar não imprime"
+msgstr "2nd floor printer does not print"
+
+#: src/Template.php
+msgid "Alta"
+msgstr "High"
+
+#: src/Template.php
+msgid "Incidente"
+msgstr "Incident"
+
+#: src/Template.php
+msgid "Equipamentos > Impressoras"
+msgstr "Equipment > Printers"
+
+#: src/Template.php
+msgid "Matriz"
+msgstr "Head office"
+
+#: src/Template.php
+msgid "Maria Souza"
+msgstr "Mary Smith"
+
+#: src/Template.php
+msgid "Suporte N1"
+msgstr "Support L1"
+
+#: src/Template.php
+msgid "Um novo chamado foi aberto."
+msgstr "A new ticket was opened."
+
+#: src/Template.php
+msgid "Um chamado foi atribuído a você ou ao seu grupo de atendimento."
+msgstr "A ticket was assigned to you or to your support group."
+
+#: src/Template.php
+msgid "Um novo acompanhamento foi adicionado ao chamado."
+msgstr "A new follow-up was added to the ticket."
+
+#: src/Template.php
+msgid "Uma nova tarefa foi adicionada ao chamado."
+msgstr "A new task was added to the ticket."
+
+#: src/Template.php
+msgid "Uma solução foi registrada para o chamado."
+msgstr "A solution was recorded for the ticket."
+
+#: src/Template.php
+msgid "O status do chamado mudou de \"%1$s\" para \"%2$s\"."
+msgstr "The ticket status changed from \"%1$s\" to \"%2$s\"."
+
+#: src/Validation.php
+msgid "Escolha o tipo de segurança da conexão."
+msgstr "Choose the connection security type."
+
+#: src/Validation.php
+msgid "Informe o servidor de envio. Exemplo: smtp.suaempresa.com.br"
+msgstr "Enter the mail server. Example: smtp.yourcompany.com"
+
+#: src/Validation.php
+msgid "Servidor inválido: digite só o nome ou o IP, sem \"http://\", sem espaços e sem a porta. Exemplo: smtp.suaempresa.com.br"
+msgstr "Invalid server: type only the name or the IP, without \"http://\", spaces or the port. Example: smtp.yourcompany.com"
+
+#: src/Validation.php
+msgid "Porta inválida: use um número de 1 a 65535. As mais comuns são 587, 465 e 25."
+msgstr "Invalid port: use a number from 1 to 65535. The most common are 587, 465 and 25."
+
+#: src/Validation.php
+msgid "Usuário inválido: use até 255 caracteres, numa linha só."
+msgstr "Invalid user name: use up to 255 characters, on a single line."
+
+#: src/Validation.php
+msgid "Senha inválida: use até 255 caracteres, numa linha só."
+msgstr "Invalid password: use up to 255 characters, on a single line."
+
+#: src/Validation.php
+msgid "Endereço de retorno inválido. Exemplo: devolvidos@suaempresa.com.br"
+msgstr "Invalid return address. Example: bounces@yourcompany.com"
+
+#: src/Validation.php
+msgid "Escolha como os e-mails serão enviados."
+msgstr "Choose how the emails will be sent."
+
+#: src/Validation.php
+msgid "E-mail do remetente inválido. Exemplo: suporte@suaempresa.com.br"
+msgstr "Invalid sender email. Example: support@yourcompany.com"
+
+#: src/Validation.php
+msgid "E-mail de resposta inválido. Exemplo: suporte@suaempresa.com.br"
+msgstr "Invalid reply-to email. Example: support@yourcompany.com"
+
+#: src/Validation.php
+msgid "E-mail \"não responda\" inválido. Exemplo: naoresponda@suaempresa.com.br"
+msgstr "Invalid \"no-reply\" email. Example: noreply@yourcompany.com"
+
+#: src/Validation.php
+msgid "E-mail do administrador inválido. Exemplo: ti@suaempresa.com.br"
+msgstr "Invalid administrator email. Example: it@yourcompany.com"
+
+#: src/Validation.php
+msgid "Informe o e-mail do remetente: sem ele nenhum e-mail pode sair. Exemplo: suporte@suaempresa.com.br"
+msgstr "Enter the sender email: without it no email can go out. Example: support@yourcompany.com"
+
+#: src/Validation.php
+msgid "Assinatura longa demais: use até 2000 caracteres."
+msgstr "Signature too long: use up to 2000 characters."
+
+#: src/Validation.php
+msgid "E-mail do remetente do MailBridge inválido. Exemplo: suporte@suaempresa.com.br"
+msgstr "Invalid MailBridge sender email. Example: support@yourcompany.com"
+
+#: src/Validation.php
+msgid "Não entendi: %s. Use um endereço (pessoa@empresa.com) ou um domínio (@empresa.com) por linha."
+msgstr "Not understood: %s. Use one address (person@company.com) or one domain (@company.com) per line."
+
+#: src/Validation.php
+msgid "Número de novas tentativas inválido: use de 0 a 20."
+msgstr "Invalid number of retries: use 0 to 20."
+
+#: src/Validation.php
+msgid "Intervalo inválido: use de 0 a 1440 minutos (1 dia)."
+msgstr "Invalid interval: use 0 to 1440 minutes (1 day)."
+
+#: src/Validation.php
+msgid "Prazo inválido: use de 0 a 3650 dias (0 = nunca apagar)."
+msgstr "Invalid period: use 0 to 3650 days (0 = never delete)."
+
+#: src/Validation.php
+msgid "Quantidade inválida: use de 1 a 500 e-mails por rodada."
+msgstr "Invalid quantity: use 1 to 500 emails per run."
+
+#: src/Validation.php
+msgid "Escolha o acontecimento que dispara o aviso."
+msgstr "Choose the event that triggers the notice."
+
+#: src/Validation.php
+msgid "Dê um nome para a regra. Exemplo: Avisar o técnico quando receber um chamado"
+msgstr "Give the rule a name. Example: Notify the technician when a ticket is assigned"
+
+#: src/Validation.php
+msgid "E-mails inválidos: %s. Corrija ou apague esses endereços (um por linha)."
+msgstr "Invalid email addresses: %s. Fix or remove them (one per line)."
+
+#: src/Validation.php
+msgid "Escolha pelo menos um destinatário, ou informe um e-mail fixo."
+msgstr "Choose at least one recipient, or enter a fixed email address."
+
+#: src/Validation.php templates/template_form.html.twig
+msgid "Escreva o assunto do e-mail. Exemplo: Chamado ##ticket.id## atribuído a você"
+msgstr "Write the email subject. Example: Ticket ##ticket.id## assigned to you"
+
+#: src/Validation.php
+msgid "Escreva a mensagem do e-mail. Use \"Restaurar padrão\" se quiser começar pelo texto sugerido."
+msgstr "Write the email message. Use \"Restore default\" if you want to start from the suggested text."
+
+#: src/Validation.php
+msgid "Mensagem longa demais: reduza o texto."
+msgstr "Message too long: shorten the text."
+
+#: templates/diagnostics.html.twig
+msgid "Verificações"
+msgstr "Checks"
+
+#: templates/diagnostics.html.twig
+msgid "Quem alterou o quê"
+msgstr "Who changed what"
+
+#: templates/diagnostics.html.twig
+msgid "Nenhuma alteração registrada ainda."
+msgstr "No change recorded yet."
+
+#: templates/diagnostics.html.twig
+msgid "Últimas alterações na configuração de e-mail e nas regras"
+msgstr "Latest changes to the email settings and the rules"
+
+#: templates/diagnostics.html.twig templates/events.html.twig
+msgid "Quando"
+msgstr "When"
+
+#: templates/diagnostics.html.twig
+msgid "Quem"
+msgstr "Who"
+
+#: templates/diagnostics.html.twig
+msgid "O quê"
+msgstr "What"
+
+#: templates/diagnostics.html.twig templates/queue_detail.html.twig
+msgid "De"
+msgstr "From"
+
+#: templates/diagnostics.html.twig templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Para"
+msgstr "To"
+
+#: templates/diagnostics.html.twig
+msgid "São as 15 alterações mais recentes guardadas no histórico do próprio GLPI. Senhas nunca aparecem."
+msgstr "These are the 15 most recent changes kept in GLPI's own history. Passwords never appear."
+
+#: templates/diagnostics.html.twig
+msgid "Cópia da configuração"
+msgstr "Copy of the settings"
+
+#: templates/diagnostics.html.twig
+msgid "Guarda num arquivo as regras, os modelos, os ajustes e o servidor de envio. A senha do servidor nunca vai no arquivo."
+msgstr "Saves the rules, templates, settings and mail server to a file. The server password never goes into the file."
+
+#: templates/diagnostics.html.twig
+msgid "Exportar"
+msgstr "Export"
+
+#: templates/diagnostics.html.twig
+msgid "Importar de um arquivo"
+msgstr "Import from a file"
+
+#: templates/diagnostics.html.twig
+msgid "O arquivo .json gerado pelo botão Exportar. Regras com o mesmo nome e acontecimento são atualizadas; as outras são criadas."
+msgstr "The .json file created by the Export button. Rules with the same name and event are updated; the others are created."
+
+#: templates/diagnostics.html.twig
+msgid "Importar também o servidor de envio e os remetentes"
+msgstr "Also import the mail server and the senders"
+
+#: templates/diagnostics.html.twig
+msgid "Importar este arquivo? Regras com o mesmo nome serão atualizadas com o conteúdo do arquivo."
+msgstr "Import this file? Rules with the same name will be updated with the file's content."
+
+#: templates/diagnostics.html.twig
+msgid "Importar"
+msgstr "Import"
+
+#: templates/diagnostics.html.twig
+msgid "Seu perfil não tem permissão para exportar ou importar."
+msgstr "Your profile is not allowed to export or import."
+
+#: templates/diagnostics.html.twig
+msgid "Manutenção"
+msgstr "Maintenance"
+
+#: templates/diagnostics.html.twig
+msgid "Apagar os dados do MailBridge ao desinstalar o plugin"
+msgstr "Delete MailBridge data when the plugin is uninstalled"
+
+#: templates/diagnostics.html.twig
+msgid "Desligado (recomendado): ao desinstalar, regras, modelos e ajustes ficam guardados para uma reinstalação."
+msgstr "Off (recommended): on uninstall, rules, templates and settings are kept for a later reinstall."
+
+#: templates/diagnostics.html.twig templates/rule_form.html.twig templates/sending.html.twig templates/template_form.html.twig
+msgid "Salvar"
+msgstr "Save"
+
+#: templates/diagnostics.html.twig
+msgid "Volta os ajustes próprios do MailBridge ao padrão (avisos ligados, sem remetente próprio, sem listas, sem escolhas por entidade). Não mexe nas regras, nos modelos nem no servidor de envio."
+msgstr "Returns MailBridge's own settings to their defaults (notices on, no own sender, no lists, no choices per entity). Rules, templates and the mail server are not touched."
+
+#: templates/diagnostics.html.twig
+msgid "Restaurar os ajustes do MailBridge para o padrão? Remetente próprio, listas e escolhas por entidade serão apagados."
+msgstr "Restore MailBridge settings to their defaults? The own sender, the lists and the choices per entity will be removed."
+
+#: templates/diagnostics.html.twig
+msgid "Restaurar padrões"
+msgstr "Restore defaults"
+
+#: templates/diagnostics.html.twig
+msgid "Permissões e versões"
+msgstr "Permissions and versions"
+
+#: templates/diagnostics.html.twig
+msgid "Quem pode alterar a configuração geral do GLPI tem acesso total ao MailBridge. Para liberar só uma parte a outros perfis, use a aba MailBridge no cadastro do perfil:"
+msgstr "Anyone allowed to change GLPI's general setup has full access to MailBridge. To give other profiles only part of it, use the MailBridge tab of the profile:"
+
+#: templates/diagnostics.html.twig
+msgid "Abrir os perfis"
+msgstr "Open the profiles"
+
+#: templates/diagnostics.html.twig
+msgid "Os dados do plugin antigo (Techmail %1$s) foram trazidos em %2$s: %3$d regras, %4$d traduções de modelos e %5$d perfis com permissão. Nada do plugin antigo foi apagado."
+msgstr "Data from the old plugin (Techmail %1$s) was brought over on %2$s: %3$d rules, %4$d template translations and %5$d profiles with permissions. Nothing from the old plugin was deleted."
+
+#: templates/diagnostics.html.twig
+msgid "Depois de conferir que está tudo aqui, desinstale o Techmail em Configurar > Plugins."
+msgstr "After checking that everything is here, uninstall Techmail in Setup > Plugins."
+
+#: templates/events.html.twig
+msgid "Partes de Eventos e destinatários"
+msgstr "Parts of Events and recipients"
+
+#: templates/events.html.twig
+msgid "Desligar os avisos do MailBridge? Nenhuma regra abaixo vai gerar e-mail até você ligar de novo. Os avisos nativos do GLPI continuam."
+msgstr "Turn MailBridge notices off? No rule below will create emails until you turn them on again. Native GLPI notices keep working."
+
+#: templates/events.html.twig
+msgid "Chave geral: desligada, nenhuma regra abaixo gera e-mail."
+msgstr "Master switch: when off, no rule below creates emails."
+
+#: templates/events.html.twig
+msgid "Desligar"
+msgstr "Turn off"
+
+#: templates/events.html.twig
+msgid "Ligar"
+msgstr "Turn on"
+
+#: templates/events.html.twig
+msgid "Quem recebe o quê"
+msgstr "Who receives what"
+
+#: templates/events.html.twig
+msgid "Nova regra"
+msgstr "New rule"
+
+#: templates/events.html.twig
+msgid "Nenhuma regra criada ainda."
+msgstr "No rule created yet."
+
+#: templates/events.html.twig
+msgid "Sem regras, o MailBridge não avisa ninguém. Crie a primeira em \"Nova regra\"."
+msgstr "Without rules, MailBridge notifies nobody. Create the first one with \"New rule\"."
+
+#: templates/events.html.twig
+msgid "Regra ligada: %s"
+msgstr "Rule on: %s"
+
+#: templates/events.html.twig
+msgid "Ligada"
+msgstr "On"
+
+#: templates/events.html.twig
+msgid "Desligada"
+msgstr "Off"
+
+#: templates/events.html.twig templates/templates.html.twig
+msgid "Modelo traduzido para este idioma"
+msgstr "Template translated into this language"
+
+#: templates/events.html.twig
+msgid "Quando:"
+msgstr "When:"
+
+#: templates/events.html.twig
+msgid "Avisa:"
+msgstr "Notifies:"
+
+#: templates/events.html.twig
+msgid "ninguém (escolha os destinatários)."
+msgstr "nobody (choose the recipients)."
+
+#: templates/events.html.twig
+msgid "Só para:"
+msgstr "Only for:"
+
+#: templates/events.html.twig
+msgid "Editar regra"
+msgstr "Edit rule"
+
+#: templates/events.html.twig templates/rule_form.html.twig templates/templates.html.twig
+msgid "Editar mensagem"
+msgstr "Edit message"
+
+#: templates/events.html.twig
+msgid "Avisos do MailBridge por entidade"
+msgstr "MailBridge notices per entity"
+
+#: templates/events.html.twig
+msgid "Este GLPI tem uma entidade só: a chave geral \"Avisos do MailBridge\" já vale para tudo. Quando houver mais entidades, você poderá desligar os avisos em cada uma aqui."
+msgstr "This GLPI has a single entity: the master switch \"MailBridge notices\" already covers everything. When there are more entities, you will be able to turn notices off for each one here."
+
+#: templates/events.html.twig
+msgid "\"Seguir a entidade de cima\" usa a escolha da entidade mais próxima acima dela. Se nenhuma tiver escolha, os avisos ficam ligados."
+msgstr "\"Follow the entity above\" uses the choice of the nearest entity above it. If none has a choice, notices stay on."
+
+#: templates/events.html.twig
+msgid "Como está agora"
+msgstr "Current state"
+
+#: templates/events.html.twig
+msgid "Escolha"
+msgstr "Choice"
+
+#: templates/events.html.twig
+msgid "Ligado"
+msgstr "On"
+
+#: templates/events.html.twig
+msgid "Desligado"
+msgstr "Off"
+
+#: templates/events.html.twig
+msgid "(padrão)"
+msgstr "(default)"
+
+#: templates/events.html.twig
+msgid "(escolhido aqui)"
+msgstr "(chosen here)"
+
+#: templates/events.html.twig
+msgid "(vem de %s)"
+msgstr "(comes from %s)"
+
+#: templates/events.html.twig
+msgid "Escolha para %s"
+msgstr "Choice for %s"
+
+#: templates/events.html.twig
+msgid "Seguir a entidade de cima"
+msgstr "Follow the entity above"
+
+#: templates/events.html.twig
+msgid "Salvar escolhas"
+msgstr "Save choices"
+
+#: templates/events.html.twig
+msgid "Páginas de entidades"
+msgstr "Entity pages"
+
+#: templates/events.html.twig
+msgid "Avisos nativos do GLPI que saem por e-mail"
+msgstr "Native GLPI notices sent by email"
+
+#: templates/events.html.twig
+msgid "Além das regras do MailBridge, o GLPI tem os próprios avisos (para solicitantes, administradores etc.). Com o envio de e-mails ligado, os que estiverem ligados aqui também disparam."
+msgstr "Besides the MailBridge rules, GLPI has its own notices (for requesters, administrators, etc.). With email sending on, the ones turned on here are sent too."
+
+#: templates/events.html.twig
+msgid "%1$d de %2$d ligados."
+msgstr "%1$d of %2$d turned on."
+
+#: templates/events.html.twig
+msgid "Procurar aviso pelo nome"
+msgstr "Search a notice by name"
+
+#: templates/events.html.twig
+msgid "Procurar pelo nome. Exemplo: chamado"
+msgstr "Search by name. Example: ticket"
+
+#: templates/events.html.twig templates/queue.html.twig
+msgid "Procurar"
+msgstr "Search"
+
+#: templates/events.html.twig
+msgid "Abrir a tela nativa (destinatários e textos)"
+msgstr "Open the native screen (recipients and texts)"
+
+#: templates/events.html.twig
+msgid "Nenhum aviso encontrado com esse nome."
+msgstr "No notice found with this name."
+
+#: templates/events.html.twig
+msgid "Aviso"
+msgstr "Notice"
+
+#: templates/events.html.twig
+msgid "Sobre"
+msgstr "About"
+
+#: templates/events.html.twig templates/queue.html.twig
+msgid "Ações"
+msgstr "Actions"
+
+#: templates/events.html.twig
+msgid "Aviso ligado: %s"
+msgstr "Notice on: %s"
+
+#: templates/events.html.twig
+msgid "Abrir %s na tela nativa do GLPI"
+msgstr "Open %s on the native GLPI screen"
+
+#: templates/events.html.twig
+msgid "Abrir"
+msgstr "Open"
+
+#: templates/events.html.twig
+msgid "Páginas de avisos nativos"
+msgstr "Native notice pages"
+
+#: templates/layout.html.twig
+msgid "Situação do envio de e-mails. Clique para ver a Visão geral."
+msgstr "Email sending status. Click to see the Overview."
+
+#: templates/layout.html.twig
+msgid "Situação:"
+msgstr "Status:"
+
+#: templates/layout.html.twig
+msgid "Integração e diagnóstico de e-mail para o GLPI"
+msgstr "Email Integration & Diagnostics for GLPI"
+
+#: templates/layout.html.twig
+msgid "Seções do MailBridge"
+msgstr "MailBridge sections"
+
+#: templates/macros.html.twig
+msgid "Não foi possível salvar. Corrija os campos marcados:"
+msgstr "Could not save. Fix the marked fields:"
+
+#: templates/macros.html.twig
+msgid "Em ordem:"
+msgstr "In order:"
+
+#: templates/macros.html.twig
+msgid "Problema:"
+msgstr "Problem:"
+
+#: templates/macros.html.twig
+msgid "Atenção:"
+msgstr "Attention:"
+
+#: templates/macros.html.twig
+msgid "Desligado:"
+msgstr "Off:"
+
+#: templates/macros.html.twig
+msgid "Informação:"
+msgstr "Information:"
+
+#: templates/macros.html.twig
+msgid "Mostrando %1$d a %2$d de %3$d"
+msgstr "Showing %1$d to %2$d of %3$d"
+
+#: templates/macros.html.twig
+msgid "Anteriores"
+msgstr "Previous"
+
+#: templates/macros.html.twig
+msgid "Próximos"
+msgstr "Next"
+
+#: templates/overview.html.twig
+msgid "Ativo: os e-mails estão saindo normalmente."
+msgstr "Active: emails are going out normally."
+
+#: templates/overview.html.twig
+msgid "Inativo: os e-mails não estão saindo."
+msgstr "Inactive: emails are not going out."
+
+#: templates/overview.html.twig
+msgid "Precisa de atenção."
+msgstr "Needs attention."
+
+#: templates/overview.html.twig
+msgid "Nada pendente. Você pode acompanhar os envios em \"Fila e histórico\"."
+msgstr "Nothing pending. You can follow the emails under \"Queue and history\"."
+
+#: templates/overview.html.twig
+msgid "Primeiros passos"
+msgstr "Getting started"
+
+#: templates/overview.html.twig
+msgid "%1$d de %2$d concluídos"
+msgstr "%1$d of %2$d done"
+
+#: templates/overview.html.twig
+msgid "Progresso dos primeiros passos"
+msgstr "Getting started progress"
+
+#: templates/overview.html.twig
+msgid "Concluído:"
+msgstr "Done:"
+
+#: templates/overview.html.twig
+msgid "Falta:"
+msgstr "To do:"
+
+#: templates/overview.html.twig
+msgid "Fila de e-mails"
+msgstr "Email queue"
+
+#: templates/overview.html.twig
+msgid "esperando envio"
+msgstr "waiting to be sent"
+
+#: templates/overview.html.twig
+msgid "com falha (7 dias)"
+msgstr "failed (7 days)"
+
+#: templates/overview.html.twig
+msgid "Nenhum e-mail enviado ainda."
+msgstr "No email sent yet."
+
+#: templates/overview.html.twig
+msgid "Ações rápidas"
+msgstr "Quick actions"
+
+#: templates/overview.html.twig
+msgid "Configurar envio"
+msgstr "Set up sending"
+
+#: templates/overview.html.twig
+msgid "Ver regras de aviso"
+msgstr "View notice rules"
+
+#: templates/overview.html.twig
+msgid "Abrir o diagnóstico"
+msgstr "Open diagnostics"
+
+#: templates/queue.html.twig
+msgid "Processar a fila agora"
+msgstr "Process the queue now"
+
+#: templates/queue.html.twig
+msgid "Filtrar por situação"
+msgstr "Filter by status"
+
+#: templates/queue.html.twig
+msgid "Procurar por destinatário ou assunto"
+msgstr "Search by recipient or subject"
+
+#: templates/queue.html.twig
+msgid "Só os do MailBridge"
+msgstr "MailBridge only"
+
+#: templates/queue.html.twig
+msgid "Limpar busca"
+msgstr "Clear search"
+
+#: templates/queue.html.twig
+msgid "E-mails da fila e do histórico"
+msgstr "Emails in the queue and in the history"
+
+#: templates/queue.html.twig
+msgid "Marcar todos desta página"
+msgstr "Select all on this page"
+
+#: templates/queue.html.twig
+msgid "Situação"
+msgstr "Status"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Origem"
+msgstr "Source"
+
+#: templates/queue.html.twig
+msgid "Marcar o e-mail para %s"
+msgstr "Select the email to %s"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "(sem assunto)"
+msgstr "(no subject)"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Este e-mail já foi enviado. Enviar uma cópia de novo?"
+msgstr "This email has already been sent. Send a copy again?"
+
+#: templates/queue.html.twig
+msgid "Reenviar o e-mail para %s"
+msgstr "Resend the email to %s"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Enviar agora"
+msgstr "Send now"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Reenviar"
+msgstr "Resend"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig
+msgid "Cancelar este e-mail? Ele sai da fila e não será enviado."
+msgstr "Cancel this email? It leaves the queue and will not be sent."
+
+#: templates/queue.html.twig
+msgid "Cancelar o e-mail para %s"
+msgstr "Cancel the email to %s"
+
+#: templates/queue.html.twig templates/queue_detail.html.twig templates/rule_form.html.twig
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: templates/queue.html.twig
+msgid "O que fazer com os marcados"
+msgstr "What to do with the selected ones"
+
+#: templates/queue.html.twig
+msgid "Reenviar os marcados"
+msgstr "Resend the selected ones"
+
+#: templates/queue.html.twig
+msgid "Cancelar os marcados"
+msgstr "Cancel the selected ones"
+
+#: templates/queue.html.twig
+msgid "Apagar os marcados do histórico"
+msgstr "Delete the selected ones from the history"
+
+#: templates/queue.html.twig
+msgid "Aplicar aos e-mails marcados? Reenviar manda de novo; cancelar tira da fila; apagar remove do histórico e não pode ser desfeito."
+msgstr "Apply to the selected emails? Resend sends them again; cancel removes them from the queue; delete removes them from the history and cannot be undone."
+
+#: templates/queue.html.twig
+msgid "Aplicar"
+msgstr "Apply"
+
+#: templates/queue.html.twig
+msgid "Páginas da fila"
+msgstr "Queue pages"
+
+#: templates/queue.html.twig
+msgid "Regras da fila"
+msgstr "Queue rules"
+
+#: templates/queue.html.twig
+msgid "Novas tentativas quando falhar"
+msgstr "Retries after a failure"
+
+#: templates/queue.html.twig
+msgid "Quantas vezes o GLPI tenta de novo antes de desistir. Padrão: 5."
+msgstr "How many times GLPI tries again before giving up. Default: 5."
+
+#: templates/queue.html.twig
+msgid "Tempo de espera antes de tentar de novo. Padrão: 5."
+msgstr "Waiting time before trying again. Default: 5."
+
+#: templates/queue.html.twig
+msgid "Dias para guardar o histórico"
+msgstr "Days to keep the history"
+
+#: templates/queue.html.twig
+msgid "Depois disso, e-mails enviados ou cancelados são apagados sozinhos. 0 = nunca apagar. Padrão: 30."
+msgstr "After that, sent or cancelled emails are deleted automatically. 0 = never delete. Default: 30."
+
+#: templates/queue.html.twig
+msgid "E-mails por rodada"
+msgstr "Emails per run"
+
+#: templates/queue.html.twig
+msgid "Quantos e-mails saem cada vez que a rotina roda. Padrão: 50."
+msgstr "How many emails go out each time the routine runs. Default: 50."
+
+#: templates/queue.html.twig
+msgid "Salvar regras da fila"
+msgstr "Save queue rules"
+
+#: templates/queue.html.twig
+msgid "Esvaziar a fila? Os %d e-mails que estão esperando serão cancelados e não serão enviados."
+msgstr "Empty the queue? The %d emails waiting will be cancelled and will not be sent."
+
+#: templates/queue.html.twig
+msgid "Esvaziar a fila"
+msgstr "Empty the queue"
+
+#: templates/queue.html.twig
+msgid "Ajustar horário e frequência da rotina (tela nativa)"
+msgstr "Adjust the routine's schedule and frequency (native screen)"
+
+#: templates/queue_detail.html.twig
+msgid "Voltar para a fila"
+msgstr "Back to the queue"
+
+#: templates/queue_detail.html.twig
+msgid "Responder para"
+msgstr "Reply to"
+
+#: templates/queue_detail.html.twig
+msgid "Criado em"
+msgstr "Created on"
+
+#: templates/queue_detail.html.twig
+msgid "Enviado em"
+msgstr "Sent on"
+
+#: templates/queue_detail.html.twig
+msgid "Tentativas com falha"
+msgstr "Failed attempts"
+
+#: templates/queue_detail.html.twig
+msgid "Apagar este e-mail do histórico? Isso não pode ser desfeito."
+msgstr "Delete this email from the history? This cannot be undone."
+
+#: templates/queue_detail.html.twig
+msgid "Apagar do histórico"
+msgstr "Delete from the history"
+
+#: templates/queue_detail.html.twig
+msgid "Por que não saiu"
+msgstr "Why it was not sent"
+
+#: templates/queue_detail.html.twig
+msgid "o GLPI desistiu depois desta tentativa"
+msgstr "GLPI gave up after this attempt"
+
+#: templates/queue_detail.html.twig
+msgid "Como o e-mail ficou"
+msgstr "How the email looked"
+
+#: templates/queue_detail.html.twig
+msgid "Conteúdo do e-mail"
+msgstr "Email content"
+
+#: templates/queue_detail.html.twig templates/template_form.html.twig
+msgid "Ver a versão em texto simples"
+msgstr "View the plain text version"
+
+#: templates/rule_form.html.twig
+msgid "Voltar para as regras"
+msgstr "Back to the rules"
+
+#: templates/rule_form.html.twig
+msgid "Nova regra de aviso"
+msgstr "New notice rule"
+
+#: templates/rule_form.html.twig
+msgid "Editar regra de aviso"
+msgstr "Edit notice rule"
+
+#: templates/rule_form.html.twig
+msgid "Quando acontecer"
+msgstr "When this happens"
+
+#: templates/rule_form.html.twig
+msgid "A mudança automática de \"Novo\" para \"Em atendimento (atribuído)\" não conta como mudança de status: para isso use \"Chamado atribuído\"."
+msgstr "The automatic change from \"New\" to \"Processing (assigned)\" does not count as a status change: use \"Ticket assigned\" for that."
+
+#: templates/rule_form.html.twig
+msgid "Nome da regra"
+msgstr "Rule name"
+
+#: templates/rule_form.html.twig
+msgid "Avisar o técnico quando receber um chamado"
+msgstr "Notify the technician when a ticket is assigned"
+
+#: templates/rule_form.html.twig
+msgid "Só para você reconhecer a regra na lista. Em branco, usa o nome do acontecimento."
+msgstr "Only for you to recognise the rule in the list. If empty, the event name is used."
+
+#: templates/rule_form.html.twig
+msgid "Regra ligada"
+msgstr "Rule on"
+
+#: templates/rule_form.html.twig
+msgid "Desligada, a regra fica guardada mas não gera e-mails."
+msgstr "When off, the rule is kept but creates no emails."
+
+#: templates/rule_form.html.twig
+msgid "Quem recebe"
+msgstr "Who receives"
+
+#: templates/rule_form.html.twig
+msgid "Pessoas ligadas ao chamado"
+msgstr "People linked to the ticket"
+
+#: templates/rule_form.html.twig
+msgid "No acontecimento \"Chamado atribuído\", recebe só quem acabou de ser atribuído."
+msgstr "For the \"Ticket assigned\" event, only whoever has just been assigned receives it."
+
+#: templates/rule_form.html.twig
+msgid "Cada pessoa do grupo recebe o próprio e-mail."
+msgstr "Each person in the group receives their own email."
+
+#: templates/rule_form.html.twig
+msgid "Quem abriu o chamado. Use com cuidado: o GLPI já tem avisos nativos para solicitantes."
+msgstr "Whoever opened the ticket. Use with care: GLPI already has native notices for requesters."
+
+#: templates/rule_form.html.twig
+msgid "Pessoas incluídas como observadoras no chamado."
+msgstr "People added as watchers on the ticket."
+
+#: templates/rule_form.html.twig
+msgid "E-mails fixos (opcional)"
+msgstr "Fixed email addresses (optional)"
+
+#: templates/rule_form.html.twig
+msgid "Um por linha. Sempre recebem este aviso, mesmo sem estar no chamado."
+msgstr "One per line. They always receive this notice, even when not on the ticket."
+
+#: templates/rule_form.html.twig
+msgid "Exemplo: o técnico que escreveu o acompanhamento não recebe o próprio aviso."
+msgstr "Example: the technician who wrote the follow-up does not receive their own notice."
+
+#: templates/rule_form.html.twig
+msgid "Opções avançadas: avisar só em alguns chamados"
+msgstr "Advanced options: notify only for some tickets"
+
+#: templates/rule_form.html.twig
+msgid "Sem filtros, a regra vale para todos os chamados."
+msgstr "Without filters, the rule applies to every ticket."
+
+#: templates/rule_form.html.twig
+msgid "Entidade (inclui as que estão dentro dela)"
+msgstr "Entity (includes the ones inside it)"
+
+#: templates/rule_form.html.twig
+msgid "A entidade raiz equivale a \"todas\"."
+msgstr "The root entity means \"all\"."
+
+#: templates/rule_form.html.twig
+msgid "Categoria (inclui as que estão dentro dela)"
+msgstr "Category (includes the ones inside it)"
+
+#: templates/rule_form.html.twig
+msgid "Em branco, qualquer categoria."
+msgstr "If empty, any category."
+
+#: templates/rule_form.html.twig
+msgid "Avisa só quando a prioridade for esta ou maior."
+msgstr "Notifies only when the priority is this one or higher."
+
+#: templates/rule_form.html.twig
+msgid "Criar regra"
+msgstr "Create rule"
+
+#: templates/rule_form.html.twig templates/sending.html.twig templates/template_form.html.twig
+msgid "Há alterações não salvas."
+msgstr "There are unsaved changes."
+
+#: templates/rule_form.html.twig
+msgid "Apagar esta regra? A mensagem dela e as traduções também são apagadas. Isso não pode ser desfeito."
+msgstr "Delete this rule? Its message and translations are deleted too. This cannot be undone."
+
+#: templates/rule_form.html.twig
+msgid "Apagar regra"
+msgstr "Delete rule"
+
+#: templates/sending.html.twig
+msgid "Modo e-mail"
+msgstr "Email mode"
+
+#: templates/sending.html.twig
+msgid "Enviar e-mails de notificação"
+msgstr "Send notification emails"
+
+#: templates/sending.html.twig
+msgid "Vale para todos os e-mails do GLPI: os avisos do MailBridge e os avisos nativos. Desligado, nenhum e-mail sai."
+msgstr "Applies to every GLPI email: MailBridge notices and native notices. When off, no email goes out."
+
+#: templates/sending.html.twig
+msgid "Desligar o envio de e-mails? Nenhuma notificação por e-mail sairá do GLPI e o que já está na fila fica parado até você ligar de novo."
+msgstr "Turn email sending off? No notification email will leave GLPI and what is already in the queue stays there until you turn it on again."
+
+#: templates/sending.html.twig
+msgid "Servidor de envio"
+msgstr "Mail server"
+
+#: templates/sending.html.twig
+msgid "O envio está configurado com login pelo provedor (OAuth): %1$s, porta %2$d."
+msgstr "Sending is set up with sign-in through the provider (OAuth): %1$s, port %2$d."
+
+#: templates/sending.html.twig
+msgid "A autorização no provedor ainda não foi concluída."
+msgstr "The authorisation at the provider has not been completed yet."
+
+#: templates/sending.html.twig
+msgid "Esse tipo de login é feito numa janela do próprio provedor, por isso o servidor continua sendo ajustado na tela de e-mail do GLPI."
+msgstr "This kind of sign-in happens in the provider's own window, so the server is still set up on GLPI's email screen."
+
+#: templates/sending.html.twig
+msgid "Abrir a tela de e-mail do GLPI"
+msgstr "Open GLPI's email screen"
+
+#: templates/sending.html.twig
+msgid "Como enviar"
+msgstr "How to send"
+
+#: templates/sending.html.twig
+msgid "SMTP: o servidor que envia seus e-mails. É o do seu provedor ou o da sua empresa."
+msgstr "SMTP: the server that sends your emails. It is your provider's or your company's."
+
+#: templates/sending.html.twig
+msgid "O endereço informado pelo seu provedor de e-mail. Exemplo: smtp.suaempresa.com.br"
+msgstr "The address given by your email provider. Example: smtp.yourcompany.com"
+
+#: templates/sending.html.twig
+msgid "Normalmente 587, 465 ou 25."
+msgstr "Usually 587, 465 or 25."
+
+#: templates/sending.html.twig
+msgid "Segurança da conexão"
+msgstr "Connection security"
+
+#: templates/sending.html.twig
+msgid "Protege a senha e o conteúdo no caminho até o servidor. Na dúvida, use STARTTLS."
+msgstr "Protects the password and the content on the way to the server. If in doubt, use STARTTLS."
+
+#: templates/sending.html.twig
+msgid "Normalmente o e-mail completo da conta. Deixe em branco se o servidor não pede login."
+msgstr "Usually the account's full email address. Leave empty if the server does not ask for a login."
+
+#: templates/sending.html.twig
+msgid "(senha guardada)"
+msgstr "(password stored)"
+
+#: templates/sending.html.twig
+msgid "Já existe uma senha guardada. Deixe em branco para manter a mesma."
+msgstr "A password is already stored. Leave empty to keep it."
+
+#: templates/sending.html.twig
+msgid "A senha fica guardada de forma protegida e nunca volta a aparecer aqui."
+msgstr "The password is stored protected and is never shown here again."
+
+#: templates/sending.html.twig
+msgid "Apagar a senha guardada"
+msgstr "Delete the stored password"
+
+#: templates/sending.html.twig
+msgid "Opções avançadas do servidor"
+msgstr "Advanced server options"
+
+#: templates/sending.html.twig
+msgid "Conferir o certificado de segurança do servidor"
+msgstr "Check the server's security certificate"
+
+#: templates/sending.html.twig
+msgid "Recomendado. Desligue só em servidor interno com certificado próprio."
+msgstr "Recommended. Turn off only on an internal server with its own certificate."
+
+#: templates/sending.html.twig
+msgid "Endereço de retorno (opcional)"
+msgstr "Return address (optional)"
+
+#: templates/sending.html.twig
+msgid "Para onde voltam os avisos de e-mail não entregue. Em branco, voltam para o remetente."
+msgstr "Where undelivered-email notices go back to. If empty, they go back to the sender."
+
+#: templates/sending.html.twig
+msgid "O GLPI entrega os e-mails ao programa de e-mail instalado no próprio servidor. Só funciona se quem cuida do servidor tiver configurado isso."
+msgstr "GLPI hands the emails to the mail program installed on the server itself. It only works if whoever manages the server has set that up."
+
+#: templates/sending.html.twig
+msgid "Quem aparece nos e-mails"
+msgstr "Who appears in the emails"
+
+#: templates/sending.html.twig
+msgid "O endereço que aparece em \"De\". Em branco, usa o e-mail do administrador."
+msgstr "The address shown in \"From\". If empty, the administrator email is used."
+
+#: templates/sending.html.twig
+msgid "Suporte de TI"
+msgstr "IT Support"
+
+#: templates/sending.html.twig
+msgid "O nome que aparece ao lado do endereço."
+msgstr "The name shown next to the address."
+
+#: templates/sending.html.twig
+msgid "E-mail para respostas (opcional)"
+msgstr "Reply-to email (optional)"
+
+#: templates/sending.html.twig
+msgid "Para onde vai a resposta quando alguém clica em \"Responder\". Em branco, vai para o remetente."
+msgstr "Where the answer goes when someone clicks \"Reply\". If empty, it goes to the sender."
+
+#: templates/sending.html.twig
+msgid "Opcional."
+msgstr "Optional."
+
+#: templates/sending.html.twig
+msgid "Recebe os avisos destinados ao administrador do GLPI e serve de remetente reserva."
+msgstr "Receives the notices meant for the GLPI administrator and is used as a fallback sender."
+
+#: templates/sending.html.twig
+msgid "Equipe de Suporte de TI"
+msgstr "IT Support Team"
+
+#: templates/sending.html.twig
+msgid "Texto colocado no fim dos avisos nativos do GLPI. Os modelos do MailBridge têm o próprio texto."
+msgstr "Text placed at the end of native GLPI notices. MailBridge templates have their own text."
+
+#: templates/sending.html.twig
+msgid "Opções avançadas dos e-mails"
+msgstr "Advanced email options"
+
+#: templates/sending.html.twig
+msgid "E-mail \"não responda\" (opcional)"
+msgstr "\"No-reply\" email (optional)"
+
+#: templates/sending.html.twig
+msgid "Usado pelo GLPI nos avisos que não esperam resposta."
+msgstr "Used by GLPI in notices that expect no answer."
+
+#: templates/sending.html.twig
+msgid "Anexar os documentos do chamado aos avisos"
+msgstr "Attach the ticket's documents to the notices"
+
+#: templates/sending.html.twig
+msgid "Deixa os e-mails maiores. Desligado, o e-mail só leva o link para o chamado."
+msgstr "Makes the emails larger. When off, the email only carries the link to the ticket."
+
+#: templates/sending.html.twig
+msgid "Cada entidade pode ter remetente e assinatura próprios, na aba Notificações do cadastro da entidade."
+msgstr "Each entity can have its own sender and signature, on the Notifications tab of the entity."
+
+#: templates/sending.html.twig
+msgid "Abrir as entidades"
+msgstr "Open the entities"
+
+#: templates/sending.html.twig
+msgid "Opções avançadas dos avisos do MailBridge"
+msgstr "Advanced options for MailBridge notices"
+
+#: templates/sending.html.twig
+msgid "Remetente só para o MailBridge (opcional)"
+msgstr "Sender for MailBridge only (optional)"
+
+#: templates/sending.html.twig
+msgid "Em branco, os avisos do MailBridge usam o remetente acima."
+msgstr "If empty, MailBridge notices use the sender above."
+
+#: templates/sending.html.twig
+msgid "Nome desse remetente"
+msgstr "Name of that sender"
+
+#: templates/sending.html.twig
+msgid "Enviar na hora, sem esperar a rotina automática"
+msgstr "Send immediately, without waiting for the automatic routine"
+
+#: templates/sending.html.twig
+msgid "Desligado (recomendado): o e-mail entra na fila e sai em até 1 minuto. Ligado: sai na hora, mas a tela do chamado pode ficar lenta se o servidor de e-mail demorar."
+msgstr "Off (recommended): the email enters the queue and goes out within 1 minute. On: it goes out at once, but the ticket screen may get slow if the mail server is slow."
+
+#: templates/sending.html.twig
+msgid "Registrar o motivo de cada aviso gerado ou ignorado"
+msgstr "Record the reason for each notice created or skipped"
+
+#: templates/sending.html.twig
+msgid "Para investigar por que alguém não recebeu um aviso. Grava no arquivo mailbridge.log do GLPI."
+msgstr "To find out why someone did not receive a notice. Written to GLPI's mailbridge.log file."
+
+#: templates/sending.html.twig
+msgid "Nunca enviar avisos do MailBridge para"
+msgstr "Never send MailBridge notices to"
+
+#: templates/sending.html.twig
+msgid "Um endereço (pessoa@empresa.com) ou domínio (@empresa.com) por linha."
+msgstr "One address (person@company.com) or domain (@company.com) per line."
+
+#: templates/sending.html.twig
+msgid "Só enviar avisos do MailBridge para"
+msgstr "Only send MailBridge notices to"
+
+#: templates/sending.html.twig
+msgid "Em branco, envia para qualquer endereço. Útil em testes: só os domínios listados recebem."
+msgstr "If empty, any address can receive. Useful for tests: only the listed domains receive."
+
+#: templates/sending.html.twig
+msgid "Seu perfil pode ver esta tela, mas não alterar a configuração."
+msgstr "Your profile can view this screen but cannot change the settings."
+
+#: templates/sending.html.twig
+msgid "Testar"
+msgstr "Test"
+
+#: templates/sending.html.twig
+msgid "Os testes usam a configuração que está salva. Salve antes de testar."
+msgstr "Tests use the saved settings. Save before testing."
+
+#: templates/sending.html.twig
+msgid "Testar conexão"
+msgstr "Test connection"
+
+#: templates/sending.html.twig templates/template_form.html.twig
+msgid "Enviar o teste para"
+msgstr "Send the test to"
+
+#: templates/sending.html.twig
+msgid "Seu e-mail do cadastro. Troque se quiser testar com outro."
+msgstr "Your email address on record. Change it if you want to test with another one."
+
+#: templates/sending.html.twig
+msgid "Seu cadastro não tem e-mail: digite um endereço para receber o teste."
+msgstr "Your record has no email address: type one to receive the test."
+
+#: templates/sending.html.twig
+msgid "Seu perfil não tem permissão para testar o envio."
+msgstr "Your profile is not allowed to test sending."
+
+#: templates/template_form.html.twig
+msgid "Voltar para os modelos"
+msgstr "Back to the templates"
+
+#: templates/template_form.html.twig
+msgid "Mensagem de: %s"
+msgstr "Message of: %s"
+
+#: templates/template_form.html.twig
+msgid "Enviada quando: %s."
+msgstr "Sent when: %s."
+
+#: templates/template_form.html.twig
+msgid "Ver quem recebe"
+msgstr "View who receives it"
+
+#: templates/template_form.html.twig
+msgid "Idiomas do modelo"
+msgstr "Template languages"
+
+#: templates/template_form.html.twig
+msgid "Idioma da nova tradução"
+msgstr "Language of the new translation"
+
+#: templates/template_form.html.twig
+msgid "Traduzir"
+msgstr "Translate"
+
+#: templates/template_form.html.twig
+msgid "Quem usa o GLPI em %s recebe esta versão. Os demais recebem o modelo padrão."
+msgstr "People using GLPI in %s receive this version. Everyone else receives the default template."
+
+#: templates/template_form.html.twig
+msgid "A primeira coisa que a pessoa vê. Pode usar variáveis, como ##ticket.id##."
+msgstr "The first thing the person sees. You can use variables, such as ##ticket.id##."
+
+#: templates/template_form.html.twig
+msgid "Escreva como num editor de texto. As variáveis (entre ##) são trocadas pelos dados do chamado na hora do envio."
+msgstr "Write as in a text editor. Variables (between ##) are replaced with the ticket's data when the email is sent."
+
+#: templates/template_form.html.twig
+msgid "Variáveis: clique para inserir onde está o cursor"
+msgstr "Variables: click to insert at the cursor"
+
+#: templates/template_form.html.twig
+msgid "Inserir %1$s: %2$s"
+msgstr "Insert %1$s: %2$s"
+
+#: templates/template_form.html.twig
+msgid "Passe o mouse sobre uma variável para ver o que ela traz. Só estas variáveis funcionam."
+msgstr "Hover over a variable to see what it brings. Only these variables work."
+
+#: templates/template_form.html.twig
+msgid "Opções avançadas: versão em texto simples"
+msgstr "Advanced options: plain text version"
+
+#: templates/template_form.html.twig
+msgid "Versão em texto simples (opcional)"
+msgstr "Plain text version (optional)"
+
+#: templates/template_form.html.twig
+msgid "Para programas de e-mail que não mostram formatação. Em branco, é gerada sozinha a partir da mensagem acima."
+msgstr "For mail programs that do not show formatting. If empty, it is generated from the message above."
+
+#: templates/template_form.html.twig
+msgid "Trocar o assunto e a mensagem pelo texto padrão deste acontecimento? O texto atual só é substituído de vez quando você clicar em Salvar."
+msgstr "Replace the subject and the message with this event's default text? The current text is only replaced for good when you click Save."
+
+#: templates/template_form.html.twig
+msgid "Texto padrão colocado no editor. Clique em Salvar para manter."
+msgstr "Default text placed in the editor. Click Save to keep it."
+
+#: templates/template_form.html.twig
+msgid "Restaurar padrão"
+msgstr "Restore default"
+
+#: templates/template_form.html.twig
+msgid "Apagar a tradução em %s? Quem usa esse idioma volta a receber o modelo padrão. Isso não pode ser desfeito."
+msgstr "Delete the translation in %s? People using that language get the default template again. This cannot be undone."
+
+#: templates/template_form.html.twig
+msgid "Apagar esta tradução"
+msgstr "Delete this translation"
+
+#: templates/template_form.html.twig
+msgid "Enviar um teste deste modelo"
+msgstr "Send a test of this template"
+
+#: templates/template_form.html.twig
+msgid "Vai com dados de exemplo e com o que está no editor agora, mesmo sem salvar."
+msgstr "It goes with sample data and with what is in the editor now, even if not saved."
+
+#: templates/template_form.html.twig
+msgid "Enviar teste deste modelo"
+msgstr "Send a test of this template"
+
+#: templates/template_form.html.twig
+msgid "Prévia com dados de exemplo"
+msgstr "Preview with sample data"
+
+#: templates/template_form.html.twig
+msgid "Atualizar"
+msgstr "Refresh"
+
+#: templates/template_form.html.twig templates/templates.html.twig
+msgid "Assunto:"
+msgstr "Subject:"
+
+#: templates/template_form.html.twig
+msgid "Prévia do e-mail"
+msgstr "Email preview"
+
+#: templates/template_form.html.twig
+msgid "Estas variáveis não existem e vão aparecer como texto:"
+msgstr "These variables do not exist and will appear as plain text:"
+
+#: templates/templates.html.twig
+msgid "Mensagens dos avisos"
+msgstr "Notice messages"
+
+#: templates/templates.html.twig
+msgid "Ainda não há mensagens: cada regra de aviso tem a sua."
+msgstr "There are no messages yet: each notice rule has its own."
+
+#: templates/templates.html.twig
+msgid "Criar uma regra"
+msgstr "Create a rule"
+
+#: templates/templates.html.twig
+msgid "Cada regra tem a própria mensagem. Escolha uma para editar o assunto e o texto, ver a prévia e enviar um teste."
+msgstr "Each rule has its own message. Choose one to edit the subject and text, see the preview and send a test."
+
+#: templates/templates.html.twig
+msgid "Regra desligada"
+msgstr "Rule off"
+
+#: templates/templates.html.twig
+msgid "Editar a mensagem de %s"
+msgstr "Edit the message of %s"
+

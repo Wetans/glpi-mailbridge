@@ -1,0 +1,42 @@
+{% extends '@mailbridge/layout.html.twig' %}
+
+{% block content %}
+   <div class="card">
+      <div class="card-header">
+         <h2 class="card-title h4 m-0">{{ __('Mensagens dos avisos', 'mailbridge') }}</h2>
+      </div>
+      {% if list is empty %}
+         <div class="card-body text-center">
+            <p class="mb-2">{{ __('Ainda não há mensagens: cada regra de aviso tem a sua.', 'mailbridge') }}</p>
+            <a class="btn btn-primary" href="{{ events_url }}">{{ __('Criar uma regra', 'mailbridge') }}</a>
+         </div>
+      {% else %}
+         <div class="card-body pb-0">
+            <p class="tm-soft">{{ __('Cada regra tem a própria mensagem. Escolha uma para editar o assunto e o texto, ver a prévia e enviar um teste.', 'mailbridge') }}</p>
+         </div>
+         <ul class="list-group list-group-flush">
+            {% for item in list %}
+               <li class="list-group-item">
+                  <div class="d-flex flex-wrap align-items-center gap-3">
+                     <div class="flex-fill tm-minw">
+                        <div>
+                           <strong class="tm-break">{{ item.name }}</strong>
+                           {% if not item.active %}<span class="badge bg-secondary-lt">{{ __('Regra desligada', 'mailbridge') }}</span>{% endif %}
+                           {% for language in item.languages %}
+                              <span class="badge bg-secondary-lt" title="{{ __('Modelo traduzido para este idioma', 'mailbridge') }}">{{ language }}</span>
+                           {% endfor %}
+                        </div>
+                        <div class="tm-soft">{{ item.event }}</div>
+                        <div class="tm-break"><span class="tm-soft">{{ __('Assunto:', 'mailbridge') }}</span> {{ item.subject }}</div>
+                     </div>
+                     <a class="btn btn-sm btn-outline-secondary" href="{{ item.url }}"
+                        aria-label="{{ __('Editar a mensagem de %s', 'mailbridge')|format(item.name) }}">
+                        <i class="ti ti-pencil" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailbridge') }}
+                     </a>
+                  </div>
+               </li>
+            {% endfor %}
+         </ul>
+      {% endif %}
+   </div>
+{% endblock %}

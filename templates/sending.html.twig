@@ -1,0 +1,306 @@
+{% extends '@mailbridge/layout.html.twig' %}
+{% import '@mailbridge/macros.html.twig' as f %}
+
+{% block content %}
+   <div class="row g-3">
+      <div class="col-12 col-xl-8">
+         <form method="post" action="{{ tm.action_url }}" id="tm-sending-form" data-track-changes="true" novalidate>
+            <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="action" value="save_sending">
+
+            {{ f.error_summary(errors) }}
+
+            {% if problems is not empty %}
+               <div class="alert alert-danger" role="alert">
+                  <ul class="list-unstyled mb-0">
+                     {% for problem in problems %}
+                        <li>{{ f.level_icon(problem.level) }} <strong>{{ problem.title }}</strong> {{ problem.detail }}</li>
+                     {% endfor %}
+                  </ul>
+               </div>
+            {% endif %}
+
+            {# ---------- Liga/desliga ---------- #}
+            <div class="card mb-3">
+               <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Modo e-mail', 'mailbridge') }}</h2></div>
+               <div class="card-body">
+                  {{ f.switch('mailing_on', __('Enviar e-mails de notificação', 'mailbridge'), v.mailing_on, {
+                     help: __('Vale para todos os e-mails do GLPI: os avisos do MailBridge e os avisos nativos. Desligado, nenhum e-mail sai.', 'mailbridge'),
+                     confirm_off: __('Desligar o envio de e-mails? Nenhuma notificação por e-mail sairá do GLPI e o que já está na fila fica parado até você ligar de novo.', 'mailbridge'),
+                     class: 'mb-0',
+                     disabled: not tm.can.manage
+                  }) }}
+               </div>
+            </div>
+
+            {# ---------- Servidor ---------- #}
+            <div class="card mb-3">
+               <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Servidor de envio', 'mailbridge') }}</h2></div>
+               <div class="card-body">
+                  {% if is_oauth %}
+                     <input type="hidden" name="transport" value="oauth">
+                     <div class="alert alert-info" role="note">
+                        <p class="mb-2">
+                           {{ __('O envio está configurado com login pelo provedor (OAuth): %1$s, porta %2$d.', 'mailbridge')|format(v.smtp_host, v.smtp_port) }}
+                           {% if not oauth_ready %}<strong>{{ __('A autorização no provedor ainda não foi concluída.', 'mailbridge') }}</strong>{% endif %}
+                        </p>
+                        <p class="mb-2">{{ __('Esse tipo de login é feito numa janela do próprio provedor, por isso o servidor continua sendo ajustado na tela de e-mail do GLPI.', 'mailbridge') }}</p>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ native_url }}">{{ __('Abrir a tela de e-mail do GLPI', 'mailbridge') }}</a>
+                     </div>
+                  {% else %}
+                     {{ f.select('transport', __('Como enviar', 'mailbridge'), v.transport, transports, {
+                        errors: errors,
+                        help: __('SMTP: o servidor que envia seus e-mails. É o do seu provedor ou o da sua empresa.', 'mailbridge')
+                     }) }}
+
+                     <div data-tm-show="transport=smtp">
+                        <div class="row g-3">
+                           <div class="col-12 col-md-8">
+                              {{ f.input('smtp_host', __('Servidor', 'mailbridge'), v.smtp_host, {
+                                 errors: errors, required: true, validate: 'host', msg: hints.smtp_host, msg_required: hints.smtp_host_required,
+                                 placeholder: 'smtp.suaempresa.com.br', maxlength: 253,
+                                 help: __('O endereço informado pelo seu provedor de e-mail. Exemplo: smtp.suaempresa.com.br', 'mailbridge'),
+                                 class: 'mb-0'
+                              }) }}
+                           </div>
+                           <div class="col-12 col-md-4">
+                              {{ f.input('smtp_port', __('Porta', 'mailbridge'), v.smtp_port ?: '', {
+                                 type: 'number', errors: errors, required: true, validate: 'int', msg: hints.smtp_port, msg_required: hints.smtp_port,
+                                 min: 1, max: 65535, placeholder: '587',
+                                 help: __('Normalmente 587, 465 ou 25.', 'mailbridge'),
+                                 class: 'mb-0'
+                              }) }}
+                           </div>
+                        </div>
+
+                        <div class="mt-3">
+                           {{ f.select('security', __('Segurança da conexão', 'mailbridge'), v.security, securities, {
+                              errors: errors,
+                              help: __('Protege a senha e o conteúdo no caminho até o servidor. Na dúvida, use STARTTLS.', 'mailbridge')
+                           }) }}
+                        </div>
+
+                        <div class="row g-3">
+                           <div class="col-12 col-md-6">
+                              {{ f.input('smtp_username', __('Usuário', 'mailbridge'), v.smtp_username, {
+                                 errors: errors, maxlength: 255, autocomplete: 'off',
+                                 placeholder: 'suporte@suaempresa.com.br',
+                                 help: __('Normalmente o e-mail completo da conta. Deixe em branco se o servidor não pede login.', 'mailbridge'),
+                                 class: 'mb-0'
+                              }) }}
+                           </div>
+                           <div class="col-12 col-md-6">
+                              {{ f.input('smtp_passwd', __('Senha', 'mailbridge'), '', {
+                                 type: 'password', errors: errors, maxlength: 255, autocomplete: 'new-password',
+                                 placeholder: has_password ? __('(senha guardada)', 'mailbridge') : '',
+                                 help: has_password
+                                    ? __('Já existe uma senha guardada. Deixe em branco para manter a mesma.', 'mailbridge')
+                                    : __('A senha fica guardada de forma protegida e nunca volta a aparecer aqui.', 'mailbridge'),
+                                 class: 'mb-0'
+                              }) }}
+                              {% if has_password %}
+                                 <label class="form-check mt-2 mb-0">
+                                    <input class="form-check-input" type="checkbox" name="clear_passwd" value="1">
+                                    <span class="form-check-label">{{ __('Apagar a senha guardada', 'mailbridge') }}</span>
+                                 </label>
+                              {% endif %}
+                           </div>
+                        </div>
+
+                        <details class="tm-advanced mt-3">
+                           <summary>{{ __('Opções avançadas do servidor', 'mailbridge') }}</summary>
+                           {{ f.switch('smtp_check_certificate', __('Conferir o certificado de segurança do servidor', 'mailbridge'), v.smtp_check_certificate, {
+                              help: __('Recomendado. Desligue só em servidor interno com certificado próprio.', 'mailbridge')
+                           }) }}
+                           {{ f.input('smtp_sender', __('Endereço de retorno (opcional)', 'mailbridge'), v.smtp_sender, {
+                              type: 'email', errors: errors, validate: 'email', msg: hints.smtp_sender,
+                              placeholder: 'devolvidos@suaempresa.com.br',
+                              help: __('Para onde voltam os avisos de e-mail não entregue. Em branco, voltam para o remetente.', 'mailbridge'),
+                              class: 'mb-0'
+                           }) }}
+                        </details>
+                     </div>
+
+                     <div data-tm-show="transport=mail" hidden>
+                        <div class="alert alert-info mb-0" role="note">
+                           {{ __('O GLPI entrega os e-mails ao programa de e-mail instalado no próprio servidor. Só funciona se quem cuida do servidor tiver configurado isso.', 'mailbridge') }}
+                        </div>
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+
+            {# ---------- Remetentes ---------- #}
+            <div class="card mb-3">
+               <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Quem aparece nos e-mails', 'mailbridge') }}</h2></div>
+               <div class="card-body">
+                  <div class="row g-3">
+                     <div class="col-12 col-md-6">
+                        {{ f.input('from_email', __('E-mail do remetente', 'mailbridge'), v.from_email, {
+                           type: 'email', errors: errors, validate: 'email', msg: hints.from_email, placeholder: 'suporte@suaempresa.com.br',
+                           help: __('O endereço que aparece em "De". Em branco, usa o e-mail do administrador.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                     <div class="col-12 col-md-6">
+                        {{ f.input('from_email_name', __('Nome do remetente', 'mailbridge'), v.from_email_name, {
+                           errors: errors, maxlength: 255, placeholder: __('Suporte de TI', 'mailbridge'),
+                           help: __('O nome que aparece ao lado do endereço.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                     <div class="col-12 col-md-6">
+                        {{ f.input('replyto_email', __('E-mail para respostas (opcional)', 'mailbridge'), v.replyto_email, {
+                           type: 'email', errors: errors, validate: 'email', msg: hints.replyto_email, placeholder: 'suporte@suaempresa.com.br',
+                           help: __('Para onde vai a resposta quando alguém clica em "Responder". Em branco, vai para o remetente.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                     <div class="col-12 col-md-6">
+                        {{ f.input('replyto_email_name', __('Nome para respostas', 'mailbridge'), v.replyto_email_name, {
+                           errors: errors, maxlength: 255, help: __('Opcional.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                     <div class="col-12 col-md-6">
+                        {{ f.input('admin_email', __('E-mail do administrador', 'mailbridge'), v.admin_email, {
+                           type: 'email', errors: errors, validate: 'email', msg: hints.admin_email, placeholder: 'ti@suaempresa.com.br',
+                           help: __('Recebe os avisos destinados ao administrador do GLPI e serve de remetente reserva.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                     <div class="col-12 col-md-6">
+                        {{ f.input('admin_email_name', __('Nome do administrador', 'mailbridge'), v.admin_email_name, {
+                           errors: errors, maxlength: 255, help: __('Opcional.', 'mailbridge'), class: 'mb-0'
+                        }) }}
+                     </div>
+                  </div>
+
+                  <div class="mt-3">
+                     {{ f.textarea('mailing_signature', __('Assinatura', 'mailbridge'), v.mailing_signature, {
+                        errors: errors, rows: 3, maxlength: 2000,
+                        placeholder: __('Equipe de Suporte de TI', 'mailbridge'),
+                        help: __('Texto colocado no fim dos avisos nativos do GLPI. Os modelos do MailBridge têm o próprio texto.', 'mailbridge')
+                     }) }}
+                  </div>
+
+                  <details class="tm-advanced">
+                     <summary>{{ __('Opções avançadas dos e-mails', 'mailbridge') }}</summary>
+                     <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                           {{ f.input('noreply_email', __('E-mail "não responda" (opcional)', 'mailbridge'), v.noreply_email, {
+                              type: 'email', errors: errors, validate: 'email', msg: hints.noreply_email, placeholder: 'naoresponda@suaempresa.com.br',
+                              help: __('Usado pelo GLPI nos avisos que não esperam resposta.', 'mailbridge'), class: 'mb-0'
+                           }) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                           {{ f.input('noreply_email_name', __('Nome do "não responda"', 'mailbridge'), v.noreply_email_name, {
+                              errors: errors, maxlength: 255, help: __('Opcional.', 'mailbridge'), class: 'mb-0'
+                           }) }}
+                        </div>
+                     </div>
+                     <div class="mt-3">
+                        {{ f.switch('attach_ticket_documents_to_mail', __('Anexar os documentos do chamado aos avisos', 'mailbridge'), v.attach_ticket_documents_to_mail, {
+                           help: __('Deixa os e-mails maiores. Desligado, o e-mail só leva o link para o chamado.', 'mailbridge')
+                        }) }}
+                     </div>
+                     <p class="tm-soft mb-0">
+                        {{ __('Cada entidade pode ter remetente e assinatura próprios, na aba Notificações do cadastro da entidade.', 'mailbridge') }}
+                        <a href="{{ entity_url }}">{{ __('Abrir as entidades', 'mailbridge') }}</a>
+                     </p>
+                  </details>
+               </div>
+            </div>
+
+            {# ---------- Ajustes próprios do MailBridge ---------- #}
+            <div class="card mb-3">
+               <div class="card-body">
+                  <details class="tm-advanced"{{ (errors.sender_email is defined or errors.block_list is defined or errors.allow_list is defined) ? ' open' }}>
+                     <summary>{{ __('Opções avançadas dos avisos do MailBridge', 'mailbridge') }}</summary>
+                     <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                           {{ f.input('sender_email', __('Remetente só para o MailBridge (opcional)', 'mailbridge'), v.sender_email, {
+                              type: 'email', errors: errors, validate: 'email', msg: hints.sender_email, placeholder: 'avisos@suaempresa.com.br',
+                              help: __('Em branco, os avisos do MailBridge usam o remetente acima.', 'mailbridge'), class: 'mb-0'
+                           }) }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                           {{ f.input('sender_name', __('Nome desse remetente', 'mailbridge'), v.sender_name, {
+                              errors: errors, maxlength: 255, help: __('Opcional.', 'mailbridge'), class: 'mb-0'
+                           }) }}
+                        </div>
+                     </div>
+                     <div class="mt-3">
+                        {{ f.switch('send_immediately', __('Enviar na hora, sem esperar a rotina automática', 'mailbridge'), v.send_immediately, {
+                           help: __('Desligado (recomendado): o e-mail entra na fila e sai em até 1 minuto. Ligado: sai na hora, mas a tela do chamado pode ficar lenta se o servidor de e-mail demorar.', 'mailbridge')
+                        }) }}
+                        {{ f.switch('debug_log', __('Registrar o motivo de cada aviso gerado ou ignorado', 'mailbridge'), v.debug_log, {
+                           help: __('Para investigar por que alguém não recebeu um aviso. Grava no arquivo mailbridge.log do GLPI.', 'mailbridge')
+                        }) }}
+                        {{ f.textarea('block_list', __('Nunca enviar avisos do MailBridge para', 'mailbridge'), v.block_list, {
+                           errors: errors, rows: 2, placeholder: '@exemplo.com',
+                           help: __('Um endereço (pessoa@empresa.com) ou domínio (@empresa.com) por linha.', 'mailbridge')
+                        }) }}
+                        {{ f.textarea('allow_list', __('Só enviar avisos do MailBridge para', 'mailbridge'), v.allow_list, {
+                           errors: errors, rows: 2, placeholder: '@suaempresa.com.br', class: 'mb-0',
+                           help: __('Em branco, envia para qualquer endereço. Útil em testes: só os domínios listados recebem.', 'mailbridge')
+                        }) }}
+                     </div>
+                  </details>
+               </div>
+            </div>
+
+            {% if tm.can.manage %}
+               <div class="card tm-savebar">
+                  <div class="card-body d-flex flex-wrap align-items-center gap-2 py-2">
+                     <button type="submit" class="btn btn-primary">
+                        <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ __('Salvar', 'mailbridge') }}
+                     </button>
+                     <span class="tm-soft" id="tm-dirty-note" hidden>{{ __('Há alterações não salvas.', 'mailbridge') }}</span>
+                  </div>
+               </div>
+            {% else %}
+               <div class="alert alert-info">{{ __('Seu perfil pode ver esta tela, mas não alterar a configuração.', 'mailbridge') }}</div>
+            {% endif %}
+         </form>
+      </div>
+
+      {# ---------- Testes ---------- #}
+      <div class="col-12 col-xl-4">
+         <div class="card" id="tm-test"{% if focus == 'test' %} data-tm-focus="1"{% endif %}>
+            <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Testar', 'mailbridge') }}</h2></div>
+            <div class="card-body">
+               <p class="tm-soft">{{ __('Os testes usam a configuração que está salva. Salve antes de testar.', 'mailbridge') }}</p>
+
+               {% if tm.can.test %}
+                  <form method="post" action="{{ tm.action_url }}" class="tm-ajax mb-3" data-tm-result="#tm-test-result" data-tm-saved-only>
+                     <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                     <input type="hidden" name="action" value="test_connection">
+                     <button type="submit" class="btn btn-outline-secondary w-100">
+                        <i class="ti ti-plug-connected" aria-hidden="true"></i> {{ __('Testar conexão', 'mailbridge') }}
+                     </button>
+                  </form>
+
+                  <form method="post" action="{{ tm.action_url }}" class="tm-ajax" data-tm-result="#tm-test-result" data-tm-saved-only novalidate>
+                     <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
+                     <input type="hidden" name="action" value="send_test">
+                     {{ f.input('test_email', __('Enviar o teste para', 'mailbridge'), test_email, {
+                        type: 'email', required: true, validate: 'email', autocomplete: 'email',
+                        msg: __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge'),
+                        msg_required: __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge'),
+                        placeholder: 'voce@suaempresa.com.br',
+                        help: test_email
+                           ? __('Seu e-mail do cadastro. Troque se quiser testar com outro.', 'mailbridge')
+                           : __('Seu cadastro não tem e-mail: digite um endereço para receber o teste.', 'mailbridge')
+                     }) }}
+                     <button type="submit" class="btn btn-primary w-100">
+                        <i class="ti ti-send" aria-hidden="true"></i> {{ __('Enviar e-mail de teste', 'mailbridge') }}
+                     </button>
+                  </form>
+               {% else %}
+                  <div class="alert alert-info mb-0">{{ __('Seu perfil não tem permissão para testar o envio.', 'mailbridge') }}</div>
+               {% endif %}
+
+               <div id="tm-test-result" class="mt-3" role="status" aria-live="polite">
+                  {% include '@mailbridge/_test_result.html.twig' %}
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{#
+ # Campos de formulário do MailBridge: rótulo ligado ao campo, texto de ajuda
+ # visível e espaço para a mensagem de erro (preenchida pelo servidor ou ao
+ # sair do campo).
+ #}
+
+{% macro input(name, label, value, o) %}
+   {% set o = {
+      type: 'text', help: '', errors: {}, required: false, validate: '', msg: '', msg_required: '',
+      placeholder: '', autocomplete: 'off', min: null, max: null, disabled: false, maxlength: null, class: ''
+   }|merge(o|default({})) %}
+   {% set id = 'tm_' ~ name %}
+   {% set err = o.errors[name]|default('') %}
+   <div class="mb-3 tm-field {{ o.class }}">
+      <label class="form-label{{ o.required ? ' required' }}" for="{{ id }}">{{ label }}</label>
+      <input type="{{ o.type }}" class="form-control{{ err ? ' is-invalid' }}" id="{{ id }}" name="{{ name }}"
+             value="{{ value }}" autocomplete="{{ o.autocomplete }}"
+             aria-describedby="{{ id }}_err {{ id }}_help"
+             {%- if err %} aria-invalid="true"{% endif %}
+             {%- if o.placeholder %} placeholder="{{ o.placeholder }}"{% endif %}
+             {%- if o.required %} aria-required="true" data-tm-required="1"{% endif %}
+             {%- if o.validate %} data-tm-validate="{{ o.validate }}" data-tm-msg="{{ o.msg }}"{% endif %}
+             {%- if o.msg_required %} data-tm-msg-required="{{ o.msg_required }}"{% endif %}
+             {%- if o.min is not null %} min="{{ o.min }}"{% endif %}
+             {%- if o.max is not null %} max="{{ o.max }}"{% endif %}
+             {%- if o.maxlength is not null %} maxlength="{{ o.maxlength }}"{% endif %}
+             {%- if o.disabled %} disabled{% endif %}>
+      <div class="invalid-feedback" id="{{ id }}_err">{{ err }}</div>
+      {% if o.help %}<div class="form-text" id="{{ id }}_help">{{ o.help }}</div>{% endif %}
+   </div>
+{% endmacro %}
+
+{% macro textarea(name, label, value, o) %}
+   {% set o = {help: '', errors: {}, rows: 3, required: false, placeholder: '', class: '', mono: false, maxlength: null}|merge(o|default({})) %}
+   {% set id = 'tm_' ~ name %}
+   {% set err = o.errors[name]|default('') %}
+   <div class="mb-3 tm-field {{ o.class }}">
+      <label class="form-label{{ o.required ? ' required' }}" for="{{ id }}">{{ label }}</label>
+      <textarea class="form-control{{ err ? ' is-invalid' }}{{ o.mono ? ' font-monospace' }}" id="{{ id }}" name="{{ name }}"
+                rows="{{ o.rows }}" aria-describedby="{{ id }}_err {{ id }}_help"
+                {%- if err %} aria-invalid="true"{% endif %}
+                {%- if o.placeholder %} placeholder="{{ o.placeholder }}"{% endif %}
+                {%- if o.maxlength is not null %} maxlength="{{ o.maxlength }}"{% endif %}
+                {%- if o.required %} aria-required="true" data-tm-required="1"{% endif %}>{{ value }}</textarea>
+      <div class="invalid-feedback" id="{{ id }}_err">{{ err }}</div>
+      {% if o.help %}<div class="form-text" id="{{ id }}_help">{{ o.help }}</div>{% endif %}
+   </div>
+{% endmacro %}
+
+{% macro select(name, label, value, choices, o) %}
+   {% set o = {help: '', errors: {}, class: ''}|merge(o|default({})) %}
+   {% set id = 'tm_' ~ name %}
+   {% set err = o.errors[name]|default('') %}
+   <div class="mb-3 tm-field {{ o.class }}">
+      <label class="form-label" for="{{ id }}">{{ label }}</label>
+      <select class="form-select{{ err ? ' is-invalid' }}" id="{{ id }}" name="{{ name }}"
+              aria-describedby="{{ id }}_err {{ id }}_help">
+         {% for key, text in choices %}
+            <option value="{{ key }}"{{ (key ~ '') == (value ~ '') ? ' selected' }}>{{ text }}</option>
+         {% endfor %}
+      </select>
+      <div class="invalid-feedback" id="{{ id }}_err">{{ err }}</div>
+      {% if o.help %}<div class="form-text" id="{{ id }}_help">{{ o.help }}</div>{% endif %}
+   </div>
+{% endmacro %}
+
+{# Chave liga/desliga. Um campo oculto garante que "desligado" também é enviado. #}
+{% macro switch(name, label, checked, o) %}
+   {% set o = {help: '', confirm_off: '', class: '', disabled: false}|merge(o|default({})) %}
+   {% set id = 'tm_' ~ name %}
+   <div class="mb-3 tm-field {{ o.class }}">
+      <input type="hidden" name="{{ name }}" value="0">
+      <label class="form-check form-switch mb-0">
+         <input class="form-check-input" type="checkbox" role="switch" id="{{ id }}" name="{{ name }}" value="1"
+                aria-describedby="{{ id }}_help"
+                {%- if checked %} checked{% endif %}
+                {%- if o.disabled %} disabled{% endif %}
+                {%- if o.confirm_off %} data-tm-confirm-off="{{ o.confirm_off }}"{% endif %}>
+         <span class="form-check-label">{{ label }}</span>
+      </label>
+      {% if o.help %}<div class="form-text" id="{{ id }}_help">{{ o.help }}</div>{% endif %}
+   </div>
+{% endmacro %}
+
+{# Resumo dos erros no topo do formulário (lido por leitores de tela). #}
+{% macro error_summary(errors) %}
+   {% if errors is not empty %}
+      <div class="alert alert-danger" role="alert">
+         <strong>{{ __('Não foi possível salvar. Corrija os campos marcados:', 'mailbridge') }}</strong>
+         <ul class="mb-0">
+            {% for message in errors %}<li>{{ message }}</li>{% endfor %}
+         </ul>
+      </div>
+   {% endif %}
+{% endmacro %}
+
+{% macro level_icon(level) %}
+   {%- if level == 'ok' -%}
+      <i class="ti ti-circle-check text-success" aria-hidden="true"></i><span class="visually-hidden">{{ __('Em ordem:', 'mailbridge') }}</span>
+   {%- elseif level == 'error' -%}
+      <i class="ti ti-circle-x text-danger" aria-hidden="true"></i><span class="visually-hidden">{{ __('Problema:', 'mailbridge') }}</span>
+   {%- elseif level == 'warn' -%}
+      <i class="ti ti-alert-triangle text-warning" aria-hidden="true"></i><span class="visually-hidden">{{ __('Atenção:', 'mailbridge') }}</span>
+   {%- elseif level == 'off' -%}
+      <i class="ti ti-player-pause" aria-hidden="true"></i><span class="visually-hidden">{{ __('Desligado:', 'mailbridge') }}</span>
+   {%- else -%}
+      <i class="ti ti-info-circle" aria-hidden="true"></i><span class="visually-hidden">{{ __('Informação:', 'mailbridge') }}</span>
+   {%- endif -%}
+{% endmacro %}
+
+{# Paginação simples: "Mostrando 1 a 20 de 72" + anterior/próxima. #}
+{% macro pager(p, label) %}
+   {% if p.total > 0 %}
+      <nav class="d-flex flex-wrap align-items-center gap-2" aria-label="{{ label }}">
+         <span class="tm-soft">{{ __('Mostrando %1$d a %2$d de %3$d', 'mailbridge')|format(p.from, p.to, p.total) }}</span>
+         <span class="ms-auto btn-list">
+            {% if p.prev %}
+               <a class="btn btn-sm btn-outline-secondary" href="{{ p.prev }}" rel="prev">
+                  <i class="ti ti-chevron-left" aria-hidden="true"></i> {{ __('Anteriores', 'mailbridge') }}
+               </a>
+            {% endif %}
+            {% if p.next %}
+               <a class="btn btn-sm btn-outline-secondary" href="{{ p.next }}" rel="next">
+                  {{ __('Próximos', 'mailbridge') }} <i class="ti ti-chevron-right" aria-hidden="true"></i>
+               </a>
+            {% endif %}
+         </span>
+      </nav>
+   {% endif %}
+{% endmacro %}

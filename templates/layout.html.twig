@@ -1,0 +1,48 @@
+{#
+ # Moldura comum das telas do MailBridge: título, situação, seções.
+ # O CSS e o JS do plugin só são carregados aqui (nunca nas outras telas do GLPI).
+ #}
+<link rel="stylesheet" href="{{ tm.web_dir }}/css/mailbridge.css?v={{ tm.asset_v }}">
+
+<div class="mailbridge container-fluid" id="mailbridge" data-tm="{{ tm.js|json_encode }}">
+   <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+      <h1 class="h2 m-0">
+         <svg class="tm-logo" viewBox="0 0 48 48" width="34" height="34" aria-hidden="true" focusable="false">
+            <rect x="3" y="11" width="26" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/>
+            <path d="M4.5 13.5 16 22.5l11.5-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M29 26h7a8 8 0 0 1 8 8v3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="44" cy="40" r="3" fill="currentColor"/>
+            <circle cx="29" cy="26" r="2.4" fill="currentColor"/>
+         </svg>
+         MailBridge
+      </h1>
+      <a class="badge bg-{{ tm.status_tone }}-lt tm-status-badge" href="{{ tm.base }}"
+         title="{{ __('Situação do envio de e-mails. Clique para ver a Visão geral.', 'mailbridge') }}">
+         <span class="status-dot bg-{{ tm.status_tone }}" aria-hidden="true"></span>
+         <span class="visually-hidden">{{ __('Situação:', 'mailbridge') }}</span>
+         {{ tm.status_label }}
+      </a>
+      <p class="tm-tagline m-0 w-100">{{ __('Integração e diagnóstico de e-mail para o GLPI', 'mailbridge') }}</p>
+   </div>
+
+   <nav aria-label="{{ __('Seções do MailBridge', 'mailbridge') }}">
+      <ul class="nav nav-tabs tm-nav mb-3">
+         {% for item in tm.nav %}
+            <li class="nav-item">
+               <a class="nav-link{{ item.current ? ' active' }}" href="{{ item.url }}"{% if item.current %} aria-current="page"{% endif %}>
+                  <i class="{{ item.icon }}" aria-hidden="true"></i>
+                  {{ item.label }}
+               </a>
+            </li>
+         {% endfor %}
+      </ul>
+   </nav>
+
+   {# Resultados de ações feitas sem recarregar a página são anunciados aqui. #}
+   <div id="tm-live" class="visually-hidden" role="status" aria-live="polite"></div>
+   <div id="tm-flash" class="alert" hidden></div>
+
+   {% block content %}{% endblock %}
+</div>
+
+<script src="{{ tm.web_dir }}/js/mailbridge.js?v={{ tm.asset_v }}"></script>
