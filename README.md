@@ -11,12 +11,12 @@
 MailBridge is a GLPI plugin that puts everything about outgoing e-mail on one screen, in plain language:
 
 - **Sending**: GLPI's mail server, port, security, user and password, sender addresses and signature.
-- **Testing**: "Testar conexão" and "Enviar e-mail de teste" show the result step by step (connect, secure connection, sign-in, send) and say what to try when a step fails.
+- **Testing**: "Test connection" and "Send test email" show the result step by step (connect, secure connection, sign-in, send) and say what to try when a step fails.
 - **Rules and templates**: who is told about what on a ticket (assigned technicians and groups, requesters, observers, fixed addresses), with editable messages per language.
 - **Queue and history**: what is waiting, what was sent, what failed and why; resend, cancel, delete.
 - **Diagnostics**: checks with a suggested action, who changed what, export/import of the configuration.
 
-MailBridge has **no mail transport of its own**. Messages go into GLPI's native notification queue and leave through the server configured in GLPI. The interface is in Brazilian Portuguese, with English (en_GB, en_US) translations.
+MailBridge has **no mail transport of its own**. Messages go into GLPI's native notification queue and leave through the server configured in GLPI. The interface is in Brazilian Portuguese, with English (en_GB, en_US) translations. This document quotes the labels as they appear with GLPI in English; the Portuguese labels are in [README.pt-BR.md](README.pt-BR.md).
 
 MailBridge 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0). See [section 5](#5-upgrading-from-techmail) if you have it installed.
 
@@ -38,9 +38,9 @@ MailBridge 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0). See 
 ### 4. Installation
 
 1. Copy the `mailbridge` folder into GLPI's `plugins/` directory. The folder name must be exactly `mailbridge`.
-2. In **Configurar > Plugins**, click **Instalar** and then **Ativar** on MailBridge.
+2. In **Setup > Plugins**, click **Install** and then **Enable** on MailBridge.
    Command line: `php bin/console plugin:install mailbridge --username=glpi` then `php bin/console plugin:activate mailbridge`.
-3. Log out and in again so the menu shows **Configurar > MailBridge**.
+3. Log out and in again so the menu shows **Setup > MailBridge**.
 
 A new installation creates three example rules (one switched on). Installing a second time changes nothing.
 
@@ -50,12 +50,12 @@ GLPI identifies a plugin by its folder name, so MailBridge (`mailbridge`) is a d
 
 1. Back up the GLPI database and the `plugins/` folder.
 2. Copy the `mailbridge` folder into `plugins/`. **Leave the `techmail` folder where it is.**
-3. In **Configurar > Plugins**, click **Instalar** on MailBridge. This:
+3. In **Setup > Plugins**, click **Install** on MailBridge. This:
    - copies rules, template translations, failure reasons, settings, per-profile permissions and the rules' change history;
    - **deactivates** Techmail (it does not uninstall it), so each notice is not sent twice.
-4. Click **Ativar** on MailBridge, then log out and in again.
-5. Open **Configurar > MailBridge > Diagnóstico**. The last card says what was brought over. Check your rules and templates, and send a test e-mail.
-6. When you are satisfied, uninstall Techmail in **Configurar > Plugins** and remove the `techmail` folder.
+4. Click **Enable** on MailBridge, then log out and in again.
+5. Open **Setup > MailBridge > Diagnostics**. The last card says what was brought over. Check your rules and templates, and send a test e-mail.
+6. When you are satisfied, uninstall Techmail in **Setup > Plugins** and remove the `techmail` folder.
 
 What to know:
 
@@ -69,15 +69,15 @@ What to know:
 
 ### 6. Configuration
 
-Everything is under **Configurar > MailBridge**.
+Everything is under **Setup > MailBridge**.
 
-1. **Envio**: fill in the server, port, connection security, user, password and the sender address, then **Salvar**. Tests always use the *saved* settings.
-2. **Testar conexão**, then **Enviar e-mail de teste**.
-3. **Eventos e destinatários**: switch each rule on or off; create rules; choose per entity; see GLPI's native notifications.
-4. **Modelos**: edit subject and message, insert variables with a click, preview, restore the default, send a test of that template.
-5. **Fila e histórico** and **Diagnóstico** for day-to-day follow-up.
+1. **Sending**: fill in the server, port, connection security, user, password and the sender address, then **Save**. Tests always use the *saved* settings.
+2. **Test connection**, then **Send test email**.
+3. **Events and recipients**: switch each rule on or off; create rules; choose per entity; see GLPI's native notifications.
+4. **Templates**: edit subject and message, insert variables with a click, preview, restore the default, send a test of that template.
+5. **Queue and history** and **Diagnostics** for day-to-day follow-up.
 
-Permissions: whoever can change GLPI's general configuration has full access. Other profiles get the **MailBridge** tab on the profile form (*Ver*, *Gerenciar*, *Testar envio*, *Operar a fila*).
+Permissions: whoever can change GLPI's general configuration has full access. Other profiles get the **MailBridge** tab on the profile form (*View*, *Manage*, *Test sending*, *Operate the queue*).
 
 ### 7. Supported e-mail transport methods
 
@@ -85,10 +85,10 @@ MailBridge configures and tests what **GLPI's own mailer** offers:
 
 | Method | Where it is configured | Status |
 |---|---|---|
-| SMTP without encryption | MailBridge > Envio | Tested (local capture mailbox) |
-| SMTP + STARTTLS, with or without user/password | MailBridge > Envio | Tested (see section 8) |
-| SMTP + SSL/TLS (implicit TLS) | MailBridge > Envio | Implemented; a successful send was not tested |
-| PHP `mail()` | MailBridge > Envio | Implemented; not tested |
+| SMTP without encryption | MailBridge > Sending | Tested (local capture mailbox) |
+| SMTP + STARTTLS, with or without user/password | MailBridge > Sending | Tested (see section 8) |
+| SMTP + SSL/TLS (implicit TLS) | MailBridge > Sending | Implemented; a successful send was not tested |
+| PHP `mail()` | MailBridge > Sending | Implemented; not tested |
 | SMTP + OAuth 2.0 (Google, Microsoft) | GLPI's native e-mail screen; MailBridge shows the status and a shortcut | Not tested |
 
 ### 8. Microsoft 365 and Gmail limitations
@@ -113,23 +113,23 @@ Nothing below is a guarantee for your account: providers and organisations chang
 
 | What you see | What it means | What to do |
 |---|---|---|
-| "O Gmail exige login: falta informar o usuário e a senha." (or Microsoft 365 / Outlook.com) | That provider always needs an account; none is saved | Enter the full account address as user, its password, the same address as sender; **Salvar**; test |
-| "O remetente … não é um endereço de e-mail de verdade." | With Gmail or Microsoft, the sender is a placeholder such as `admsys@localhost` | Enter the account address in "E-mail do remetente" |
-| "A configuração de envio mudou depois do último teste com sucesso." | The server, account, password or sender changed after the last good test | Send a new test |
-| "Falta guardar a senha do servidor de envio." | A user is saved but no password | Type the password and click **Salvar**, then test |
-| "Você alterou a configuração e ainda não salvou." | Tests use saved settings only | Click **Salvar**, test again |
-| "O servidor de envio não aceitou o usuário e a senha." | The provider refused the sign-in | Open "Detalhe técnico": it carries the provider's own reason |
+| "Gmail requires sign-in: the user and password are missing." (or Microsoft 365 / Outlook.com) | That provider always needs an account; none is saved | Enter the full account address as user, its password, the same address as sender; **Save**; test |
+| "The sender "…" is not a real e-mail address." | With Gmail or Microsoft, the sender is a placeholder such as `admsys@localhost` | Enter the account address in "Sender email" |
+| "The sending settings changed after the last successful test." | The server, account, password or sender changed after the last good test | Send a new test |
+| "The mail server password has not been saved." | A user is saved but no password | Type the password and click **Save**, then test |
+| "You changed the settings and have not saved them yet." | Tests use saved settings only | Click **Save**, test again |
+| "The mail server did not accept the user name and password." | The provider refused the sign-in | Open "Technical detail": it carries the provider's own reason |
 | Test says sent, nothing arrives | The server accepted the message | Check spam; check that the server is not a capture or relay-only server |
-| Overview says "Precisa de atenção" | One of the checks failed | Diagnóstico lists each check with the action |
-| "O plugin antigo (Techmail) está ativo junto com o MailBridge." | Both plugins active | Deactivate Techmail |
-| A person receives nothing | No e-mail on the user record, inactive user, or blocked by a list | Fila e histórico; switch on the detailed record in Envio |
+| Overview says "Needs attention" | One of the checks failed | Diagnostics lists each check with the action |
+| "The old plugin (Techmail) is active together with MailBridge." | Both plugins active | Deactivate Techmail |
+| A person receives nothing | No e-mail on the user record, inactive user, or blocked by a list | Check Queue and history; in Sending, switch on "Record the reason for each notice created or skipped" |
 
 ### 10. Logging and diagnostics
 
-- **Fila e histórico** shows the reason of each failed attempt (kept in the plugin's own table, because GLPI stores no per-message reason).
-- `files/_log/mailbridge.log`: why each notice was generated or skipped, when "Registrar o motivo de cada aviso" is on.
+- **Queue and history** shows the reason of each failed attempt (kept in the plugin's own table, because GLPI stores no per-message reason).
+- `files/_log/mailbridge.log`: why each notice was generated or skipped, when "Record the reason for each notice created or skipped" is on (in Sending).
 - GLPI's own `files/_log/mail-error.log`, `mail.log` and `php-errors.log`.
-- **Diagnóstico > Quem alterou o quê** reads GLPI's change history.
+- **Diagnostics > Who changed what** reads GLPI's change history.
 
 No log, export, screen or error message contains passwords or tokens.
 
@@ -139,20 +139,20 @@ No log, export, screen or error message contains passwords or tokens.
 - Tests run only against the saved server, need their own permission and are limited to 6 per minute per person.
 - Every change goes through GLPI's CSRF protection and a permission check.
 - Templates are cleaned when saved and when sent; only a fixed list of variables is replaced; line breaks are stripped from subject and address fields.
-- Uninstalling does not delete data unless the option in Diagnóstico is switched on.
+- Uninstalling does not delete data unless the option in Diagnostics is switched on.
 
 ### 12. Backup and rollback
 
 - **Before installing or upgrading**: back up the database and `plugins/`.
-- **Settings backup**: Diagnóstico > Exportar (a JSON file without passwords).
+- **Settings backup**: Diagnostics > Export (a JSON file without passwords).
 - **Roll back from MailBridge to Techmail**: deactivate MailBridge, activate Techmail. Techmail's data was never changed by the upgrade.
-- **Remove MailBridge completely**: switch on "Apagar os dados do MailBridge ao desinstalar" in Diagnóstico, then uninstall. E-mails already in GLPI's queue are never touched.
+- **Remove MailBridge completely**: switch on "Delete MailBridge data when the plugin is uninstalled" in Diagnostics, then uninstall. E-mails already in GLPI's queue are never touched.
 
 ### 13. Known issues
 
 - GLPI 11 is not tested.
 - OAuth is configured on GLPI's native screen, not inside MailBridge.
-- If you change the server and leave the password blank, the previously saved password is kept and would be offered to the new server. Type the new password, or tick "Apagar a senha guardada".
+- If you change the server and leave the password blank, the previously saved password is kept and would be offered to the new server. Type the new password, or tick "Delete the stored password".
 - The Overview judges the settings; it cannot know whether the provider will accept the sign-in. Use the test buttons. It recognises Gmail and Microsoft by server name only (`smtp.gmail.com`, `smtp.googlemail.com`, `smtp.office365.com`, `smtp-mail.outlook.com`); other servers are not required to have a sign-in or a public sender, so local test mailboxes keep working.
 - After installing, users must log in again to see the menu entry and new permissions.
 - Not included: sending limits per period, digest e-mails, provider presets, bounce handling.
