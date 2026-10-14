@@ -38,6 +38,7 @@ O MailBridge 1.0 sucede o **Techmail** (versões 1.0.0 e 1.1.0). Se você o tem 
 ### 4. Instalação
 
 1. Copie a pasta `mailbridge` para a pasta `plugins/` do GLPI. O nome da pasta precisa ser exatamente `mailbridge`.
+   Pelo GitHub, dentro de `plugins/`: `git clone https://github.com/Wetans/glpi-mailbridge.git mailbridge` (o repositório se chama `glpi-mailbridge`, mas a pasta precisa ser `mailbridge`).
 2. Em **Configurar > Plugins**, clique em **Instalar** e depois em **Ativar** no MailBridge.
    Pela linha de comando: `php bin/console plugin:install mailbridge --username=glpi` e depois `php bin/console plugin:activate mailbridge`.
 3. Saia e entre de novo no GLPI para o menu mostrar **Configurar > MailBridge**.
@@ -167,7 +168,7 @@ Veja o [CHANGELOG.md](CHANGELOG.md) (em inglês). Em resumo: o MailBridge 1.0 é
 
 O MailBridge foi criado e é mantido por **Mateus Oliveira** ([@Wetans](https://github.com/Wetans)). É software livre, distribuído sob a GNU General Public License, versão 2 ou (a seu critério) qualquer versão posterior; veja o arquivo [LICENSE](LICENSE).
 
-Dúvidas, problemas e sugestões: [registre no GitHub](https://github.com/Wetans/mailbridge/issues).
+Dúvidas, problemas e sugestões: [registre no GitHub](https://github.com/Wetans/glpi-mailbridge/issues).
 
 ## Para mantenedores
 

@@ -44,7 +44,7 @@ function plugin_version_mailbridge(): array
         'version'      => PLUGIN_MAILBRIDGE_VERSION,
         'author'       => 'Mateus Oliveira',
         'license'      => 'GPLv2+',
-        'homepage'     => 'https://github.com/Wetans/mailbridge',
+        'homepage'     => 'https://github.com/Wetans/glpi-mailbridge',
         'requirements' => [
             'glpi' => [
                 'min' => PLUGIN_MAILBRIDGE_MIN_GLPI,
