@@ -156,11 +156,16 @@ No log, export, screen or error message contains passwords or tokens.
 - The Overview judges the settings; it cannot know whether the provider will accept the sign-in. Use the test buttons. It recognises Gmail and Microsoft by server name only (`smtp.gmail.com`, `smtp.googlemail.com`, `smtp.office365.com`, `smtp-mail.outlook.com`); other servers are not required to have a sign-in or a public sender, so local test mailboxes keep working.
 - After installing, users must log in again to see the menu entry and new permissions.
 - Not included: sending limits per period, digest e-mails, provider presets, bounce handling.
-- Author and licence in `setup.php` are generic; adjust them before distributing.
 
 ### 14. Version history
 
 See [CHANGELOG.md](CHANGELOG.md). In short: MailBridge 1.0 is the first release under the new name and makes the Overview and the tests stricter about sign-in, sender and stale tests. Before that the plugin was called Techmail: Techmail 1.1.0 added the single-screen manager and Techmail 1.0.0 was the first version.
+
+## Author and license
+
+MailBridge is created and maintained by **Mateus Oliveira** ([@Wetans](https://github.com/Wetans)). It is free software, distributed under the GNU General Public License, version 2 or (at your option) any later version; see [LICENSE](LICENSE).
+
+Questions, problems and suggestions: [open an issue on GitHub](https://github.com/Wetans/mailbridge/issues).
 
 ## For maintainers
 

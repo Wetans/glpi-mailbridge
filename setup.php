@@ -13,6 +13,12 @@
  * O MailBridge 1.0 sucede o plugin "Techmail" (versões 1.0.0 e 1.1.0, pasta
  * `techmail`). A instalação do MailBridge traz os dados de uma instalação
  * antiga sem apagar nada (veja GlpiPlugin\Mailbridge\LegacyImport e o README).
+ *
+ * Copyright (C) 2026 Mateus Oliveira <https://github.com/Wetans>
+ *
+ * Este programa é software livre: você pode redistribuí-lo e/ou modificá-lo
+ * sob os termos da GNU General Public License, versão 2 ou (a seu critério)
+ * qualquer versão posterior. Veja o arquivo LICENSE.
  */
 
 use Glpi\Plugin\Hooks;
@@ -36,9 +42,9 @@ function plugin_version_mailbridge(): array
     return [
         'name'         => 'MailBridge',
         'version'      => PLUGIN_MAILBRIDGE_VERSION,
-        'author'       => 'MailBridge',
+        'author'       => 'Mateus Oliveira',
         'license'      => 'GPLv2+',
-        'homepage'     => '',
+        'homepage'     => 'https://github.com/Wetans/mailbridge',
         'requirements' => [
             'glpi' => [
                 'min' => PLUGIN_MAILBRIDGE_MIN_GLPI,
