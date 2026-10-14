@@ -171,12 +171,9 @@ mailbridge/
 ├── src/                  business rules (pure classes) and GLPI access; Screen/ per section
 ├── templates/            screens (Twig)
 ├── css/, js/, pics/      loaded only on the plugin's screens
-├── locales/              pt_BR, en_GB, en_US
-├── tests/                tests of the pure classes
-└── tools/locales.py      extracts the texts and builds the translation files
+└── locales/              pt_BR, en_GB, en_US
 ```
 
-- Tests: `php tests/run.php` (nothing to install) or `phpunit`.
-- Translations: source texts are Portuguese. After changing a text, edit `locales/en_GB.po`, run `python3 tools/locales.py`, then clear GLPI's cache.
+- Translations: source texts are Portuguese. After changing a text, update it in `locales/mailbridge.pot` and the `.po` files, compile each `.po` into its `.mo` (for example with gettext's `msgfmt`), then clear GLPI's cache.
 - Internal names: folder and identifier `mailbridge`, namespace `GlpiPlugin\Mailbridge`, tables `glpi_plugin_mailbridge_*`, settings context `plugin:mailbridge`, permission `plugin_mailbridge`. The CSS prefix inside the plugin is `tm-` (not `mb-`, which Bootstrap uses for margins).
 - The old name appears only where the old installation is read: `src/LegacyImport.php`, old export files (`src/Porter.php`), old history (`src/Audit.php`, `src/Queue.php`) and the texts that name the old plugin.
