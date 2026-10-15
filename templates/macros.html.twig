@@ -1,5 +1,5 @@
 {#
- # Campos de formulário do MailBridge: rótulo ligado ao campo, texto de ajuda
+ # Campos de formulário do MailTech: rótulo ligado ao campo, texto de ajuda
  # visível e espaço para a mensagem de erro (preenchida pelo servidor ou ao
  # sair do campo).
  #}
@@ -86,7 +86,7 @@
 {% macro error_summary(errors) %}
    {% if errors is not empty %}
       <div class="alert alert-danger" role="alert">
-         <strong>{{ __('Não foi possível salvar. Corrija os campos marcados:', 'mailbridge') }}</strong>
+         <strong>{{ __('Não foi possível salvar. Corrija os campos marcados:', 'mailtech') }}</strong>
          <ul class="mb-0">
             {% for message in errors %}<li>{{ message }}</li>{% endfor %}
          </ul>
@@ -96,15 +96,15 @@
 
 {% macro level_icon(level) %}
    {%- if level == 'ok' -%}
-      <i class="ti ti-circle-check text-success" aria-hidden="true"></i><span class="visually-hidden">{{ __('Em ordem:', 'mailbridge') }}</span>
+      <i class="ti ti-circle-check text-success" aria-hidden="true"></i><span class="visually-hidden">{{ __('Em ordem:', 'mailtech') }}</span>
    {%- elseif level == 'error' -%}
-      <i class="ti ti-circle-x text-danger" aria-hidden="true"></i><span class="visually-hidden">{{ __('Problema:', 'mailbridge') }}</span>
+      <i class="ti ti-circle-x text-danger" aria-hidden="true"></i><span class="visually-hidden">{{ __('Problema:', 'mailtech') }}</span>
    {%- elseif level == 'warn' -%}
-      <i class="ti ti-alert-triangle text-warning" aria-hidden="true"></i><span class="visually-hidden">{{ __('Atenção:', 'mailbridge') }}</span>
+      <i class="ti ti-alert-triangle text-warning" aria-hidden="true"></i><span class="visually-hidden">{{ __('Atenção:', 'mailtech') }}</span>
    {%- elseif level == 'off' -%}
-      <i class="ti ti-player-pause" aria-hidden="true"></i><span class="visually-hidden">{{ __('Desligado:', 'mailbridge') }}</span>
+      <i class="ti ti-player-pause" aria-hidden="true"></i><span class="visually-hidden">{{ __('Desligado:', 'mailtech') }}</span>
    {%- else -%}
-      <i class="ti ti-info-circle" aria-hidden="true"></i><span class="visually-hidden">{{ __('Informação:', 'mailbridge') }}</span>
+      <i class="ti ti-info-circle" aria-hidden="true"></i><span class="visually-hidden">{{ __('Informação:', 'mailtech') }}</span>
    {%- endif -%}
 {% endmacro %}
 
@@ -112,16 +112,16 @@
 {% macro pager(p, label) %}
    {% if p.total > 0 %}
       <nav class="d-flex flex-wrap align-items-center gap-2" aria-label="{{ label }}">
-         <span class="tm-soft">{{ __('Mostrando %1$d a %2$d de %3$d', 'mailbridge')|format(p.from, p.to, p.total) }}</span>
+         <span class="tm-soft">{{ __('Mostrando %1$d a %2$d de %3$d', 'mailtech')|format(p.from, p.to, p.total) }}</span>
          <span class="ms-auto btn-list">
             {% if p.prev %}
                <a class="btn btn-sm btn-outline-secondary" href="{{ p.prev }}" rel="prev">
-                  <i class="ti ti-chevron-left" aria-hidden="true"></i> {{ __('Anteriores', 'mailbridge') }}
+                  <i class="ti ti-chevron-left" aria-hidden="true"></i> {{ __('Anteriores', 'mailtech') }}
                </a>
             {% endif %}
             {% if p.next %}
                <a class="btn btn-sm btn-outline-secondary" href="{{ p.next }}" rel="next">
-                  {{ __('Próximos', 'mailbridge') }} <i class="ti ti-chevron-right" aria-hidden="true"></i>
+                  {{ __('Próximos', 'mailtech') }} <i class="ti ti-chevron-right" aria-hidden="true"></i>
                </a>
             {% endif %}
          </span>

@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Pequenas diferenças de banco entre GLPI 10 e 11.

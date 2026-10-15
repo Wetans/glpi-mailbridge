@@ -1,10 +1,10 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
-use GlpiPlugin\Mailbridge\Facts;
-use GlpiPlugin\Mailbridge\Health;
-use GlpiPlugin\Mailbridge\Page;
+use GlpiPlugin\Mailtech\Facts;
+use GlpiPlugin\Mailtech\Health;
+use GlpiPlugin\Mailtech\Page;
 
 /**
  * Visão geral: está funcionando? o que falta? há falhas?

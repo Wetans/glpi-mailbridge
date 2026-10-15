@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Traduz o erro técnico de envio (em inglês, cheio de códigos) para uma frase
@@ -68,140 +68,140 @@ final class ErrorExplainer
         switch ($kind) {
             case 'no_password':
                 return [
-                    'title'  => __('Falta guardar a senha do servidor de envio.', 'mailbridge'),
+                    'title'  => __('Falta guardar a senha do servidor de envio.', 'mailtech'),
                     'advice' => [
-                        __('Digite a senha no campo "Senha" e clique em Salvar. Os testes e os envios só usam o que está salvo.', 'mailbridge'),
-                        __('Gmail e Outlook pedem uma "senha de app" ou login pelo provedor (OAuth); a senha normal da conta não funciona.', 'mailbridge'),
-                        __('Se o servidor não pede login, apague o usuário e salve.', 'mailbridge'),
+                        __('Digite a senha no campo "Senha" e clique em Salvar. Os testes e os envios só usam o que está salvo.', 'mailtech'),
+                        __('Gmail e Outlook pedem uma "senha de app" ou login pelo provedor (OAuth); a senha normal da conta não funciona.', 'mailtech'),
+                        __('Se o servidor não pede login, apague o usuário e salve.', 'mailtech'),
                     ],
                 ];
             case 'no_login':
                 return [
-                    'title'  => __('O servidor de envio exige login e nenhum usuário foi informado.', 'mailbridge'),
+                    'title'  => __('O servidor de envio exige login e nenhum usuário foi informado.', 'mailtech'),
                     'advice' => [
-                        __('Em Envio, informe como usuário o endereço completo da conta e a senha dela, clique em Salvar e teste de novo.', 'mailbridge'),
-                        __('No Gmail a senha é uma "senha de app" criada na Conta Google (com a verificação em duas etapas ligada); a senha normal da conta não funciona.', 'mailbridge'),
-                        __('Use como remetente o mesmo endereço da conta.', 'mailbridge'),
+                        __('Em Envio, informe como usuário o endereço completo da conta e a senha dela, clique em Salvar e teste de novo.', 'mailtech'),
+                        __('No Gmail a senha é uma "senha de app" criada na Conta Google (com a verificação em duas etapas ligada); a senha normal da conta não funciona.', 'mailtech'),
+                        __('Use como remetente o mesmo endereço da conta.', 'mailtech'),
                     ],
                 ];
             case 'dns':
                 return [
-                    'title'  => __('O servidor de envio não foi encontrado.', 'mailbridge'),
+                    'title'  => __('O servidor de envio não foi encontrado.', 'mailtech'),
                     'advice' => [
-                        __('Confira se o nome do servidor foi digitado certo (exemplo: smtp.suaempresa.com.br).', 'mailbridge'),
-                        __('Veja se o servidor do GLPI tem acesso à internet ou à rede onde fica o servidor de e-mail.', 'mailbridge'),
+                        __('Confira se o nome do servidor foi digitado certo (exemplo: smtp.suaempresa.com.br).', 'mailtech'),
+                        __('Veja se o servidor do GLPI tem acesso à internet ou à rede onde fica o servidor de e-mail.', 'mailtech'),
                     ],
                 ];
             case 'refused':
                 return [
-                    'title'  => __('O servidor de envio recusou a conexão nessa porta.', 'mailbridge'),
+                    'title'  => __('O servidor de envio recusou a conexão nessa porta.', 'mailtech'),
                     'advice' => [
-                        __('Confira a porta: as mais comuns são 587 (STARTTLS), 465 (SSL/TLS) e 25 (sem segurança).', 'mailbridge'),
-                        __('Peça a quem cuida da rede para liberar a saída do GLPI até esse servidor e porta.', 'mailbridge'),
+                        __('Confira a porta: as mais comuns são 587 (STARTTLS), 465 (SSL/TLS) e 25 (sem segurança).', 'mailtech'),
+                        __('Peça a quem cuida da rede para liberar a saída do GLPI até esse servidor e porta.', 'mailtech'),
                     ],
                 ];
             case 'timeout':
                 return [
-                    'title'  => __('O servidor de envio não respondeu a tempo.', 'mailbridge'),
+                    'title'  => __('O servidor de envio não respondeu a tempo.', 'mailtech'),
                     'advice' => [
-                        __('Confira o servidor e a porta.', 'mailbridge'),
-                        __('Um firewall pode estar bloqueando a saída: peça para liberar a porta usada.', 'mailbridge'),
-                        __('Tente de novo em alguns minutos: o servidor de e-mail pode estar fora do ar.', 'mailbridge'),
+                        __('Confira o servidor e a porta.', 'mailtech'),
+                        __('Um firewall pode estar bloqueando a saída: peça para liberar a porta usada.', 'mailtech'),
+                        __('Tente de novo em alguns minutos: o servidor de e-mail pode estar fora do ar.', 'mailtech'),
                     ],
                 ];
             case 'cert':
                 return [
-                    'title'  => __('O certificado de segurança do servidor de envio não foi aceito.', 'mailbridge'),
+                    'title'  => __('O certificado de segurança do servidor de envio não foi aceito.', 'mailtech'),
                     'advice' => [
-                        __('Use o mesmo nome de servidor que aparece no certificado (o que o provedor informa).', 'mailbridge'),
-                        __('Em servidor interno com certificado próprio, desligue "Conferir o certificado de segurança" nas opções avançadas.', 'mailbridge'),
+                        __('Use o mesmo nome de servidor que aparece no certificado (o que o provedor informa).', 'mailtech'),
+                        __('Em servidor interno com certificado próprio, desligue "Conferir o certificado de segurança" nas opções avançadas.', 'mailtech'),
                     ],
                 ];
             case 'need_tls':
                 return [
-                    'title'  => __('O servidor de envio exige conexão segura.', 'mailbridge'),
+                    'title'  => __('O servidor de envio exige conexão segura.', 'mailtech'),
                     'advice' => [
-                        __('Em "Segurança da conexão", escolha STARTTLS (normalmente na porta 587) ou SSL/TLS (porta 465).', 'mailbridge'),
+                        __('Em "Segurança da conexão", escolha STARTTLS (normalmente na porta 587) ou SSL/TLS (porta 465).', 'mailtech'),
                     ],
                 ];
             case 'tls':
                 return [
-                    'title'  => __('Não foi possível iniciar a conexão segura com o servidor de envio.', 'mailbridge'),
+                    'title'  => __('Não foi possível iniciar a conexão segura com o servidor de envio.', 'mailtech'),
                     'advice' => [
-                        __('A segurança escolhida precisa combinar com a porta: STARTTLS com 587, SSL/TLS com 465, nenhuma com 25.', 'mailbridge'),
-                        __('Se o servidor não oferece segurança, escolha "Nenhuma".', 'mailbridge'),
+                        __('A segurança escolhida precisa combinar com a porta: STARTTLS com 587, SSL/TLS com 465, nenhuma com 25.', 'mailtech'),
+                        __('Se o servidor não oferece segurança, escolha "Nenhuma".', 'mailtech'),
                     ],
                 ];
             case 'auth':
                 return [
-                    'title'  => __('O servidor de envio não aceitou o usuário e a senha.', 'mailbridge'),
+                    'title'  => __('O servidor de envio não aceitou o usuário e a senha.', 'mailtech'),
                     'advice' => [
-                        __('Digite de novo o usuário (normalmente o e-mail completo) e a senha.', 'mailbridge'),
-                        __('Gmail e Outlook pedem uma "senha de app" ou login pelo provedor (OAuth); a senha normal da conta não funciona.', 'mailbridge'),
-                        __('Se o servidor não pede login, deixe usuário e senha em branco.', 'mailbridge'),
+                        __('Digite de novo o usuário (normalmente o e-mail completo) e a senha.', 'mailtech'),
+                        __('Gmail e Outlook pedem uma "senha de app" ou login pelo provedor (OAuth); a senha normal da conta não funciona.', 'mailtech'),
+                        __('Se o servidor não pede login, deixe usuário e senha em branco.', 'mailtech'),
                     ],
                 ];
             case 'relay':
                 return [
-                    'title'  => __('O servidor de envio não permite que o GLPI envie por ele.', 'mailbridge'),
+                    'title'  => __('O servidor de envio não permite que o GLPI envie por ele.', 'mailtech'),
                     'advice' => [
-                        __('Informe usuário e senha, se o servidor exigir login.', 'mailbridge'),
-                        __('Ou peça a quem cuida do e-mail para autorizar o servidor do GLPI.', 'mailbridge'),
+                        __('Informe usuário e senha, se o servidor exigir login.', 'mailtech'),
+                        __('Ou peça a quem cuida do e-mail para autorizar o servidor do GLPI.', 'mailtech'),
                     ],
                 ];
             case 'sender':
                 return [
-                    'title'  => __('O servidor de envio recusou o endereço do remetente.', 'mailbridge'),
+                    'title'  => __('O servidor de envio recusou o endereço do remetente.', 'mailtech'),
                     'advice' => [
-                        __('Use como remetente um endereço da mesma conta ou do mesmo domínio do usuário de login.', 'mailbridge'),
-                        __('Confira se o e-mail do remetente foi digitado certo.', 'mailbridge'),
+                        __('Use como remetente um endereço da mesma conta ou do mesmo domínio do usuário de login.', 'mailtech'),
+                        __('Confira se o e-mail do remetente foi digitado certo.', 'mailtech'),
                     ],
                 ];
             case 'recipient':
                 return [
-                    'title'  => __('O servidor de envio recusou o endereço de quem ia receber.', 'mailbridge'),
+                    'title'  => __('O servidor de envio recusou o endereço de quem ia receber.', 'mailtech'),
                     'advice' => [
-                        __('Confira o e-mail no cadastro da pessoa (pode ter erro de digitação ou a caixa não existe mais).', 'mailbridge'),
-                        __('Depois de corrigir o cadastro, o próximo aviso sai certo; este pode ser cancelado.', 'mailbridge'),
+                        __('Confira o e-mail no cadastro da pessoa (pode ter erro de digitação ou a caixa não existe mais).', 'mailtech'),
+                        __('Depois de corrigir o cadastro, o próximo aviso sai certo; este pode ser cancelado.', 'mailtech'),
                     ],
                 ];
             case 'size':
                 return [
-                    'title'  => __('O e-mail é grande demais para o servidor de envio.', 'mailbridge'),
+                    'title'  => __('O e-mail é grande demais para o servidor de envio.', 'mailtech'),
                     'advice' => [
-                        __('Desligue "Anexar os documentos do chamado" ou reduza o texto do modelo.', 'mailbridge'),
+                        __('Desligue "Anexar os documentos do chamado" ou reduza o texto do modelo.', 'mailtech'),
                     ],
                 ];
             case 'quota':
                 return [
-                    'title'  => __('O servidor de envio pediu para esperar (limite de envios ou ocupado).', 'mailbridge'),
+                    'title'  => __('O servidor de envio pediu para esperar (limite de envios ou ocupado).', 'mailtech'),
                     'advice' => [
-                        __('Espere alguns minutos: o GLPI tenta de novo sozinho.', 'mailbridge'),
-                        __('Se acontecer sempre, a conta pode ter atingido o limite diário: use um servidor de e-mail da empresa.', 'mailbridge'),
+                        __('Espere alguns minutos: o GLPI tenta de novo sozinho.', 'mailtech'),
+                        __('Se acontecer sempre, a conta pode ter atingido o limite diário: use um servidor de e-mail da empresa.', 'mailtech'),
                     ],
                 ];
             case 'mailfn':
                 return [
-                    'title'  => __('A função de e-mail do servidor do GLPI não funcionou.', 'mailbridge'),
+                    'title'  => __('A função de e-mail do servidor do GLPI não funcionou.', 'mailtech'),
                     'advice' => [
-                        __('Em "Como enviar", escolha "Servidor de e-mail (SMTP)" e informe os dados do seu provedor.', 'mailbridge'),
+                        __('Em "Como enviar", escolha "Servidor de e-mail (SMTP)" e informe os dados do seu provedor.', 'mailtech'),
                     ],
                 ];
             case 'connect':
                 return [
-                    'title'  => __('Não foi possível conectar ao servidor de envio.', 'mailbridge'),
+                    'title'  => __('Não foi possível conectar ao servidor de envio.', 'mailtech'),
                     'advice' => [
-                        __('Confira o servidor, a porta e a segurança da conexão.', 'mailbridge'),
-                        __('Use "Testar conexão" na tela Envio para ver em que passo parou.', 'mailbridge'),
+                        __('Confira o servidor, a porta e a segurança da conexão.', 'mailtech'),
+                        __('Use "Testar conexão" na tela Envio para ver em que passo parou.', 'mailtech'),
                     ],
                 ];
         }
 
         return [
-            'title'  => __('O servidor de envio devolveu um erro.', 'mailbridge'),
+            'title'  => __('O servidor de envio devolveu um erro.', 'mailtech'),
             'advice' => [
-                __('Use "Testar conexão" na tela Envio para ver em que passo parou.', 'mailbridge'),
-                __('Mostre o detalhe técnico abaixo para quem cuida do servidor de e-mail.', 'mailbridge'),
+                __('Use "Testar conexão" na tela Envio para ver em que passo parou.', 'mailtech'),
+                __('Mostre o detalhe técnico abaixo para quem cuida do servidor de e-mail.', 'mailtech'),
             ],
         ];
     }

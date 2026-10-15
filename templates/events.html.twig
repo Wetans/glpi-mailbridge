@@ -1,8 +1,8 @@
-{% extends '@mailbridge/layout.html.twig' %}
-{% import '@mailbridge/macros.html.twig' as f %}
+{% extends '@mailtech/layout.html.twig' %}
+{% import '@mailtech/macros.html.twig' as f %}
 
 {% block content %}
-   <ul class="nav nav-pills tm-nav mb-3" aria-label="{{ __('Partes de Eventos e destinatários', 'mailbridge') }}">
+   <ul class="nav nav-pills tm-nav mb-3" aria-label="{{ __('Partes de Eventos e destinatários', 'mailtech') }}">
       {% for code, item in tabs %}
          <li class="nav-item">
             <a class="nav-link{{ code == tab ? ' active' }}" href="{{ item.url }}"{% if code == tab %} aria-current="page"{% endif %}>{{ item.label }}</a>
@@ -10,26 +10,26 @@
       {% endfor %}
    </ul>
 
-   {# ================= Regras do MailBridge ================= #}
+   {# ================= Regras do MailTech ================= #}
    {% if tab == 'rules' %}
       <div class="card mb-3">
          <div class="card-body d-flex flex-wrap align-items-center gap-3" data-tm-row>
             <label class="form-check form-switch m-0">
-               <input class="form-check-input tm-toggle" type="checkbox" role="switch" id="tm_mailbridge_on"
-                      data-action="toggle_mailbridge"{{ mailbridge_on ? ' checked' }}{{ tm.can.manage ? '' : ' disabled' }}
-                      data-tm-confirm-off="{{ __('Desligar os avisos do MailBridge? Nenhuma regra abaixo vai gerar e-mail até você ligar de novo. Os avisos nativos do GLPI continuam.', 'mailbridge') }}">
-               <span class="form-check-label fw-bold">{{ __('Avisos do MailBridge', 'mailbridge') }}</span>
+               <input class="form-check-input tm-toggle" type="checkbox" role="switch" id="tm_mailtech_on"
+                      data-action="toggle_mailtech"{{ mailtech_on ? ' checked' }}{{ tm.can.manage ? '' : ' disabled' }}
+                      data-tm-confirm-off="{{ __('Desligar os avisos do MailTech? Nenhuma regra abaixo vai gerar e-mail até você ligar de novo. Os avisos nativos do GLPI continuam.', 'mailtech') }}">
+               <span class="form-check-label fw-bold">{{ __('Avisos do MailTech', 'mailtech') }}</span>
             </label>
             <span class="tm-soft flex-fill tm-minw">
-               {{ __('Chave geral: desligada, nenhuma regra abaixo gera e-mail.', 'mailbridge') }}
+               {{ __('Chave geral: desligada, nenhuma regra abaixo gera e-mail.', 'mailtech') }}
             </span>
             {% if tm.can.manage %}
                <noscript>
                   <form method="post" action="{{ tm.action_url }}">
                      <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
-                     <input type="hidden" name="action" value="toggle_mailbridge">
-                     <input type="hidden" name="on" value="{{ mailbridge_on ? 0 : 1 }}">
-                     <button type="submit" class="btn btn-sm btn-outline-secondary">{{ mailbridge_on ? __('Desligar', 'mailbridge') : __('Ligar', 'mailbridge') }}</button>
+                     <input type="hidden" name="action" value="toggle_mailtech">
+                     <input type="hidden" name="on" value="{{ mailtech_on ? 0 : 1 }}">
+                     <button type="submit" class="btn btn-sm btn-outline-secondary">{{ mailtech_on ? __('Desligar', 'mailtech') : __('Ligar', 'mailtech') }}</button>
                   </form>
                </noscript>
             {% endif %}
@@ -38,18 +38,18 @@
 
       <div class="card">
          <div class="card-header">
-            <h2 class="card-title h4 m-0">{{ __('Quem recebe o quê', 'mailbridge') }}</h2>
+            <h2 class="card-title h4 m-0">{{ __('Quem recebe o quê', 'mailtech') }}</h2>
             {% if tm.can.manage %}
                <a class="btn btn-primary btn-sm ms-auto" href="{{ new_url }}">
-                  <i class="ti ti-plus" aria-hidden="true"></i> {{ __('Nova regra', 'mailbridge') }}
+                  <i class="ti ti-plus" aria-hidden="true"></i> {{ __('Nova regra', 'mailtech') }}
                </a>
             {% endif %}
          </div>
 
          {% if rules is empty %}
             <div class="card-body text-center">
-               <p class="mb-2"><i class="ti ti-mail-off" aria-hidden="true"></i> {{ __('Nenhuma regra criada ainda.', 'mailbridge') }}</p>
-               <p class="tm-soft mb-0">{{ __('Sem regras, o MailBridge não avisa ninguém. Crie a primeira em "Nova regra".', 'mailbridge') }}</p>
+               <p class="mb-2"><i class="ti ti-mail-off" aria-hidden="true"></i> {{ __('Nenhuma regra criada ainda.', 'mailtech') }}</p>
+               <p class="tm-soft mb-0">{{ __('Sem regras, o MailTech não avisa ninguém. Crie a primeira em "Nova regra".', 'mailtech') }}</p>
             </div>
          {% else %}
             <form method="post" action="{{ tm.action_url }}">
@@ -62,26 +62,26 @@
                            <label class="form-check form-switch m-0 pt-1">
                               <input class="form-check-input tm-toggle" type="checkbox" role="switch"
                                      data-action="toggle_rule" data-id="{{ rule.id }}"{{ rule.active ? ' checked' }}{{ tm.can.manage ? '' : ' disabled' }}
-                                     aria-label="{{ __('Regra ligada: %s', 'mailbridge')|format(rule.name) }}">
+                                     aria-label="{{ __('Regra ligada: %s', 'mailtech')|format(rule.name) }}">
                            </label>
                            <div class="flex-fill tm-minw">
                               <div class="mb-1">
                                  <strong class="tm-break">{{ rule.name }}</strong>
-                                 <span class="badge bg-secondary-lt" data-tm-state data-on="{{ __('Ligada', 'mailbridge') }}" data-off="{{ __('Desligada', 'mailbridge') }}">
-                                    {{- rule.active ? __('Ligada', 'mailbridge') : __('Desligada', 'mailbridge') -}}
+                                 <span class="badge bg-secondary-lt" data-tm-state data-on="{{ __('Ligada', 'mailtech') }}" data-off="{{ __('Desligada', 'mailtech') }}">
+                                    {{- rule.active ? __('Ligada', 'mailtech') : __('Desligada', 'mailtech') -}}
                                  </span>
                                  {% for language in rule.languages %}
-                                    <span class="badge bg-secondary-lt" title="{{ __('Modelo traduzido para este idioma', 'mailbridge') }}">{{ language }}</span>
+                                    <span class="badge bg-secondary-lt" title="{{ __('Modelo traduzido para este idioma', 'mailtech') }}">{{ language }}</span>
                                  {% endfor %}
                               </div>
                               <div>
-                                 <span class="tm-soft">{{ __('Quando:', 'mailbridge') }}</span> {{ rule.summary.when }}.
-                                 <span class="tm-soft">{{ __('Avisa:', 'mailbridge') }}</span>
-                                 {% if rule.summary.who %}{{ rule.summary.who|join('; ') }}.{% else %}<span class="text-danger">{{ __('ninguém (escolha os destinatários).', 'mailbridge') }}</span>{% endif %}
+                                 <span class="tm-soft">{{ __('Quando:', 'mailtech') }}</span> {{ rule.summary.when }}.
+                                 <span class="tm-soft">{{ __('Avisa:', 'mailtech') }}</span>
+                                 {% if rule.summary.who %}{{ rule.summary.who|join('; ') }}.{% else %}<span class="text-danger">{{ __('ninguém (escolha os destinatários).', 'mailtech') }}</span>{% endif %}
                               </div>
                               {% if rule.summary.filters or rule.summary.notes %}
                                  <div class="tm-soft">
-                                    {% if rule.summary.filters %}{{ __('Só para:', 'mailbridge') }} {{ rule.summary.filters|join('; ') }}.{% endif %}
+                                    {% if rule.summary.filters %}{{ __('Só para:', 'mailtech') }} {{ rule.summary.filters|join('; ') }}.{% endif %}
                                     {{ rule.summary.notes|join(' ') }}
                                  </div>
                               {% endif %}
@@ -90,15 +90,15 @@
                               {% if tm.can.manage %}
                                  <noscript>
                                     <button type="submit" name="row" value="{{ rule.id }}:{{ rule.active ? 0 : 1 }}" class="btn btn-sm btn-outline-secondary">
-                                       {{ rule.active ? __('Desligar', 'mailbridge') : __('Ligar', 'mailbridge') }}
+                                       {{ rule.active ? __('Desligar', 'mailtech') : __('Ligar', 'mailtech') }}
                                     </button>
                                  </noscript>
                               {% endif %}
                               <a class="btn btn-sm btn-outline-secondary" href="{{ rule.edit_url }}">
-                                 <i class="ti ti-pencil" aria-hidden="true"></i> {{ __('Editar regra', 'mailbridge') }}
+                                 <i class="ti ti-pencil" aria-hidden="true"></i> {{ __('Editar regra', 'mailtech') }}
                               </a>
                               <a class="btn btn-sm btn-outline-secondary" href="{{ rule.template_url }}">
-                                 <i class="ti ti-template" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailbridge') }}
+                                 <i class="ti ti-template" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailtech') }}
                               </a>
                            </div>
                         </div>
@@ -113,10 +113,10 @@
    {# ================= Por entidade ================= #}
    {% if tab == 'entities' %}
       <div class="card">
-         <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Avisos do MailBridge por entidade', 'mailbridge') }}</h2></div>
+         <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Avisos do MailTech por entidade', 'mailtech') }}</h2></div>
          {% if entity_total <= 1 %}
             <div class="card-body">
-               <p class="mb-0">{{ __('Este GLPI tem uma entidade só: a chave geral "Avisos do MailBridge" já vale para tudo. Quando houver mais entidades, você poderá desligar os avisos em cada uma aqui.', 'mailbridge') }}</p>
+               <p class="mb-0">{{ __('Este GLPI tem uma entidade só: a chave geral "Avisos do MailTech" já vale para tudo. Quando houver mais entidades, você poderá desligar os avisos em cada uma aqui.', 'mailtech') }}</p>
             </div>
          {% else %}
             <form method="post" action="{{ tm.action_url }}" data-track-changes="true">
@@ -124,15 +124,15 @@
                <input type="hidden" name="action" value="save_entities">
                <input type="hidden" name="estart" value="{{ estart }}">
                <div class="card-body pb-0">
-                  <p class="tm-soft">{{ __('"Seguir a entidade de cima" usa a escolha da entidade mais próxima acima dela. Se nenhuma tiver escolha, os avisos ficam ligados.', 'mailbridge') }}</p>
+                  <p class="tm-soft">{{ __('"Seguir a entidade de cima" usa a escolha da entidade mais próxima acima dela. Se nenhuma tiver escolha, os avisos ficam ligados.', 'mailtech') }}</p>
                </div>
                <div class="tm-table-wrap">
                   <table class="table table-vcenter tm-table mb-0">
                      <thead>
                         <tr>
-                           <th scope="col">{{ __('Entidade', 'mailbridge') }}</th>
-                           <th scope="col">{{ __('Como está agora', 'mailbridge') }}</th>
-                           <th scope="col">{{ __('Escolha', 'mailbridge') }}</th>
+                           <th scope="col">{{ __('Entidade', 'mailtech') }}</th>
+                           <th scope="col">{{ __('Como está agora', 'mailtech') }}</th>
+                           <th scope="col">{{ __('Escolha', 'mailtech') }}</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -140,23 +140,23 @@
                            <tr>
                               <th scope="row" class="fw-normal tm-break">{{ entity.name }}</th>
                               <td>
-                                 <span class="badge bg-{{ entity.enabled ? 'success' : 'secondary' }}-lt">{{ entity.enabled ? __('Ligado', 'mailbridge') : __('Desligado', 'mailbridge') }}</span>
+                                 <span class="badge bg-{{ entity.enabled ? 'success' : 'secondary' }}-lt">{{ entity.enabled ? __('Ligado', 'mailtech') : __('Desligado', 'mailtech') }}</span>
                                  <span class="tm-soft">
                                     {% if entity.source is null %}
-                                       {{ __('(padrão)', 'mailbridge') }}
+                                       {{ __('(padrão)', 'mailtech') }}
                                     {% elseif entity.source == entity.id %}
-                                       {{ __('(escolhido aqui)', 'mailbridge') }}
+                                       {{ __('(escolhido aqui)', 'mailtech') }}
                                     {% else %}
-                                       {{ __('(vem de %s)', 'mailbridge')|format(entity.source_name) }}
+                                       {{ __('(vem de %s)', 'mailtech')|format(entity.source_name) }}
                                     {% endif %}
                                  </span>
                               </td>
                               <td>
                                  <select class="form-select form-select-sm" name="entity[{{ entity.id }}]"
-                                         aria-label="{{ __('Escolha para %s', 'mailbridge')|format(entity.name) }}"{{ tm.can.manage ? '' : ' disabled' }}>
-                                    <option value="inherit"{{ entity.choice == 'inherit' ? ' selected' }}>{{ __('Seguir a entidade de cima', 'mailbridge') }}</option>
-                                    <option value="on"{{ entity.choice == 'on' ? ' selected' }}>{{ __('Ligado', 'mailbridge') }}</option>
-                                    <option value="off"{{ entity.choice == 'off' ? ' selected' }}>{{ __('Desligado', 'mailbridge') }}</option>
+                                         aria-label="{{ __('Escolha para %s', 'mailtech')|format(entity.name) }}"{{ tm.can.manage ? '' : ' disabled' }}>
+                                    <option value="inherit"{{ entity.choice == 'inherit' ? ' selected' }}>{{ __('Seguir a entidade de cima', 'mailtech') }}</option>
+                                    <option value="on"{{ entity.choice == 'on' ? ' selected' }}>{{ __('Ligado', 'mailtech') }}</option>
+                                    <option value="off"{{ entity.choice == 'off' ? ' selected' }}>{{ __('Desligado', 'mailtech') }}</option>
                                  </select>
                               </td>
                            </tr>
@@ -166,9 +166,9 @@
                </div>
                <div class="card-footer d-flex flex-wrap align-items-center gap-2">
                   {% if tm.can.manage %}
-                     <button type="submit" class="btn btn-primary">{{ __('Salvar escolhas', 'mailbridge') }}</button>
+                     <button type="submit" class="btn btn-primary">{{ __('Salvar escolhas', 'mailtech') }}</button>
                   {% endif %}
-                  <div class="flex-fill">{{ f.pager(pager, __('Páginas de entidades', 'mailbridge')) }}</div>
+                  <div class="flex-fill">{{ f.pager(pager, __('Páginas de entidades', 'mailtech')) }}</div>
                </div>
             </form>
          {% endif %}
@@ -179,25 +179,25 @@
    {% if tab == 'native' %}
       <div class="card">
          <div class="card-header">
-            <h2 class="card-title h4 m-0">{{ __('Avisos nativos do GLPI que saem por e-mail', 'mailbridge') }}</h2>
+            <h2 class="card-title h4 m-0">{{ __('Avisos nativos do GLPI que saem por e-mail', 'mailtech') }}</h2>
          </div>
          <div class="card-body">
             <p>
-               {{ __('Além das regras do MailBridge, o GLPI tem os próprios avisos (para solicitantes, administradores etc.). Com o envio de e-mails ligado, os que estiverem ligados aqui também disparam.', 'mailbridge') }}
-               <strong>{{ __('%1$d de %2$d ligados.', 'mailbridge')|format(native_count.active, native_count.total) }}</strong>
+               {{ __('Além das regras do MailTech, o GLPI tem os próprios avisos (para solicitantes, administradores etc.). Com o envio de e-mails ligado, os que estiverem ligados aqui também disparam.', 'mailtech') }}
+               <strong>{{ __('%1$d de %2$d ligados.', 'mailtech')|format(native_count.active, native_count.total) }}</strong>
             </p>
             <form method="get" action="{{ search_url }}" class="d-flex flex-wrap gap-2 mb-0" role="search">
                <input type="hidden" name="section" value="events">
                <input type="hidden" name="tab" value="native">
-               <label class="visually-hidden" for="tm_nq">{{ __('Procurar aviso pelo nome', 'mailbridge') }}</label>
+               <label class="visually-hidden" for="tm_nq">{{ __('Procurar aviso pelo nome', 'mailtech') }}</label>
                <input type="search" class="form-control w-auto flex-fill" id="tm_nq" name="nq" value="{{ nq }}"
-                      placeholder="{{ __('Procurar pelo nome. Exemplo: chamado', 'mailbridge') }}">
-               <button type="submit" class="btn btn-outline-secondary"><i class="ti ti-search" aria-hidden="true"></i> {{ __('Procurar', 'mailbridge') }}</button>
-               <a class="btn btn-outline-secondary" href="{{ native_url }}">{{ __('Abrir a tela nativa (destinatários e textos)', 'mailbridge') }}</a>
+                      placeholder="{{ __('Procurar pelo nome. Exemplo: chamado', 'mailtech') }}">
+               <button type="submit" class="btn btn-outline-secondary"><i class="ti ti-search" aria-hidden="true"></i> {{ __('Procurar', 'mailtech') }}</button>
+               <a class="btn btn-outline-secondary" href="{{ native_url }}">{{ __('Abrir a tela nativa (destinatários e textos)', 'mailtech') }}</a>
             </form>
          </div>
          {% if natives is empty %}
-            <div class="card-body text-center tm-soft">{{ __('Nenhum aviso encontrado com esse nome.', 'mailbridge') }}</div>
+            <div class="card-body text-center tm-soft">{{ __('Nenhum aviso encontrado com esse nome.', 'mailtech') }}</div>
          {% else %}
             <form method="post" action="{{ tm.action_url }}">
                <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
@@ -207,11 +207,11 @@
                   <table class="table table-vcenter tm-table mb-0">
                      <thead>
                         <tr>
-                           <th scope="col">{{ __('Ligado', 'mailbridge') }}</th>
-                           <th scope="col">{{ __('Aviso', 'mailbridge') }}</th>
-                           <th scope="col">{{ __('Sobre', 'mailbridge') }}</th>
-                           <th scope="col" class="tm-hide-xs">{{ __('Quando', 'mailbridge') }}</th>
-                           <th scope="col"><span class="visually-hidden">{{ __('Ações', 'mailbridge') }}</span></th>
+                           <th scope="col">{{ __('Ligado', 'mailtech') }}</th>
+                           <th scope="col">{{ __('Aviso', 'mailtech') }}</th>
+                           <th scope="col">{{ __('Sobre', 'mailtech') }}</th>
+                           <th scope="col" class="tm-hide-xs">{{ __('Quando', 'mailtech') }}</th>
+                           <th scope="col"><span class="visually-hidden">{{ __('Ações', 'mailtech') }}</span></th>
                         </tr>
                      </thead>
                      <tbody>
@@ -221,12 +221,12 @@
                                  <label class="form-check form-switch m-0">
                                     <input class="form-check-input tm-toggle" type="checkbox" role="switch"
                                            data-action="toggle_native" data-id="{{ item.id }}"{{ item.active ? ' checked' }}{{ tm.can.manage ? '' : ' disabled' }}
-                                           aria-label="{{ __('Aviso ligado: %s', 'mailbridge')|format(item.name) }}">
+                                           aria-label="{{ __('Aviso ligado: %s', 'mailtech')|format(item.name) }}">
                                  </label>
                                  {% if tm.can.manage %}
                                     <noscript>
                                        <button type="submit" name="row" value="{{ item.id }}:{{ item.active ? 0 : 1 }}" class="btn btn-sm btn-outline-secondary">
-                                          {{ item.active ? __('Desligar', 'mailbridge') : __('Ligar', 'mailbridge') }}
+                                          {{ item.active ? __('Desligar', 'mailtech') : __('Ligar', 'mailtech') }}
                                        </button>
                                     </noscript>
                                  {% endif %}
@@ -236,8 +236,8 @@
                               <td class="tm-hide-xs">{{ item.event }}</td>
                               <td class="text-end">
                                  <a class="btn btn-sm btn-outline-secondary" href="{{ item.url }}"
-                                    aria-label="{{ __('Abrir %s na tela nativa do GLPI', 'mailbridge')|format(item.name) }}">
-                                    {{ __('Abrir', 'mailbridge') }}
+                                    aria-label="{{ __('Abrir %s na tela nativa do GLPI', 'mailtech')|format(item.name) }}">
+                                    {{ __('Abrir', 'mailtech') }}
                                  </a>
                               </td>
                            </tr>
@@ -246,7 +246,7 @@
                   </table>
                </div>
             </form>
-            <div class="card-footer">{{ f.pager(pager, __('Páginas de avisos nativos', 'mailbridge')) }}</div>
+            <div class="card-footer">{{ f.pager(pager, __('Páginas de avisos nativos', 'mailtech')) }}</div>
          {% endif %}
       </div>
    {% endif %}

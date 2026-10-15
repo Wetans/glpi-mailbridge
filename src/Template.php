@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use CommonITILActor;
 use Glpi\RichText\RichText;
@@ -28,25 +28,25 @@ final class Template
     public static function placeholders(): array
     {
         return [
-            'ticket.id'            => __('Número do chamado', 'mailbridge'),
-            'ticket.title'         => __('Título do chamado', 'mailbridge'),
-            'ticket.content'       => __('Descrição do chamado', 'mailbridge'),
-            'ticket.url'           => __('Link para abrir o chamado', 'mailbridge'),
-            'ticket.status'        => __('Status atual', 'mailbridge'),
-            'ticket.old_status'    => __('Status anterior (evento de mudança de status)', 'mailbridge'),
-            'ticket.priority'      => __('Prioridade', 'mailbridge'),
-            'ticket.urgency'       => __('Urgência', 'mailbridge'),
-            'ticket.type'          => __('Tipo (incidente ou requisição)', 'mailbridge'),
-            'ticket.category'      => __('Categoria', 'mailbridge'),
-            'ticket.entity'        => __('Entidade', 'mailbridge'),
-            'ticket.opening_date'  => __('Data de abertura', 'mailbridge'),
-            'ticket.requesters'    => __('Solicitantes', 'mailbridge'),
-            'ticket.technicians'   => __('Técnicos atribuídos', 'mailbridge'),
-            'ticket.groups'        => __('Grupos técnicos atribuídos', 'mailbridge'),
-            'recipient.name'       => __('Nome de quem recebe o e-mail', 'mailbridge'),
-            'event.label'          => __('Frase que descreve o evento', 'mailbridge'),
-            'event.author'         => __('Quem executou a ação', 'mailbridge'),
-            'event.content'        => __('Texto do acompanhamento, tarefa ou solução', 'mailbridge'),
+            'ticket.id'            => __('Número do chamado', 'mailtech'),
+            'ticket.title'         => __('Título do chamado', 'mailtech'),
+            'ticket.content'       => __('Descrição do chamado', 'mailtech'),
+            'ticket.url'           => __('Link para abrir o chamado', 'mailtech'),
+            'ticket.status'        => __('Status atual', 'mailtech'),
+            'ticket.old_status'    => __('Status anterior (evento de mudança de status)', 'mailtech'),
+            'ticket.priority'      => __('Prioridade', 'mailtech'),
+            'ticket.urgency'       => __('Urgência', 'mailtech'),
+            'ticket.type'          => __('Tipo (incidente ou requisição)', 'mailtech'),
+            'ticket.category'      => __('Categoria', 'mailtech'),
+            'ticket.entity'        => __('Entidade', 'mailtech'),
+            'ticket.opening_date'  => __('Data de abertura', 'mailtech'),
+            'ticket.requesters'    => __('Solicitantes', 'mailtech'),
+            'ticket.technicians'   => __('Técnicos atribuídos', 'mailtech'),
+            'ticket.groups'        => __('Grupos técnicos atribuídos', 'mailtech'),
+            'recipient.name'       => __('Nome de quem recebe o e-mail', 'mailtech'),
+            'event.label'          => __('Frase que descreve o evento', 'mailtech'),
+            'event.author'         => __('Quem executou a ação', 'mailtech'),
+            'event.content'        => __('Texto do acompanhamento, tarefa ou solução', 'mailtech'),
         ];
     }
 
@@ -215,39 +215,39 @@ final class Template
      */
     public static function sample(string $event, string $recipient_name = '', string $url_base = ''): array
     {
-        $status     = __('Em atendimento (atribuído)', 'mailbridge');
-        $old_status = __('Novo', 'mailbridge');
+        $status     = __('Em atendimento (atribuído)', 'mailtech');
+        $old_status = __('Novo', 'mailtech');
         if ($event === Rule::EVENT_SOLUTION) {
             $old_status = $status;
-            $status     = __('Solucionado', 'mailbridge');
+            $status     = __('Solucionado', 'mailtech');
         }
         if ($recipient_name === '') {
-            $recipient_name = __('João Lima', 'mailbridge');
+            $recipient_name = __('João Lima', 'mailtech');
         }
         $url = rtrim($url_base !== '' ? $url_base : 'https://glpi.exemplo.com.br', '/') . '/index.php?redirect=Ticket_1234';
 
-        $content = '<p>' . Text::esc(__('Desde hoje cedo a impressora do financeiro não imprime. Já tentei desligar e ligar.', 'mailbridge')) . '</p>';
-        $note    = '<p>' . Text::esc(__('Troquei o cabo de rede e a impressora voltou a funcionar.', 'mailbridge')) . '</p>';
+        $content = '<p>' . Text::esc(__('Desde hoje cedo a impressora do financeiro não imprime. Já tentei desligar e ligar.', 'mailtech')) . '</p>';
+        $note    = '<p>' . Text::esc(__('Troquei o cabo de rede e a impressora voltou a funcionar.', 'mailtech')) . '</p>';
 
         return [
             'ticket.id'           => self::plain('1234'),
-            'ticket.title'        => self::plain(__('Impressora do 2º andar não imprime', 'mailbridge')),
+            'ticket.title'        => self::plain(__('Impressora do 2º andar não imprime', 'mailtech')),
             'ticket.content'      => ['text' => Text::toPlain($content), 'html' => $content],
             'ticket.url'          => self::plain($url),
             'ticket.status'       => self::plain($status),
             'ticket.old_status'   => self::plain($event === Rule::EVENT_STATUS || $event === Rule::EVENT_SOLUTION ? $old_status : ''),
-            'ticket.priority'     => self::plain(__('Alta', 'mailbridge')),
-            'ticket.urgency'      => self::plain(__('Alta', 'mailbridge')),
-            'ticket.type'         => self::plain(__('Incidente', 'mailbridge')),
-            'ticket.category'     => self::plain(__('Equipamentos > Impressoras', 'mailbridge')),
-            'ticket.entity'       => self::plain(__('Matriz', 'mailbridge')),
+            'ticket.priority'     => self::plain(__('Alta', 'mailtech')),
+            'ticket.urgency'      => self::plain(__('Alta', 'mailtech')),
+            'ticket.type'         => self::plain(__('Incidente', 'mailtech')),
+            'ticket.category'     => self::plain(__('Equipamentos > Impressoras', 'mailtech')),
+            'ticket.entity'       => self::plain(__('Matriz', 'mailtech')),
             'ticket.opening_date' => self::plain(date('d/m/Y') . ' 08:15'),
-            'ticket.requesters'   => self::plain(__('Maria Souza', 'mailbridge')),
-            'ticket.technicians'  => self::plain(__('João Lima', 'mailbridge')),
-            'ticket.groups'       => self::plain(__('Suporte N1', 'mailbridge')),
+            'ticket.requesters'   => self::plain(__('Maria Souza', 'mailtech')),
+            'ticket.technicians'  => self::plain(__('João Lima', 'mailtech')),
+            'ticket.groups'       => self::plain(__('Suporte N1', 'mailtech')),
             'recipient.name'      => self::plain($recipient_name),
             'event.label'         => self::plain(self::eventLabel($event, $status, $old_status)),
-            'event.author'        => self::plain(__('Maria Souza', 'mailbridge')),
+            'event.author'        => self::plain(__('Maria Souza', 'mailtech')),
             'event.content'       => ['text' => Text::toPlain($note), 'html' => $note],
         ];
     }
@@ -256,18 +256,18 @@ final class Template
     {
         switch ($event) {
             case Rule::EVENT_NEW_TICKET:
-                return __('Um novo chamado foi aberto.', 'mailbridge');
+                return __('Um novo chamado foi aberto.', 'mailtech');
             case Rule::EVENT_ASSIGNED:
-                return __('Um chamado foi atribuído a você ou ao seu grupo de atendimento.', 'mailbridge');
+                return __('Um chamado foi atribuído a você ou ao seu grupo de atendimento.', 'mailtech');
             case Rule::EVENT_FOLLOWUP:
-                return __('Um novo acompanhamento foi adicionado ao chamado.', 'mailbridge');
+                return __('Um novo acompanhamento foi adicionado ao chamado.', 'mailtech');
             case Rule::EVENT_TASK:
-                return __('Uma nova tarefa foi adicionada ao chamado.', 'mailbridge');
+                return __('Uma nova tarefa foi adicionada ao chamado.', 'mailtech');
             case Rule::EVENT_SOLUTION:
-                return __('Uma solução foi registrada para o chamado.', 'mailbridge');
+                return __('Uma solução foi registrada para o chamado.', 'mailtech');
             case Rule::EVENT_STATUS:
                 return sprintf(
-                    __('O status do chamado mudou de "%1$s" para "%2$s".', 'mailbridge'),
+                    __('O status do chamado mudou de "%1$s" para "%2$s".', 'mailtech'),
                     $old_status !== '' ? $old_status : '?',
                     $status
                 );
@@ -280,7 +280,7 @@ final class Template
     {
         $users_id = (int) ($ctx['author_id'] ?? 0);
         if ($users_id <= 0) {
-            return __('Sistema', 'mailbridge');
+            return __('Sistema', 'mailtech');
         }
         $user = new User();
         if (!$user->getFromDB($users_id)) {

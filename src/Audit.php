@@ -1,12 +1,12 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Html;
 
 /**
  * Quem alterou o quê: lê o histórico que o próprio GLPI já grava
- * (glpi_logs) para a configuração de e-mail, os ajustes do MailBridge e as
+ * (glpi_logs) para a configuração de e-mail, os ajustes do MailTech e as
  * regras. Não cria outro registro. Senhas aparecem como "********" (é o
  * próprio GLPI que as mascara ao gravar).
  */
@@ -33,12 +33,17 @@ final class Audit
                     ['itemtype' => $rule_type],
                     [
                         'itemtype' => 'Config',
-                        'OR'       => [
-                            ['old_value' => ['LIKE', '%(plugin:mailbridge)%']],
-                            ['old_value' => ['LIKE', '%(' . LegacyImport::CONTEXT . ')%']],
-                            ['old_value' => ['LIKE', 'notifications\\_mailing %']],
-                            ['old_value' => ['LIKE', 'use\\_notifications %']],
-                        ],
+                        'OR'       => array_merge(
+                            [
+                                ['old_value' => ['LIKE', '%(plugin:mailtech)%']],
+                                ['old_value' => ['LIKE', 'notifications\\_mailing %']],
+                                ['old_value' => ['LIKE', 'use\\_notifications %']],
+                            ],
+                            // Inclui o que foi alterado quando o plugin tinha um nome anterior.
+                            array_map(static function (string $key): array {
+                                return ['old_value' => ['LIKE', '%(plugin:' . $key . ')%']];
+                            }, LegacyImport::keys())
+                        ),
                     ],
                 ],
             ],
@@ -61,7 +66,7 @@ final class Audit
                 'date' => (string) Html::convDateTime($row['date_mod']),
                 'user' => trim(Text::decode((string) $row['user_name'])) !== ''
                     ? Text::decode((string) $row['user_name'])
-                    : __('Sistema', 'mailbridge'),
+                    : __('Sistema', 'mailtech'),
                 'what' => '',
                 'old'  => Text::decode((string) $row['old_value']),
                 'new'  => Text::decode((string) $row['new_value']),
@@ -73,8 +78,8 @@ final class Audit
                 $rule_ids[]    = (int) $row['items_id'];
                 $option        = (int) $row['id_search_option'];
                 $entry['what'] = $option > 0
-                    ? ($rule_fields[$option] ?? __('campo', 'mailbridge'))
-                    : __('regra criada', 'mailbridge');
+                    ? ($rule_fields[$option] ?? __('campo', 'mailtech'))
+                    : __('regra criada', 'mailtech');
                 if ($option === 0) {
                     $entry['old'] = '';
                     $entry['new'] = '';
@@ -82,7 +87,7 @@ final class Audit
             } else {
                 // O GLPI grava "chave valor antigo" (e "(contexto)" para plugins).
                 $old = $entry['old'];
-                if (preg_match('/^(\S+)(?: \(plugin:(?:mailbridge|' . LegacyImport::KEY . ')\))? ?(.*)$/s', $old, $m)) {
+                if (preg_match('/^(\S+)(?: \(plugin:(?:mailtech|' . implode('|', LegacyImport::keys()) . ')\))? ?(.*)$/s', $old, $m)) {
                     $entry['what'] = self::configLabel($m[1]);
                     $entry['old']  = $m[2];
                     if ($m[1] === 'legacy_import' || $m[1] === 'last_test_config') {
@@ -106,7 +111,7 @@ final class Audit
         foreach ($entries as $i => $entry) {
             if ($entry['rule'] > 0) {
                 $entries[$i]['what'] = sprintf(
-                    __('Regra "%1$s": %2$s', 'mailbridge'),
+                    __('Regra "%1$s": %2$s', 'mailtech'),
                     $names[$entry['rule']] ?? ('#' . $entry['rule']),
                     $entry['what']
                 );
@@ -132,39 +137,39 @@ final class Audit
     private static function configLabel(string $key): string
     {
         $labels = [
-            'notifications_mailing'  => __('Envio de e-mails (liga/desliga)', 'mailbridge'),
-            'use_notifications'      => __('Notificações do GLPI (liga/desliga)', 'mailbridge'),
-            'smtp_mode'              => __('Forma de envio e segurança', 'mailbridge'),
-            'smtp_host'              => __('Servidor', 'mailbridge'),
-            'smtp_port'              => __('Porta', 'mailbridge'),
-            'smtp_username'          => __('Usuário', 'mailbridge'),
-            'smtp_passwd'            => __('Senha', 'mailbridge'),
-            'smtp_check_certificate' => __('Conferir o certificado', 'mailbridge'),
-            'smtp_sender'            => __('Endereço de retorno', 'mailbridge'),
-            'smtp_max_retries'       => __('Novas tentativas', 'mailbridge'),
-            'smtp_retry_time'        => __('Minutos entre as tentativas', 'mailbridge'),
-            'from_email'             => __('E-mail do remetente', 'mailbridge'),
-            'from_email_name'        => __('Nome do remetente', 'mailbridge'),
-            'replyto_email'          => __('E-mail para respostas', 'mailbridge'),
-            'replyto_email_name'     => __('Nome para respostas', 'mailbridge'),
-            'noreply_email'          => __('E-mail "não responda"', 'mailbridge'),
-            'noreply_email_name'     => __('Nome do "não responda"', 'mailbridge'),
-            'admin_email'            => __('E-mail do administrador', 'mailbridge'),
-            'admin_email_name'       => __('Nome do administrador', 'mailbridge'),
-            'mailing_signature'      => __('Assinatura', 'mailbridge'),
-            'attach_ticket_documents_to_mail' => __('Anexar documentos do chamado', 'mailbridge'),
-            'enabled'                => __('Avisos do MailBridge (liga/desliga)', 'mailbridge'),
-            'send_immediately'       => __('MailBridge: enviar na hora', 'mailbridge'),
-            'sender_email'           => __('MailBridge: remetente próprio', 'mailbridge'),
-            'sender_name'            => __('MailBridge: nome do remetente próprio', 'mailbridge'),
-            'debug_log'              => __('MailBridge: registro detalhado', 'mailbridge'),
-            'block_list'             => __('MailBridge: nunca enviar para', 'mailbridge'),
-            'allow_list'             => __('MailBridge: só enviar para', 'mailbridge'),
-            'entity_modes'           => __('MailBridge: escolhas por entidade', 'mailbridge'),
-            'last_test_ok'           => __('MailBridge: último teste com sucesso', 'mailbridge'),
-            'purge_on_uninstall'     => __('MailBridge: apagar dados ao desinstalar', 'mailbridge'),
-            'legacy_import'          => __('MailBridge: dados trazidos do plugin antigo', 'mailbridge'),
-            'last_test_config'       => __('MailBridge: configuração usada no último teste', 'mailbridge'),
+            'notifications_mailing'  => __('Envio de e-mails (liga/desliga)', 'mailtech'),
+            'use_notifications'      => __('Notificações do GLPI (liga/desliga)', 'mailtech'),
+            'smtp_mode'              => __('Forma de envio e segurança', 'mailtech'),
+            'smtp_host'              => __('Servidor', 'mailtech'),
+            'smtp_port'              => __('Porta', 'mailtech'),
+            'smtp_username'          => __('Usuário', 'mailtech'),
+            'smtp_passwd'            => __('Senha', 'mailtech'),
+            'smtp_check_certificate' => __('Conferir o certificado', 'mailtech'),
+            'smtp_sender'            => __('Endereço de retorno', 'mailtech'),
+            'smtp_max_retries'       => __('Novas tentativas', 'mailtech'),
+            'smtp_retry_time'        => __('Minutos entre as tentativas', 'mailtech'),
+            'from_email'             => __('E-mail do remetente', 'mailtech'),
+            'from_email_name'        => __('Nome do remetente', 'mailtech'),
+            'replyto_email'          => __('E-mail para respostas', 'mailtech'),
+            'replyto_email_name'     => __('Nome para respostas', 'mailtech'),
+            'noreply_email'          => __('E-mail "não responda"', 'mailtech'),
+            'noreply_email_name'     => __('Nome do "não responda"', 'mailtech'),
+            'admin_email'            => __('E-mail do administrador', 'mailtech'),
+            'admin_email_name'       => __('Nome do administrador', 'mailtech'),
+            'mailing_signature'      => __('Assinatura', 'mailtech'),
+            'attach_ticket_documents_to_mail' => __('Anexar documentos do chamado', 'mailtech'),
+            'enabled'                => __('Avisos do MailTech (liga/desliga)', 'mailtech'),
+            'send_immediately'       => __('MailTech: enviar na hora', 'mailtech'),
+            'sender_email'           => __('MailTech: remetente próprio', 'mailtech'),
+            'sender_name'            => __('MailTech: nome do remetente próprio', 'mailtech'),
+            'debug_log'              => __('MailTech: registro detalhado', 'mailtech'),
+            'block_list'             => __('MailTech: nunca enviar para', 'mailtech'),
+            'allow_list'             => __('MailTech: só enviar para', 'mailtech'),
+            'entity_modes'           => __('MailTech: escolhas por entidade', 'mailtech'),
+            'last_test_ok'           => __('MailTech: último teste com sucesso', 'mailtech'),
+            'purge_on_uninstall'     => __('MailTech: apagar dados ao desinstalar', 'mailtech'),
+            'legacy_import'          => __('MailTech: dados trazidos do plugin antigo', 'mailtech'),
+            'last_test_config'       => __('MailTech: configuração usada no último teste', 'mailtech'),
         ];
 
         return $labels[$key] ?? $key;

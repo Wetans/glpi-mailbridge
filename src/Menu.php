@@ -1,22 +1,22 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use CommonGLPI;
 
 /**
- * Entrada única do plugin no menu: Configurar > MailBridge.
+ * Entrada única do plugin no menu: Configurar > MailTech.
  */
 class Menu extends CommonGLPI
 {
     public static function getTypeName($nb = 0)
     {
-        return 'MailBridge';
+        return 'MailTech';
     }
 
     public static function getMenuName()
     {
-        return 'MailBridge';
+        return 'MailTech';
     }
 
     public static function getIcon()

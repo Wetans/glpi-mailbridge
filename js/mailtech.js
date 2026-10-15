@@ -1,13 +1,13 @@
 /*
- * MailBridge - comportamento das telas do plugin.
- * Carregado só nas telas do MailBridge. Usa o jQuery que o GLPI já carrega e
+ * MailTech - comportamento das telas do plugin.
+ * Carregado só nas telas do MailTech. Usa o jQuery que o GLPI já carrega e
  * nenhuma outra biblioteca. Todo texto vindo do servidor entra na página
  * como texto (nunca como HTML).
  */
 (function ($) {
    'use strict';
 
-   var root = document.getElementById('mailbridge');
+   var root = document.getElementById('mailtech');
    if (!root) {
       return;
    }
@@ -356,7 +356,7 @@
       runInto(target, this.querySelector('button[type=submit]'), $(this).serialize());
    });
 
-   // Chaves liga/desliga que gravam na hora (regras, avisos nativos, avisos do MailBridge).
+   // Chaves liga/desliga que gravam na hora (regras, avisos nativos, avisos do MailTech).
    $(root).on('change', 'input.tm-toggle', function () {
       var input = this;
       var on = input.checked;

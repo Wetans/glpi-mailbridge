@@ -1,5 +1,5 @@
-{% extends '@mailbridge/layout.html.twig' %}
-{% import '@mailbridge/macros.html.twig' as f %}
+{% extends '@mailtech/layout.html.twig' %}
+{% import '@mailtech/macros.html.twig' as f %}
 
 {% block content %}
    {# ---------- Rotina automática ---------- #}
@@ -16,11 +16,11 @@
                <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
                {% if routine_off %}
                   <button type="submit" name="action" value="queue_enable_routine" class="btn btn-sm btn-primary">
-                     <i class="ti ti-player-play" aria-hidden="true"></i> {{ __('Reativar a rotina', 'mailbridge') }}
+                     <i class="ti ti-player-play" aria-hidden="true"></i> {{ __('Reativar a rotina', 'mailtech') }}
                   </button>
                {% endif %}
                <button type="submit" name="action" value="queue_run" class="btn btn-sm btn-outline-secondary">
-                  <i class="ti ti-bolt" aria-hidden="true"></i> {{ __('Processar a fila agora', 'mailbridge') }}
+                  <i class="ti ti-bolt" aria-hidden="true"></i> {{ __('Processar a fila agora', 'mailtech') }}
                </button>
             </form>
          {% endif %}
@@ -28,14 +28,14 @@
    {% endif %}
    {% if technical %}
       <details class="mb-3">
-         <summary>{{ __('Detalhe técnico', 'mailbridge') }}</summary>
+         <summary>{{ __('Detalhe técnico', 'mailtech') }}</summary>
          <code class="tm-break">{{ technical }}</code>
       </details>
    {% endif %}
 
    <div class="card mb-3">
       <div class="card-header d-flex flex-wrap gap-2">
-         <ul class="nav nav-pills tm-nav flex-fill" aria-label="{{ __('Filtrar por situação', 'mailbridge') }}">
+         <ul class="nav nav-pills tm-nav flex-fill" aria-label="{{ __('Filtrar por situação', 'mailtech') }}">
             {% for item in filters %}
                <li class="nav-item">
                   <a class="nav-link{{ item.current ? ' active' }}" href="{{ item.url }}"{% if item.current %} aria-current="true"{% endif %}>
@@ -50,15 +50,15 @@
          <form method="get" action="{{ search_url }}" class="d-flex flex-wrap align-items-center gap-2" role="search">
             <input type="hidden" name="section" value="queue">
             {% if filter != 'all' %}<input type="hidden" name="filter" value="{{ filter }}">{% endif %}
-            <label class="visually-hidden" for="tm_q">{{ __('Procurar por destinatário ou assunto', 'mailbridge') }}</label>
+            <label class="visually-hidden" for="tm_q">{{ __('Procurar por destinatário ou assunto', 'mailtech') }}</label>
             <input type="search" class="form-control w-auto flex-fill" id="tm_q" name="q" value="{{ q }}"
-                   placeholder="{{ __('Procurar por destinatário ou assunto', 'mailbridge') }}">
+                   placeholder="{{ __('Procurar por destinatário ou assunto', 'mailtech') }}">
             <label class="form-check m-0">
                <input class="form-check-input" type="checkbox" name="only" value="1"{{ only ? ' checked' }}>
-               <span class="form-check-label">{{ __('Só os do MailBridge', 'mailbridge') }}</span>
+               <span class="form-check-label">{{ __('Só os do MailTech', 'mailtech') }}</span>
             </label>
-            <button type="submit" class="btn btn-outline-secondary"><i class="ti ti-search" aria-hidden="true"></i> {{ __('Procurar', 'mailbridge') }}</button>
-            {% if q or only %}<a class="btn btn-outline-secondary" href="{{ clear_url }}">{{ __('Limpar busca', 'mailbridge') }}</a>{% endif %}
+            <button type="submit" class="btn btn-outline-secondary"><i class="ti ti-search" aria-hidden="true"></i> {{ __('Procurar', 'mailtech') }}</button>
+            {% if q or only %}<a class="btn btn-outline-secondary" href="{{ clear_url }}">{{ __('Limpar busca', 'mailtech') }}</a>{% endif %}
          </form>
       </div>
 
@@ -77,20 +77,20 @@
 
             <div class="tm-table-wrap">
                <table class="table table-vcenter tm-table mb-0">
-                  <caption class="visually-hidden">{{ __('E-mails da fila e do histórico', 'mailbridge') }}</caption>
+                  <caption class="visually-hidden">{{ __('E-mails da fila e do histórico', 'mailtech') }}</caption>
                   <thead>
                      <tr>
                         {% if tm.can.queue %}
                            <th scope="col" style="width:1%">
                               <input class="form-check-input" type="checkbox" id="tm-check-all"
-                                     aria-label="{{ __('Marcar todos desta página', 'mailbridge') }}">
+                                     aria-label="{{ __('Marcar todos desta página', 'mailtech') }}">
                            </th>
                         {% endif %}
-                        <th scope="col" class="tm-col-state">{{ __('Situação', 'mailbridge') }}</th>
-                        <th scope="col" class="tm-col-to">{{ __('Para', 'mailbridge') }}</th>
-                        <th scope="col" class="tm-col-subject">{{ __('Assunto', 'mailbridge') }}</th>
-                        <th scope="col" class="tm-hide-xs">{{ __('Origem', 'mailbridge') }}</th>
-                        {% if tm.can.queue %}<th scope="col"><span class="visually-hidden">{{ __('Ações', 'mailbridge') }}</span></th>{% endif %}
+                        <th scope="col" class="tm-col-state">{{ __('Situação', 'mailtech') }}</th>
+                        <th scope="col" class="tm-col-to">{{ __('Para', 'mailtech') }}</th>
+                        <th scope="col" class="tm-col-subject">{{ __('Assunto', 'mailtech') }}</th>
+                        <th scope="col" class="tm-hide-xs">{{ __('Origem', 'mailtech') }}</th>
+                        {% if tm.can.queue %}<th scope="col"><span class="visually-hidden">{{ __('Ações', 'mailtech') }}</span></th>{% endif %}
                      </tr>
                   </thead>
                   <tbody>
@@ -99,7 +99,7 @@
                            {% if tm.can.queue %}
                               <td>
                                  <input class="form-check-input" type="checkbox" name="ids[]" value="{{ row.id }}"
-                                        aria-label="{{ __('Marcar o e-mail para %s', 'mailbridge')|format(row.recipient) }}">
+                                        aria-label="{{ __('Marcar o e-mail para %s', 'mailtech')|format(row.recipient) }}">
                               </td>
                            {% endif %}
                            <td>
@@ -111,22 +111,22 @@
                            </td>
                            <td class="tm-break">{{ row.recipient }}</td>
                            <td class="tm-break">
-                              <a href="{{ row.detail_url }}">{{ row.subject ?: __('(sem assunto)', 'mailbridge') }}</a>
+                              <a href="{{ row.detail_url }}">{{ row.subject ?: __('(sem assunto)', 'mailtech') }}</a>
                            </td>
                            <td class="tm-hide-xs">{{ row.event_label }}</td>
                            {% if tm.can.queue %}
                               <td class="text-end">
                                  <div class="btn-list justify-content-end flex-nowrap">
                                     <button type="submit" name="row" value="resend:{{ row.id }}" class="btn btn-sm btn-outline-secondary"
-                                            {%- if row.state == 'sent' %} data-tm-confirm="{{ __('Este e-mail já foi enviado. Enviar uma cópia de novo?', 'mailbridge') }}"{% endif %}
-                                            aria-label="{{ __('Reenviar o e-mail para %s', 'mailbridge')|format(row.recipient) }}">
-                                       <i class="ti ti-send" aria-hidden="true"></i> {{ row.state == 'pending' ? __('Enviar agora', 'mailbridge') : __('Reenviar', 'mailbridge') }}
+                                            {%- if row.state == 'sent' %} data-tm-confirm="{{ __('Este e-mail já foi enviado. Enviar uma cópia de novo?', 'mailtech') }}"{% endif %}
+                                            aria-label="{{ __('Reenviar o e-mail para %s', 'mailtech')|format(row.recipient) }}">
+                                       <i class="ti ti-send" aria-hidden="true"></i> {{ row.state == 'pending' ? __('Enviar agora', 'mailtech') : __('Reenviar', 'mailtech') }}
                                     </button>
                                     {% if row.can_cancel %}
                                        <button type="submit" name="row" value="cancel:{{ row.id }}" class="btn btn-sm btn-outline-secondary"
-                                               data-tm-confirm="{{ __('Cancelar este e-mail? Ele sai da fila e não será enviado.', 'mailbridge') }}"
-                                               aria-label="{{ __('Cancelar o e-mail para %s', 'mailbridge')|format(row.recipient) }}">
-                                          {{ __('Cancelar', 'mailbridge') }}
+                                               data-tm-confirm="{{ __('Cancelar este e-mail? Ele sai da fila e não será enviado.', 'mailtech') }}"
+                                               aria-label="{{ __('Cancelar o e-mail para %s', 'mailtech')|format(row.recipient) }}">
+                                          {{ __('Cancelar', 'mailtech') }}
                                        </button>
                                     {% endif %}
                                  </div>
@@ -140,18 +140,18 @@
 
             <div class="card-footer d-flex flex-wrap align-items-center gap-2">
                {% if tm.can.queue %}
-                  <label class="visually-hidden" for="tm_do">{{ __('O que fazer com os marcados', 'mailbridge') }}</label>
+                  <label class="visually-hidden" for="tm_do">{{ __('O que fazer com os marcados', 'mailtech') }}</label>
                   <select class="form-select form-select-sm w-auto" id="tm_do" name="do">
-                     <option value="resend">{{ __('Reenviar os marcados', 'mailbridge') }}</option>
-                     <option value="cancel">{{ __('Cancelar os marcados', 'mailbridge') }}</option>
-                     <option value="delete">{{ __('Apagar os marcados do histórico', 'mailbridge') }}</option>
+                     <option value="resend">{{ __('Reenviar os marcados', 'mailtech') }}</option>
+                     <option value="cancel">{{ __('Cancelar os marcados', 'mailtech') }}</option>
+                     <option value="delete">{{ __('Apagar os marcados do histórico', 'mailtech') }}</option>
                   </select>
                   <button type="submit" class="btn btn-sm btn-outline-secondary" data-tm-needs-selection="1"
-                          data-tm-confirm="{{ __('Aplicar aos e-mails marcados? Reenviar manda de novo; cancelar tira da fila; apagar remove do histórico e não pode ser desfeito.', 'mailbridge') }}">
-                     {{ __('Aplicar', 'mailbridge') }}
+                          data-tm-confirm="{{ __('Aplicar aos e-mails marcados? Reenviar manda de novo; cancelar tira da fila; apagar remove do histórico e não pode ser desfeito.', 'mailtech') }}">
+                     {{ __('Aplicar', 'mailtech') }}
                   </button>
                {% endif %}
-               <div class="flex-fill">{{ f.pager(pager, __('Páginas da fila', 'mailbridge')) }}</div>
+               <div class="flex-fill">{{ f.pager(pager, __('Páginas da fila', 'mailtech')) }}</div>
             </div>
          </form>
       {% endif %}
@@ -159,7 +159,7 @@
 
    {# ---------- Regras da fila ---------- #}
    <div class="card" id="tm-routine">
-      <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Regras da fila', 'mailbridge') }}</h2></div>
+      <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Regras da fila', 'mailtech') }}</h2></div>
       <div class="card-body">
          <form method="post" action="{{ tm.action_url }}" data-track-changes="true" novalidate>
             <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
@@ -167,33 +167,33 @@
             {{ f.error_summary(errors) }}
             <div class="row g-3">
                <div class="col-12 col-sm-6 col-xl-3">
-                  {{ f.input('max_retries', __('Novas tentativas quando falhar', 'mailbridge'), policy.max_retries, {
+                  {{ f.input('max_retries', __('Novas tentativas quando falhar', 'mailtech'), policy.max_retries, {
                      type: 'number', errors: errors, required: true, validate: 'int', min: 0, max: 20, msg: hints.max_retries, msg_required: hints.max_retries, class: 'mb-0',
-                     help: __('Quantas vezes o GLPI tenta de novo antes de desistir. Padrão: 5.', 'mailbridge')
+                     help: __('Quantas vezes o GLPI tenta de novo antes de desistir. Padrão: 5.', 'mailtech')
                   }) }}
                </div>
                <div class="col-12 col-sm-6 col-xl-3">
-                  {{ f.input('retry_minutes', __('Minutos entre as tentativas', 'mailbridge'), policy.retry_minutes, {
+                  {{ f.input('retry_minutes', __('Minutos entre as tentativas', 'mailtech'), policy.retry_minutes, {
                      type: 'number', errors: errors, required: true, validate: 'int', min: 0, max: 1440, msg: hints.retry_minutes, msg_required: hints.retry_minutes, class: 'mb-0',
-                     help: __('Tempo de espera antes de tentar de novo. Padrão: 5.', 'mailbridge')
+                     help: __('Tempo de espera antes de tentar de novo. Padrão: 5.', 'mailtech')
                   }) }}
                </div>
                <div class="col-12 col-sm-6 col-xl-3">
-                  {{ f.input('keep_days', __('Dias para guardar o histórico', 'mailbridge'), policy.keep_days, {
+                  {{ f.input('keep_days', __('Dias para guardar o histórico', 'mailtech'), policy.keep_days, {
                      type: 'number', errors: errors, required: true, validate: 'int', min: 0, max: 3650, msg: hints.keep_days, msg_required: hints.keep_days, class: 'mb-0',
-                     help: __('Depois disso, e-mails enviados ou cancelados são apagados sozinhos. 0 = nunca apagar. Padrão: 30.', 'mailbridge')
+                     help: __('Depois disso, e-mails enviados ou cancelados são apagados sozinhos. 0 = nunca apagar. Padrão: 30.', 'mailtech')
                   }) }}
                </div>
                <div class="col-12 col-sm-6 col-xl-3">
-                  {{ f.input('batch', __('E-mails por rodada', 'mailbridge'), policy.batch, {
+                  {{ f.input('batch', __('E-mails por rodada', 'mailtech'), policy.batch, {
                      type: 'number', errors: errors, required: true, validate: 'int', min: 1, max: 500, msg: hints.batch, msg_required: hints.batch, class: 'mb-0',
-                     help: __('Quantos e-mails saem cada vez que a rotina roda. Padrão: 50.', 'mailbridge')
+                     help: __('Quantos e-mails saem cada vez que a rotina roda. Padrão: 50.', 'mailtech')
                   }) }}
                </div>
             </div>
             {% if tm.can.manage %}
                <button type="submit" class="btn btn-primary mt-3">
-                  <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ __('Salvar regras da fila', 'mailbridge') }}
+                  <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ __('Salvar regras da fila', 'mailtech') }}
                </button>
             {% endif %}
          </form>
@@ -205,13 +205,13 @@
                   <input type="hidden" name="_glpi_csrf_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="action" value="queue_cancel_all">
                   <button type="submit" class="btn btn-outline-danger"{{ pending == 0 ? ' disabled' }}
-                          data-tm-confirm="{{ __('Esvaziar a fila? Os %d e-mails que estão esperando serão cancelados e não serão enviados.', 'mailbridge')|format(pending) }}">
-                     <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Esvaziar a fila', 'mailbridge') }}
+                          data-tm-confirm="{{ __('Esvaziar a fila? Os %d e-mails que estão esperando serão cancelados e não serão enviados.', 'mailtech')|format(pending) }}">
+                     <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Esvaziar a fila', 'mailtech') }}
                   </button>
                </form>
             {% endif %}
             {% if routine_url %}
-               <a class="btn btn-outline-secondary" href="{{ routine_url }}">{{ __('Ajustar horário e frequência da rotina (tela nativa)', 'mailbridge') }}</a>
+               <a class="btn btn-outline-secondary" href="{{ routine_url }}">{{ __('Ajustar horário e frequência da rotina (tela nativa)', 'mailtech') }}</a>
             {% endif %}
          </div>
       </div>

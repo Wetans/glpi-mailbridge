@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use QueuedNotification;
 
@@ -36,14 +36,14 @@ final class Facts
         $facts = [
             'notifications_on' => !empty($CFG_GLPI['use_notifications']),
             'mailing_on'       => !empty($CFG_GLPI['notifications_mailing']),
-            'mailbridge_on'      => (int) $settings['enabled'] === 1,
+            'mailtech_on'      => (int) $settings['enabled'] === 1,
             'transport'        => $sending['transport'],
             'smtp_host'        => $sending['smtp_host'],
             'smtp_port'        => $sending['smtp_port'],
             'security'         => $sending['security'],
             'mail_function'    => $sending['mail_function'],
             'oauth_ready'      => $sending['oauth_ready'],
-            'legacy_active'    => LegacyImport::legacyActive(),
+            'legacy_active'    => LegacyImport::activeName() ?? '',
             'login_without_password' => $sending['transport'] === 'smtp' && $sending['smtp_username'] !== '' && !$sending['has_password'],
             'provider'         => $sending['transport'] === 'mail' ? '' : Provider::name($sending['smtp_host']),
             'has_login'        => $sending['smtp_username'] !== '',

@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Exporta e importa a configuração (ajustes, regras, modelos e, se pedido, o
@@ -9,9 +9,6 @@ namespace GlpiPlugin\Mailbridge;
 final class Porter
 {
     public const FORMAT = 1;
-
-    /** Identificação gravada no arquivo; exportações feitas pelo nome antigo do plugin continuam valendo. */
-    private const PLUGIN_IDS = ['mailbridge', LegacyImport::KEY];
 
     /** Chaves do envio do GLPI que podem viajar no arquivo (sem segredos). */
     private const SENDING_KEYS = [
@@ -58,9 +55,9 @@ final class Porter
         }
 
         return [
-            'plugin'      => 'mailbridge',
+            'plugin'      => 'mailtech',
             'format'      => self::FORMAT,
-            'version'     => PLUGIN_MAILBRIDGE_VERSION,
+            'version'     => PLUGIN_MAILTECH_VERSION,
             'exported_at' => date('c'),
             'note'        => 'Sem senhas: a senha do servidor de envio precisa ser digitada de novo depois de importar.',
             'settings'    => $settings,
@@ -78,17 +75,18 @@ final class Porter
     public static function parse(string $json): array
     {
         if (strlen($json) > 2 * 1024 * 1024) {
-            return [null, __('Arquivo grande demais: o limite é 2 MB.', 'mailbridge')];
+            return [null, __('Arquivo grande demais: o limite é 2 MB.', 'mailtech')];
         }
         $data = json_decode($json, true);
         if (!is_array($data)) {
-            return [null, __('Não consegui ler o arquivo: ele precisa ser o arquivo .json gerado pelo botão "Exportar".', 'mailbridge')];
+            return [null, __('Não consegui ler o arquivo: ele precisa ser o arquivo .json gerado pelo botão "Exportar".', 'mailtech')];
         }
-        if (!in_array($data['plugin'] ?? '', self::PLUGIN_IDS, true)) {
-            return [null, __('Este arquivo não é uma exportação do MailBridge.', 'mailbridge')];
+        // Identificação gravada no arquivo; exportações feitas com um nome anterior do plugin continuam valendo.
+        if (!in_array($data['plugin'] ?? '', array_merge(['mailtech'], LegacyImport::keys()), true)) {
+            return [null, __('Este arquivo não é uma exportação do MailTech.', 'mailtech')];
         }
         if ((int) ($data['format'] ?? 0) < 1 || (int) $data['format'] > self::FORMAT) {
-            return [null, __('Este arquivo foi gerado por uma versão mais nova do MailBridge. Atualize o plugin antes de importar.', 'mailbridge')];
+            return [null, __('Este arquivo foi gerado por uma versão mais nova do MailTech. Atualize o plugin antes de importar.', 'mailtech')];
         }
 
         $out = ['settings' => [], 'policy' => [], 'sending' => [], 'rules' => []];
@@ -149,7 +147,7 @@ final class Porter
         $report = ['created' => 0, 'updated' => 0, 'skipped' => [], 'sending' => false];
 
         // Ajustes do plugin.
-        [$settings, $errors] = Validation::mailbridge($data['settings']);
+        [$settings, $errors] = Validation::mailtech($data['settings']);
         foreach ($errors as $message) {
             $report['skipped'][] = $message;
         }
@@ -167,7 +165,7 @@ final class Porter
         if ($with_sending && $data['sending']) {
             [$sending, $errors] = Validation::sending($data['sending']);
             if ($errors) {
-                $report['skipped'][] = __('A configuração do servidor de envio do arquivo tem erros e não foi importada.', 'mailbridge');
+                $report['skipped'][] = __('A configuração do servidor de envio do arquivo tem erros e não foi importada.', 'mailtech');
             } else {
                 unset($sending['smtp_passwd']);
                 Sending::save($sending);
@@ -188,7 +186,7 @@ final class Porter
             [$template, $template_errors] = Validation::template($rule, $known);
             if ($errors || $template_errors) {
                 $report['skipped'][] = sprintf(
-                    __('Regra "%s" ignorada: %s', 'mailbridge'),
+                    __('Regra "%s" ignorada: %s', 'mailtech'),
                     $rule['name'],
                     (string) reset($errors) ?: (string) reset($template_errors)
                 );

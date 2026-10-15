@@ -1,32 +1,32 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Glpi\Application\View\TemplateRenderer;
 use Html;
 use Plugin;
 
 /**
- * Moldura da tela única do MailBridge: seções, endereços e dados comuns.
+ * Moldura da tela única do MailTech: seções, endereços e dados comuns.
  * O conteúdo de cada seção fica nas classes de src/Screen.
  */
 final class Page
 {
     public const SECTIONS = ['overview', 'sending', 'events', 'templates', 'queue', 'diagnostics'];
 
-    private const FLASH = 'plugin_mailbridge_flash';
+    private const FLASH = 'plugin_mailtech_flash';
 
     /**
      * Caminho da tela a partir da raiz do GLPI (usado no menu).
      */
     public static function path(): string
     {
-        return '/' . Plugin::getWebDir('mailbridge', false) . '/front/index.php';
+        return '/' . Plugin::getWebDir('mailtech', false) . '/front/index.php';
     }
 
     public static function webDir(): string
     {
-        return (string) Plugin::getWebDir('mailbridge');
+        return (string) Plugin::getWebDir('mailtech');
     }
 
     /**
@@ -51,12 +51,12 @@ final class Page
     public static function sections(): array
     {
         return [
-            'overview'    => ['label' => __('Visão geral', 'mailbridge'), 'icon' => 'ti ti-layout-dashboard'],
-            'sending'     => ['label' => __('Envio', 'mailbridge'), 'icon' => 'ti ti-send'],
-            'events'      => ['label' => __('Eventos e destinatários', 'mailbridge'), 'icon' => 'ti ti-users'],
-            'templates'   => ['label' => __('Modelos', 'mailbridge'), 'icon' => 'ti ti-template'],
-            'queue'       => ['label' => __('Fila e histórico', 'mailbridge'), 'icon' => 'ti ti-inbox'],
-            'diagnostics' => ['label' => __('Diagnóstico', 'mailbridge'), 'icon' => 'ti ti-stethoscope'],
+            'overview'    => ['label' => __('Visão geral', 'mailtech'), 'icon' => 'ti ti-layout-dashboard'],
+            'sending'     => ['label' => __('Envio', 'mailtech'), 'icon' => 'ti ti-send'],
+            'events'      => ['label' => __('Eventos e destinatários', 'mailtech'), 'icon' => 'ti ti-users'],
+            'templates'   => ['label' => __('Modelos', 'mailtech'), 'icon' => 'ti ti-template'],
+            'queue'       => ['label' => __('Fila e histórico', 'mailtech'), 'icon' => 'ti ti-inbox'],
+            'diagnostics' => ['label' => __('Diagnóstico', 'mailtech'), 'icon' => 'ti ti-stethoscope'],
         ];
     }
 
@@ -84,8 +84,8 @@ final class Page
         }
         [$template, $data] = $screens[$section]::build($get);
 
-        Html::header('MailBridge', $_SERVER['PHP_SELF'], 'config', Menu::class);
-        TemplateRenderer::getInstance()->display('@mailbridge/' . $template, self::context($section) + $data);
+        Html::header('MailTech', $_SERVER['PHP_SELF'], 'config', Menu::class);
+        TemplateRenderer::getInstance()->display('@mailtech/' . $template, self::context($section) + $data);
         Html::footer();
     }
 
@@ -96,9 +96,9 @@ final class Page
     {
         $health = Facts::health();
         $labels = [
-            Health::ACTIVE    => __('Ativo', 'mailbridge'),
-            Health::INACTIVE  => __('Inativo', 'mailbridge'),
-            Health::ATTENTION => __('Precisa de atenção', 'mailbridge'),
+            Health::ACTIVE    => __('Ativo', 'mailtech'),
+            Health::INACTIVE  => __('Inativo', 'mailtech'),
+            Health::ATTENTION => __('Precisa de atenção', 'mailtech'),
         ];
         $tones = [
             Health::ACTIVE    => 'success',
@@ -119,7 +119,7 @@ final class Page
                 'web_dir'      => self::webDir(),
                 'action_url'   => self::webDir() . '/front/action.php',
                 'ajax_url'     => self::webDir() . '/ajax/action.php',
-                'version'      => PLUGIN_MAILBRIDGE_VERSION,
+                'version'      => PLUGIN_MAILTECH_VERSION,
                 'asset_v'      => self::assetVersion(),
                 'status'       => $health['status'],
                 'status_label' => $labels[$health['status']],
@@ -132,18 +132,18 @@ final class Page
                 ],
                 'js'           => [
                     'ajax'          => self::webDir() . '/ajax/action.php',
-                    'working'       => __('Aguarde…', 'mailbridge'),
-                    'network_error' => __('Não foi possível concluir a ação. Recarregue a página e tente de novo.', 'mailbridge'),
-                    'required'      => __('Preencha este campo.', 'mailbridge'),
-                    'ok'            => __('Feito', 'mailbridge'),
-                    'failed'        => __('Falhou', 'mailbridge'),
-                    'skipped'       => __('Não se aplica', 'mailbridge'),
-                    'what_to_try'   => __('O que tentar:', 'mailbridge'),
-                    'technical'     => __('Detalhe técnico', 'mailbridge'),
-                    'select_some'   => __('Marque pelo menos um e-mail da lista.', 'mailbridge'),
-                    'preview_wait'  => __('Atualizando a prévia…', 'mailbridge'),
-                    'unsaved_title' => __('Você alterou a configuração e ainda não salvou.', 'mailbridge'),
-                    'unsaved_tip'   => __('Os testes usam a configuração salva: clique em Salvar e teste de novo.', 'mailbridge'),
+                    'working'       => __('Aguarde…', 'mailtech'),
+                    'network_error' => __('Não foi possível concluir a ação. Recarregue a página e tente de novo.', 'mailtech'),
+                    'required'      => __('Preencha este campo.', 'mailtech'),
+                    'ok'            => __('Feito', 'mailtech'),
+                    'failed'        => __('Falhou', 'mailtech'),
+                    'skipped'       => __('Não se aplica', 'mailtech'),
+                    'what_to_try'   => __('O que tentar:', 'mailtech'),
+                    'technical'     => __('Detalhe técnico', 'mailtech'),
+                    'select_some'   => __('Marque pelo menos um e-mail da lista.', 'mailtech'),
+                    'preview_wait'  => __('Atualizando a prévia…', 'mailtech'),
+                    'unsaved_title' => __('Você alterou a configuração e ainda não salvou.', 'mailtech'),
+                    'unsaved_tip'   => __('Os testes usam a configuração salva: clique em Salvar e teste de novo.', 'mailtech'),
                 ],
             ],
         ];
@@ -155,10 +155,10 @@ final class Page
      */
     private static function assetVersion(): string
     {
-        $dir   = Plugin::getPhpDir('mailbridge');
-        $stamp = max((int) @filemtime($dir . '/css/mailbridge.css'), (int) @filemtime($dir . '/js/mailbridge.js'));
+        $dir   = Plugin::getPhpDir('mailtech');
+        $stamp = max((int) @filemtime($dir . '/css/mailtech.css'), (int) @filemtime($dir . '/js/mailtech.js'));
 
-        return PLUGIN_MAILBRIDGE_VERSION . '-' . $stamp;
+        return PLUGIN_MAILTECH_VERSION . '-' . $stamp;
     }
 
     // ------------------------------------------------------------------

@@ -1,16 +1,16 @@
 <?php
 
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Rights;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Rights;
 
-// Endereço antigo (Techmail 1.0.0): o formulário da regra agora fica em MailBridge > Eventos e destinatários.
+// Endereço antigo (Techmail 1.0.0): o formulário da regra agora fica em MailTech > Eventos e destinatários.
 if (!defined('GLPI_ROOT')) {
     include('../../../inc/includes.php');
 }
 
-// Com o MailBridge desativado as classes dele não carregam: mostra "não encontrado" do GLPI em vez de um erro.
-if (!Plugin::isPluginActive('mailbridge')) {
-    Html::displayNotFoundError('MailBridge is not active');
+// Com o MailTech desativado as classes dele não carregam: mostra "não encontrado" do GLPI em vez de um erro.
+if (!Plugin::isPluginActive('mailtech')) {
+    Html::displayNotFoundError('MailTech is not active');
 }
 
 Rights::check(Rights::VIEW);

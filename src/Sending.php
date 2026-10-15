@@ -1,12 +1,12 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Config as CoreConfig;
 
 /**
  * Lê e grava a configuração de envio de e-mails DO GLPI (servidor, segurança,
- * remetentes, assinatura). O MailBridge não tem configuração de servidor
+ * remetentes, assinatura). O MailTech não tem configuração de servidor
  * própria: esta classe só dá uma tela mais simples para a que já existe em
  * Configurar > Notificações.
  *

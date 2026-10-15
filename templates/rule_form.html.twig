@@ -1,9 +1,9 @@
-{% extends '@mailbridge/layout.html.twig' %}
-{% import '@mailbridge/macros.html.twig' as f %}
+{% extends '@mailtech/layout.html.twig' %}
+{% import '@mailtech/macros.html.twig' as f %}
 
 {% block content %}
    <p class="mb-3">
-      <a href="{{ back_url }}"><i class="ti ti-arrow-left" aria-hidden="true"></i> {{ __('Voltar para as regras', 'mailbridge') }}</a>
+      <a href="{{ back_url }}"><i class="ti ti-arrow-left" aria-hidden="true"></i> {{ __('Voltar para as regras', 'mailtech') }}</a>
    </p>
 
    <form method="post" action="{{ tm.action_url }}" data-track-changes="true" novalidate>
@@ -15,59 +15,59 @@
 
       <div class="card mb-3">
          <div class="card-header">
-            <h2 class="card-title h4 m-0">{{ is_new ? __('Nova regra de aviso', 'mailbridge') : __('Editar regra de aviso', 'mailbridge') }}</h2>
+            <h2 class="card-title h4 m-0">{{ is_new ? __('Nova regra de aviso', 'mailtech') : __('Editar regra de aviso', 'mailtech') }}</h2>
          </div>
          <div class="card-body">
             <div class="row g-3">
                <div class="col-12 col-md-6">
-                  {{ f.select('event', __('Quando acontecer', 'mailbridge'), v.event, events, {
+                  {{ f.select('event', __('Quando acontecer', 'mailtech'), v.event, events, {
                      errors: errors, class: 'mb-0',
-                     help: __('A mudança automática de "Novo" para "Em atendimento (atribuído)" não conta como mudança de status: para isso use "Chamado atribuído".', 'mailbridge')
+                     help: __('A mudança automática de "Novo" para "Em atendimento (atribuído)" não conta como mudança de status: para isso use "Chamado atribuído".', 'mailtech')
                   }) }}
                </div>
                <div class="col-12 col-md-6">
-                  {{ f.input('name', __('Nome da regra', 'mailbridge'), v.name, {
+                  {{ f.input('name', __('Nome da regra', 'mailtech'), v.name, {
                      errors: errors, maxlength: 255, class: 'mb-0',
-                     placeholder: __('Avisar o técnico quando receber um chamado', 'mailbridge'),
-                     help: __('Só para você reconhecer a regra na lista. Em branco, usa o nome do acontecimento.', 'mailbridge')
+                     placeholder: __('Avisar o técnico quando receber um chamado', 'mailtech'),
+                     help: __('Só para você reconhecer a regra na lista. Em branco, usa o nome do acontecimento.', 'mailtech')
                   }) }}
                </div>
             </div>
             <div class="mt-3">
-               {{ f.switch('is_active', __('Regra ligada', 'mailbridge'), v.is_active, {
-                  class: 'mb-0', help: __('Desligada, a regra fica guardada mas não gera e-mails.', 'mailbridge')
+               {{ f.switch('is_active', __('Regra ligada', 'mailtech'), v.is_active, {
+                  class: 'mb-0', help: __('Desligada, a regra fica guardada mas não gera e-mails.', 'mailtech')
                }) }}
             </div>
          </div>
       </div>
 
       <div class="card mb-3">
-         <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Quem recebe', 'mailbridge') }}</h2></div>
+         <div class="card-header"><h2 class="card-title h4 m-0">{{ __('Quem recebe', 'mailtech') }}</h2></div>
          <div class="card-body">
             <fieldset class="mb-3{{ errors.recipients is defined ? ' border border-danger rounded p-2' }}">
-               <legend class="form-label">{{ __('Pessoas ligadas ao chamado', 'mailbridge') }}</legend>
+               <legend class="form-label">{{ __('Pessoas ligadas ao chamado', 'mailtech') }}</legend>
                {% if errors.recipients is defined %}<p class="text-danger" role="alert">{{ errors.recipients }}</p>{% endif %}
-               {{ f.switch('notify_assigned_users', __('Técnicos atribuídos ao chamado', 'mailbridge'), v.notify_assigned_users, {
-                  help: __('No acontecimento "Chamado atribuído", recebe só quem acabou de ser atribuído.', 'mailbridge')
+               {{ f.switch('notify_assigned_users', __('Técnicos atribuídos ao chamado', 'mailtech'), v.notify_assigned_users, {
+                  help: __('No acontecimento "Chamado atribuído", recebe só quem acabou de ser atribuído.', 'mailtech')
                }) }}
-               {{ f.switch('notify_assigned_groups', __('Membros dos grupos técnicos atribuídos', 'mailbridge'), v.notify_assigned_groups, {
-                  help: __('Cada pessoa do grupo recebe o próprio e-mail.', 'mailbridge')
+               {{ f.switch('notify_assigned_groups', __('Membros dos grupos técnicos atribuídos', 'mailtech'), v.notify_assigned_groups, {
+                  help: __('Cada pessoa do grupo recebe o próprio e-mail.', 'mailtech')
                }) }}
-               {{ f.switch('notify_requesters', __('Solicitantes do chamado', 'mailbridge'), v.notify_requesters, {
-                  help: __('Quem abriu o chamado. Use com cuidado: o GLPI já tem avisos nativos para solicitantes.', 'mailbridge')
+               {{ f.switch('notify_requesters', __('Solicitantes do chamado', 'mailtech'), v.notify_requesters, {
+                  help: __('Quem abriu o chamado. Use com cuidado: o GLPI já tem avisos nativos para solicitantes.', 'mailtech')
                }) }}
-               {{ f.switch('notify_observers', __('Observadores do chamado', 'mailbridge'), v.notify_observers, {
-                  class: 'mb-0', help: __('Pessoas incluídas como observadoras no chamado.', 'mailbridge')
+               {{ f.switch('notify_observers', __('Observadores do chamado', 'mailtech'), v.notify_observers, {
+                  class: 'mb-0', help: __('Pessoas incluídas como observadoras no chamado.', 'mailtech')
                }) }}
             </fieldset>
 
-            {{ f.textarea('extra_emails', __('E-mails fixos (opcional)', 'mailbridge'), v.extra_emails, {
+            {{ f.textarea('extra_emails', __('E-mails fixos (opcional)', 'mailtech'), v.extra_emails, {
                errors: errors, rows: 3, placeholder: "coordenacao@suaempresa.com.br",
-               help: __('Um por linha. Sempre recebem este aviso, mesmo sem estar no chamado.', 'mailbridge')
+               help: __('Um por linha. Sempre recebem este aviso, mesmo sem estar no chamado.', 'mailtech')
             }) }}
 
-            {{ f.switch('exclude_author', __('Não avisar quem executou a ação', 'mailbridge'), v.exclude_author, {
-               class: 'mb-0', help: __('Exemplo: o técnico que escreveu o acompanhamento não recebe o próprio aviso.', 'mailbridge')
+            {{ f.switch('exclude_author', __('Não avisar quem executou a ação', 'mailtech'), v.exclude_author, {
+               class: 'mb-0', help: __('Exemplo: o técnico que escreveu o acompanhamento não recebe o próprio aviso.', 'mailtech')
             }) }}
          </div>
       </div>
@@ -75,29 +75,29 @@
       <div class="card mb-3">
          <div class="card-body">
             <details class="tm-advanced"{{ has_filters ? ' open' }}>
-               <summary>{{ __('Opções avançadas: avisar só em alguns chamados', 'mailbridge') }}</summary>
-               <p class="tm-soft">{{ __('Sem filtros, a regra vale para todos os chamados.', 'mailbridge') }}</p>
+               <summary>{{ __('Opções avançadas: avisar só em alguns chamados', 'mailtech') }}</summary>
+               <p class="tm-soft">{{ __('Sem filtros, a regra vale para todos os chamados.', 'mailtech') }}</p>
                <div class="row g-3">
                   <div class="col-12 col-md-6">
                      <div class="tm-field">
-                        <label class="form-label" for="dropdown_filter_entities_idtm">{{ __('Entidade (inclui as que estão dentro dela)', 'mailbridge') }}</label>
+                        <label class="form-label" for="dropdown_filter_entities_idtm">{{ __('Entidade (inclui as que estão dentro dela)', 'mailtech') }}</label>
                         <div>{{ entity_dropdown|raw }}</div>
-                        <div class="form-text">{{ __('A entidade raiz equivale a "todas".', 'mailbridge') }}</div>
+                        <div class="form-text">{{ __('A entidade raiz equivale a "todas".', 'mailtech') }}</div>
                      </div>
                   </div>
                   <div class="col-12 col-md-6">
                      <div class="tm-field">
-                        <label class="form-label" for="dropdown_filter_itilcategories_idtm">{{ __('Categoria (inclui as que estão dentro dela)', 'mailbridge') }}</label>
+                        <label class="form-label" for="dropdown_filter_itilcategories_idtm">{{ __('Categoria (inclui as que estão dentro dela)', 'mailtech') }}</label>
                         <div>{{ category_dropdown|raw }}</div>
-                        <div class="form-text">{{ __('Em branco, qualquer categoria.', 'mailbridge') }}</div>
+                        <div class="form-text">{{ __('Em branco, qualquer categoria.', 'mailtech') }}</div>
                      </div>
                   </div>
                   <div class="col-12 col-md-6">
-                     {{ f.select('filter_type', __('Tipo do chamado', 'mailbridge'), v.filter_type, types, {class: 'mb-0'}) }}
+                     {{ f.select('filter_type', __('Tipo do chamado', 'mailtech'), v.filter_type, types, {class: 'mb-0'}) }}
                   </div>
                   <div class="col-12 col-md-6">
-                     {{ f.select('filter_min_priority', __('Prioridade mínima', 'mailbridge'), v.filter_min_priority, priorities, {
-                        class: 'mb-0', help: __('Avisa só quando a prioridade for esta ou maior.', 'mailbridge')
+                     {{ f.select('filter_min_priority', __('Prioridade mínima', 'mailtech'), v.filter_min_priority, priorities, {
+                        class: 'mb-0', help: __('Avisa só quando a prioridade for esta ou maior.', 'mailtech')
                      }) }}
                   </div>
                </div>
@@ -109,15 +109,15 @@
          <div class="card tm-savebar">
             <div class="card-body d-flex flex-wrap align-items-center gap-2 py-2">
                <button type="submit" class="btn btn-primary">
-                  <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ is_new ? __('Criar regra', 'mailbridge') : __('Salvar', 'mailbridge') }}
+                  <i class="ti ti-device-floppy" aria-hidden="true"></i> {{ is_new ? __('Criar regra', 'mailtech') : __('Salvar', 'mailtech') }}
                </button>
-               <a class="btn btn-outline-secondary" href="{{ back_url }}">{{ __('Cancelar', 'mailbridge') }}</a>
+               <a class="btn btn-outline-secondary" href="{{ back_url }}">{{ __('Cancelar', 'mailtech') }}</a>
                {% if template_url %}
                   <a class="btn btn-outline-secondary" href="{{ template_url }}">
-                     <i class="ti ti-template" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailbridge') }}
+                     <i class="ti ti-template" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailtech') }}
                   </a>
                {% endif %}
-               <span class="tm-soft" id="tm-dirty-note" hidden>{{ __('Há alterações não salvas.', 'mailbridge') }}</span>
+               <span class="tm-soft" id="tm-dirty-note" hidden>{{ __('Há alterações não salvas.', 'mailtech') }}</span>
             </div>
          </div>
       {% endif %}
@@ -129,8 +129,8 @@
          <input type="hidden" name="action" value="delete_rule">
          <input type="hidden" name="id" value="{{ id }}">
          <button type="submit" class="btn btn-outline-danger"
-                 data-tm-confirm="{{ __('Apagar esta regra? A mensagem dela e as traduções também são apagadas. Isso não pode ser desfeito.', 'mailbridge') }}">
-            <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Apagar regra', 'mailbridge') }}
+                 data-tm-confirm="{{ __('Apagar esta regra? A mensagem dela e as traduções também são apagadas. Isso não pode ser desfeito.', 'mailtech') }}">
+            <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Apagar regra', 'mailtech') }}
          </button>
       </form>
    {% endif %}

@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use CronTask;
 use QueuedNotification;
@@ -202,7 +202,7 @@ final class Queue
      *
      * @return array{rows:array<int,array>,total:int}
      */
-    public static function search(string $filter, string $text, bool $only_mailbridge, int $start, int $limit = self::PER_PAGE): array
+    public static function search(string $filter, string $text, bool $only_mailtech, int $start, int $limit = self::PER_PAGE): array
     {
         /** @var \DBmysql $DB */
         global $DB;
@@ -224,12 +224,13 @@ final class Queue
                 ],
             ];
         }
-        if ($only_mailbridge) {
-            // Inclui o que foi enviado quando o plugin ainda tinha o nome antigo.
-            $where[] = ['OR' => [
-                ['event' => ['LIKE', 'plugin\\_mailbridge\\_%']],
-                ['event' => ['LIKE', 'plugin\\_' . LegacyImport::KEY . '\\_%']],
-            ]];
+        if ($only_mailtech) {
+            // Inclui o que foi enviado quando o plugin tinha um nome anterior.
+            $own = [];
+            foreach (self::ownPrefixes() as $prefix) {
+                $own[] = ['event' => ['LIKE', addcslashes($prefix, '_') . '%']];
+            }
+            $where[] = ['OR' => $own];
         }
 
         $total = (int) countElementsInTable(QueuedNotification::getTable(), $where);
@@ -290,7 +291,7 @@ final class Queue
             'subject'       => Text::decode((string) ($row['name'] ?? '')),
             'event'         => (string) ($row['event'] ?? ''),
             'event_label'   => self::eventLabel((string) ($row['event'] ?? '')),
-            'is_mailbridge'   => self::ownEventCode((string) ($row['event'] ?? '')) !== null,
+            'is_mailtech'   => self::ownEventCode((string) ($row['event'] ?? '')) !== null,
             'itemtype'      => (string) ($row['itemtype'] ?? ''),
             'items_id'      => (int) ($row['items_id'] ?? 0),
             'tries'         => (int) ($row['sent_try'] ?? 0),
@@ -301,12 +302,28 @@ final class Queue
     }
 
     /**
+     * Começos do código do acontecimento dos e-mails gerados por este plugin,
+     * hoje e quando ele tinha um nome anterior.
+     *
+     * @return string[]
+     */
+    private static function ownPrefixes(): array
+    {
+        $prefixes = ['plugin_mailtech_'];
+        foreach (LegacyImport::keys() as $key) {
+            $prefixes[] = 'plugin_' . $key . '_';
+        }
+
+        return $prefixes;
+    }
+
+    /**
      * Código do acontecimento de um e-mail gerado por este plugin (hoje ou
-     * quando ele ainda tinha o nome antigo); null se o e-mail é de outra origem.
+     * quando ele tinha um nome anterior); null se o e-mail é de outra origem.
      */
     private static function ownEventCode(string $event): ?string
     {
-        foreach (['plugin_mailbridge_', 'plugin_' . LegacyImport::KEY . '_'] as $prefix) {
+        foreach (self::ownPrefixes() as $prefix) {
             if (strpos($event, $prefix) === 0) {
                 return substr($event, strlen($prefix));
             }
@@ -323,17 +340,17 @@ final class Queue
         $code = self::ownEventCode($event);
         if ($code !== null) {
             if ($code === 'test') {
-                return __('MailBridge: e-mail de teste', 'mailbridge');
+                return __('MailTech: e-mail de teste', 'mailtech');
             }
             $events = Rule::getEvents();
 
-            return sprintf(__('MailBridge: %s', 'mailbridge'), $events[$code] ?? $code);
+            return sprintf(__('MailTech: %s', 'mailtech'), $events[$code] ?? $code);
         }
         if ($event === '') {
-            return __('Aviso do GLPI', 'mailbridge');
+            return __('Aviso do GLPI', 'mailtech');
         }
 
-        return sprintf(__('Aviso do GLPI (%s)', 'mailbridge'), $event);
+        return sprintf(__('Aviso do GLPI (%s)', 'mailtech'), $event);
     }
 
     // ------------------------------------------------------------------
@@ -453,7 +470,7 @@ final class Queue
 
     /**
      * Retira da sessão as mensagens de erro que o GLPI acabou de empilhar (a
-     * tela do MailBridge mostra uma explicação melhor) e devolve o erro técnico.
+     * tela do MailTech mostra uma explicação melhor) e devolve o erro técnico.
      */
     private static function takeNewErrors(int $before): string
     {
