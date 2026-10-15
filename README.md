@@ -38,7 +38,7 @@ MailTech 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0), and wa
 ### 4. Installation
 
 1. Copy the `mailtech` folder into GLPI's `plugins/` directory. The folder name must be exactly `mailtech`.
-   From GitHub, inside `plugins/`: `git clone https://github.com/mateusoliveiraw/MailTech.git mailtech` (the repository is called `MailTech`, but GLPI needs the folder to be `mailtech`, in lowercase).
+   From GitHub, inside `plugins/`: `git clone https://github.com/mateusoliveiraw/glpi-mailtech.git mailtech` (the repository is called `glpi-mailtech`, but GLPI needs the folder to be `mailtech`).
 2. In **Setup > Plugins**, click **Install** and then **Enable** on MailTech.
    Command line: `php bin/console plugin:install mailtech --username=glpi` then `php bin/console plugin:activate mailtech`.
 3. Log out and in again so the menu shows **Setup > MailTech**.
@@ -168,7 +168,7 @@ See [CHANGELOG.md](CHANGELOG.md). In short: MailTech 1.0 is the first release un
 
 MailTech is created and maintained by **Mateus Oliveira** ([@mateusoliveiraw](https://github.com/mateusoliveiraw)). It is free software, distributed under the GNU General Public License, version 2 or (at your option) any later version; see [LICENSE](LICENSE).
 
-Questions, problems and suggestions: [open an issue on GitHub](https://github.com/mateusoliveiraw/MailTech/issues).
+Questions, problems and suggestions: [open an issue on GitHub](https://github.com/mateusoliveiraw/glpi-mailtech/issues).
 
 ## For maintainers
 

@@ -45,7 +45,7 @@ function plugin_version_mailtech(): array
         'version'      => PLUGIN_MAILTECH_VERSION,
         'author'       => 'Mateus Oliveira',
         'license'      => 'GPLv2+',
-        'homepage'     => 'https://github.com/mateusoliveiraw/MailTech',
+        'homepage'     => 'https://github.com/mateusoliveiraw/glpi-mailtech',
         'requirements' => [
             'glpi' => [
                 'min' => PLUGIN_MAILTECH_MIN_GLPI,
