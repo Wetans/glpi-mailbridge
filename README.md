@@ -1,14 +1,14 @@
-# MailBridge — Email Integration & Diagnostics for GLPI
+# MailTech — Email Integration & Diagnostics for GLPI
 
-<img src="pics/mailbridge.svg" alt="MailBridge logo" width="72">
+<img src="pics/mailtech.svg" alt="MailTech logo" width="72">
 
 *Leia em português: [README.pt-BR.md](README.pt-BR.md).*
 
-## MailBridge Documentation
+## MailTech Documentation
 
 ### 1. Overview
 
-MailBridge is a GLPI plugin that puts everything about outgoing e-mail on one screen, in plain language:
+MailTech is a GLPI plugin that puts everything about outgoing e-mail on one screen, in plain language:
 
 - **Sending**: GLPI's mail server, port, security, user and password, sender addresses and signature.
 - **Testing**: "Test connection" and "Send test email" show the result step by step (connect, secure connection, sign-in, send) and say what to try when a step fails.
@@ -16,9 +16,9 @@ MailBridge is a GLPI plugin that puts everything about outgoing e-mail on one sc
 - **Queue and history**: what is waiting, what was sent, what failed and why; resend, cancel, delete.
 - **Diagnostics**: checks with a suggested action, who changed what, export/import of the configuration.
 
-MailBridge has **no mail transport of its own**. Messages go into GLPI's native notification queue and leave through the server configured in GLPI. The interface is in Brazilian Portuguese, with English (en_GB, en_US) translations. This document quotes the labels as they appear with GLPI in English; the Portuguese labels are in [README.pt-BR.md](README.pt-BR.md).
+MailTech has **no mail transport of its own**. Messages go into GLPI's native notification queue and leave through the server configured in GLPI. The interface is in Brazilian Portuguese, with English (en_GB, en_US) translations. This document quotes the labels as they appear with GLPI in English; the Portuguese labels are in [README.pt-BR.md](README.pt-BR.md).
 
-MailBridge 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0). See [section 5](#5-upgrading-from-techmail) if you have it installed.
+MailTech 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0), and was briefly published as **MailBridge**. See [section 5](#5-upgrading-from-mailbridge-or-techmail) if you have either installed.
 
 ### 2. Supported GLPI version
 
@@ -37,40 +37,42 @@ MailBridge 1.0 is the successor of **Techmail** (versions 1.0.0 and 1.1.0). See 
 
 ### 4. Installation
 
-1. Copy the `mailbridge` folder into GLPI's `plugins/` directory. The folder name must be exactly `mailbridge`.
-   From GitHub, inside `plugins/`: `git clone https://github.com/Wetans/glpi-mailbridge.git mailbridge` (the repository is called `glpi-mailbridge`, but the folder must be `mailbridge`).
-2. In **Setup > Plugins**, click **Install** and then **Enable** on MailBridge.
-   Command line: `php bin/console plugin:install mailbridge --username=glpi` then `php bin/console plugin:activate mailbridge`.
-3. Log out and in again so the menu shows **Setup > MailBridge**.
+1. Copy the `mailtech` folder into GLPI's `plugins/` directory. The folder name must be exactly `mailtech`.
+   From GitHub, inside `plugins/`: `git clone https://github.com/mateusoliveiraw/MailTech.git mailtech` (the repository is called `MailTech`, but GLPI needs the folder to be `mailtech`, in lowercase).
+2. In **Setup > Plugins**, click **Install** and then **Enable** on MailTech.
+   Command line: `php bin/console plugin:install mailtech --username=glpi` then `php bin/console plugin:activate mailtech`.
+3. Log out and in again so the menu shows **Setup > MailTech**.
 
 A new installation creates three example rules (one switched on). Installing a second time changes nothing.
 
-### 5. Upgrading from Techmail
+### 5. Upgrading from MailBridge or Techmail
 
-GLPI identifies a plugin by its folder name, so MailBridge (`mailbridge`) is a different plugin from Techmail (`techmail`) as far as GLPI is concerned. The installer therefore **copies** the Techmail data; it never moves or deletes it.
+GLPI identifies a plugin by its folder name, so MailTech (`mailtech`) is a different plugin from MailBridge (`mailbridge`) and Techmail (`techmail`) as far as GLPI is concerned. The installer therefore **copies** the earlier plugin's data; it never moves or deletes it.
 
 1. Back up the GLPI database and the `plugins/` folder.
-2. Copy the `mailbridge` folder into `plugins/`. **Leave the `techmail` folder where it is.**
-3. In **Setup > Plugins**, click **Install** on MailBridge. This:
-   - copies rules, template translations, failure reasons, settings, per-profile permissions and the rules' change history;
-   - **deactivates** Techmail (it does not uninstall it), so each notice is not sent twice.
-4. Click **Enable** on MailBridge, then log out and in again.
-5. Open **Setup > MailBridge > Diagnostics**. The last card says what was brought over. Check your rules and templates, and send a test e-mail.
-6. When you are satisfied, uninstall Techmail in **Setup > Plugins** and remove the `techmail` folder.
+2. Copy the `mailtech` folder into `plugins/`. **Leave the `mailbridge` or `techmail` folder where it is.**
+3. In **Setup > Plugins**, click **Install** on MailTech. This:
+   - copies rules, template translations, failure reasons, settings, per-profile permissions and the rules' change history from the earlier plugin;
+   - **deactivates** the earlier plugin (it does not uninstall it), so each notice is not sent twice.
+4. Click **Enable** on MailTech, then log out and in again.
+5. Open **Setup > MailTech > Diagnostics**. The last card says what was brought over. Check your rules and templates, and send a test e-mail.
+6. When you are satisfied, uninstall the earlier plugin in **Setup > Plugins** and remove its folder.
 
 What to know:
 
-- Works from Techmail 1.0.0 and 1.1.0.
-- The copy runs once. Changes made in MailBridge afterwards are not written back to Techmail.
-- One setting is deliberately not copied: "delete the data when uninstalling". In MailBridge it always starts switched off.
-- GLPI's mail server settings and the notification queue belong to GLPI and are not touched.
-- Bookmarks to `/plugins/techmail/...` stop working once the old folder is removed; the new address is `/plugins/mailbridge/front/index.php`.
-- Configuration files exported by Techmail can still be imported.
-- If Techmail is activated again while MailBridge is active, MailBridge pauses its own notices and the Overview says so.
+- Works from MailBridge 1.0 and from Techmail 1.0.0 and 1.1.0.
+- If a GLPI has data from both, the MailBridge data is used: it already contains what MailBridge brought over from Techmail.
+- The copy runs once. Changes made in MailTech afterwards are not written back to the earlier plugin.
+- One setting is deliberately not copied: "delete the data when uninstalling". In MailTech it always starts switched off.
+- GLPI's mail server settings and the notification queue belong to GLPI and are not touched. E-mails sent under an earlier name are still recognised as MailTech's and stay in the "MailTech only" filter of Queue and history.
+- Bookmarks to `/plugins/mailbridge/...` or `/plugins/techmail/...` stop working once the old folder is removed; the new address is `/plugins/mailtech/front/index.php`.
+- The detailed record now goes to `files/_log/mailtech.log`; an earlier `mailbridge.log` or `techmail.log` is left as it is.
+- Configuration files exported by MailBridge or Techmail can still be imported.
+- If an earlier plugin is activated again while MailTech is active, MailTech pauses its own notices and the Overview says so.
 
 ### 6. Configuration
 
-Everything is under **Setup > MailBridge**.
+Everything is under **Setup > MailTech**.
 
 1. **Sending**: fill in the server, port, connection security, user, password and the sender address, then **Save**. Tests always use the *saved* settings.
 2. **Test connection**, then **Send test email**.
@@ -78,19 +80,19 @@ Everything is under **Setup > MailBridge**.
 4. **Templates**: edit subject and message, insert variables with a click, preview, restore the default, send a test of that template.
 5. **Queue and history** and **Diagnostics** for day-to-day follow-up.
 
-Permissions: whoever can change GLPI's general configuration has full access. Other profiles get the **MailBridge** tab on the profile form (*View*, *Manage*, *Test sending*, *Operate the queue*).
+Permissions: whoever can change GLPI's general configuration has full access. Other profiles get the **MailTech** tab on the profile form (*View*, *Manage*, *Test sending*, *Operate the queue*).
 
 ### 7. Supported e-mail transport methods
 
-MailBridge configures and tests what **GLPI's own mailer** offers:
+MailTech configures and tests what **GLPI's own mailer** offers:
 
 | Method | Where it is configured | Status |
 |---|---|---|
-| SMTP without encryption | MailBridge > Sending | Tested (local capture mailbox) |
-| SMTP + STARTTLS, with or without user/password | MailBridge > Sending | Tested (see section 8) |
-| SMTP + SSL/TLS (implicit TLS) | MailBridge > Sending | Implemented; a successful send was not tested |
-| PHP `mail()` | MailBridge > Sending | Implemented; not tested |
-| SMTP + OAuth 2.0 (Google, Microsoft) | GLPI's native e-mail screen; MailBridge shows the status and a shortcut | Not tested |
+| SMTP without encryption | MailTech > Sending | Tested (local capture mailbox) |
+| SMTP + STARTTLS, with or without user/password | MailTech > Sending | Tested (see section 8) |
+| SMTP + SSL/TLS (implicit TLS) | MailTech > Sending | Implemented; a successful send was not tested |
+| PHP `mail()` | MailTech > Sending | Implemented; not tested |
+| SMTP + OAuth 2.0 (Google, Microsoft) | GLPI's native e-mail screen; MailTech shows the status and a shortcut | Not tested |
 
 ### 8. Microsoft 365 and Gmail limitations
 
@@ -122,13 +124,13 @@ Nothing below is a guarantee for your account: providers and organisations chang
 | "The mail server did not accept the user name and password." | The provider refused the sign-in | Open "Technical detail": it carries the provider's own reason |
 | Test says sent, nothing arrives | The server accepted the message | Check spam; check that the server is not a capture or relay-only server |
 | Overview says "Needs attention" | One of the checks failed | Diagnostics lists each check with the action |
-| "The old plugin (Techmail) is active together with MailBridge." | Both plugins active | Deactivate Techmail |
+| "The old plugin (MailBridge) is active together with MailTech." (or Techmail) | Both plugins active | Deactivate the plugin it names |
 | A person receives nothing | No e-mail on the user record, inactive user, or blocked by a list | Check Queue and history; in Sending, switch on "Record the reason for each notice created or skipped" |
 
 ### 10. Logging and diagnostics
 
 - **Queue and history** shows the reason of each failed attempt (kept in the plugin's own table, because GLPI stores no per-message reason).
-- `files/_log/mailbridge.log`: why each notice was generated or skipped, when "Record the reason for each notice created or skipped" is on (in Sending).
+- `files/_log/mailtech.log`: why each notice was generated or skipped, when "Record the reason for each notice created or skipped" is on (in Sending).
 - GLPI's own `files/_log/mail-error.log`, `mail.log` and `php-errors.log`.
 - **Diagnostics > Who changed what** reads GLPI's change history.
 
@@ -146,13 +148,13 @@ No log, export, screen or error message contains passwords or tokens.
 
 - **Before installing or upgrading**: back up the database and `plugins/`.
 - **Settings backup**: Diagnostics > Export (a JSON file without passwords).
-- **Roll back from MailBridge to Techmail**: deactivate MailBridge, activate Techmail. Techmail's data was never changed by the upgrade.
-- **Remove MailBridge completely**: switch on "Delete MailBridge data when the plugin is uninstalled" in Diagnostics, then uninstall. E-mails already in GLPI's queue are never touched.
+- **Roll back from MailTech to MailBridge (or Techmail)**: deactivate MailTech, activate the earlier plugin. Its data was never changed by the upgrade; changes made in MailTech afterwards are not carried back.
+- **Remove MailTech completely**: switch on "Delete MailTech data when the plugin is uninstalled" in Diagnostics, then uninstall. E-mails already in GLPI's queue are never touched.
 
 ### 13. Known issues
 
 - GLPI 11 is not tested.
-- OAuth is configured on GLPI's native screen, not inside MailBridge.
+- OAuth is configured on GLPI's native screen, not inside MailTech.
 - If you change the server and leave the password blank, the previously saved password is kept and would be offered to the new server. Type the new password, or tick "Delete the stored password".
 - The Overview judges the settings; it cannot know whether the provider will accept the sign-in. Use the test buttons. It recognises Gmail and Microsoft by server name only (`smtp.gmail.com`, `smtp.googlemail.com`, `smtp.office365.com`, `smtp-mail.outlook.com`); other servers are not required to have a sign-in or a public sender, so local test mailboxes keep working.
 - After installing, users must log in again to see the menu entry and new permissions.
@@ -160,19 +162,19 @@ No log, export, screen or error message contains passwords or tokens.
 
 ### 14. Version history
 
-See [CHANGELOG.md](CHANGELOG.md). In short: MailBridge 1.0 is the first release under the new name and makes the Overview and the tests stricter about sign-in, sender and stale tests. Before that the plugin was called Techmail: Techmail 1.1.0 added the single-screen manager and Techmail 1.0.0 was the first version.
+See [CHANGELOG.md](CHANGELOG.md). In short: MailTech 1.0 is the first release under the new name and makes the Overview and the tests stricter about sign-in, sender and stale tests. Before that the plugin was called Techmail: Techmail 1.1.0 added the single-screen manager and Techmail 1.0.0 was the first version. The 1.0 code was briefly published as MailBridge before taking the name MailTech.
 
 ## Author and license
 
-MailBridge is created and maintained by **Mateus Oliveira** ([@Wetans](https://github.com/Wetans)). It is free software, distributed under the GNU General Public License, version 2 or (at your option) any later version; see [LICENSE](LICENSE).
+MailTech is created and maintained by **Mateus Oliveira** ([@mateusoliveiraw](https://github.com/mateusoliveiraw)). It is free software, distributed under the GNU General Public License, version 2 or (at your option) any later version; see [LICENSE](LICENSE).
 
-Questions, problems and suggestions: [open an issue on GitHub](https://github.com/Wetans/glpi-mailbridge/issues).
+Questions, problems and suggestions: [open an issue on GitHub](https://github.com/mateusoliveiraw/MailTech/issues).
 
 ## For maintainers
 
 ```
-mailbridge/
-├── setup.php, hook.php   registration, hooks, install/upgrade (incl. import from Techmail)
+mailtech/
+├── setup.php, hook.php   registration, hooks, install/upgrade (incl. import from MailBridge or Techmail)
 ├── front/, ajax/         single screen, actions, export
 ├── src/                  business rules (pure classes) and GLPI access; Screen/ per section
 ├── templates/            screens (Twig)
@@ -180,6 +182,6 @@ mailbridge/
 └── locales/              pt_BR, en_GB, en_US
 ```
 
-- Translations: source texts are Portuguese. After changing a text, update it in `locales/mailbridge.pot` and the `.po` files, compile each `.po` into its `.mo` (for example with gettext's `msgfmt`), then clear GLPI's cache.
-- Internal names: folder and identifier `mailbridge`, namespace `GlpiPlugin\Mailbridge`, tables `glpi_plugin_mailbridge_*`, settings context `plugin:mailbridge`, permission `plugin_mailbridge`. The CSS prefix inside the plugin is `tm-` (not `mb-`, which Bootstrap uses for margins).
-- The old name appears only where the old installation is read: `src/LegacyImport.php`, old export files (`src/Porter.php`), old history (`src/Audit.php`, `src/Queue.php`) and the texts that name the old plugin.
+- Translations: source texts are Portuguese. After changing a text, update it in `locales/mailtech.pot` and the `.po` files, compile each `.po` into its `.mo` (for example with gettext's `msgfmt`), then clear GLPI's cache.
+- Internal names: folder and identifier `mailtech`, namespace `GlpiPlugin\Mailtech`, tables `glpi_plugin_mailtech_*`, settings context `plugin:mailtech`, permission `plugin_mailtech`. The CSS prefix inside the plugin is `tm-` (not `mb-`, which Bootstrap uses for margins).
+- The earlier names (`mailbridge`, `techmail`) appear only where an earlier installation is read: `src/LegacyImport.php` (the list of earlier names lives there), old export files (`src/Porter.php`), old queue entries (`src/Queue.php`), old change history (`src/Audit.php`) and the texts that name the earlier plugin.
