@@ -1,18 +1,18 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Config as CoreConfig;
 use Toolbox;
 
 /**
  * Configurações próprias do plugin (guardadas na tabela glpi_configs,
- * contexto "plugin:mailbridge"). A configuração de envio do GLPI (servidor,
+ * contexto "plugin:mailtech"). A configuração de envio do GLPI (servidor,
  * remetentes...) fica na classe Sending.
  */
 class Settings
 {
-    public const CONTEXT = 'plugin:mailbridge';
+    public const CONTEXT = 'plugin:mailtech';
 
     /** @var array|null cache da requisição */
     private static $cache = null;
@@ -31,9 +31,9 @@ class Settings
             'entity_modes'       => '{}',
             'last_test_ok'       => '',
             'purge_on_uninstall' => 0,
-            // MailBridge 1.0: relatório da importação dos dados do plugin antigo (Techmail); vazio = não houve
+            // MailTech 1.0: relatório da importação dos dados do plugin anterior (MailBridge ou Techmail); vazio = não houve
             'legacy_import'      => '',
-            // MailBridge 1.0: marca da configuração de envio usada no último teste com sucesso (Sending::fingerprint())
+            // MailTech 1.0: marca da configuração de envio usada no último teste com sucesso (Sending::fingerprint())
             'last_test_config'   => '',
         ];
     }
@@ -68,7 +68,7 @@ class Settings
     }
 
     /**
-     * Grava valores JÁ VALIDADOS (veja Validation::mailbridge()). Só aceita
+     * Grava valores JÁ VALIDADOS (veja Validation::mailtech()). Só aceita
      * chaves conhecidas.
      */
     public static function set(array $values): void
@@ -106,13 +106,13 @@ class Settings
     }
 
     /**
-     * Registra uma linha em files/_log/mailbridge.log (se o log estiver ligado).
+     * Registra uma linha em files/_log/mailtech.log (se o log estiver ligado).
      */
     public static function log(string $message, bool $force = false): void
     {
         if (!$force && !self::get('debug_log')) {
             return;
         }
-        Toolbox::logInFile('mailbridge', $message . "\n");
+        Toolbox::logInFile('mailtech', $message . "\n");
     }
 }

@@ -1,15 +1,15 @@
-{% extends '@mailbridge/layout.html.twig' %}
+{% extends '@mailtech/layout.html.twig' %}
 
 {% block content %}
    <p class="mb-3">
-      <a href="{{ list_url }}"><i class="ti ti-arrow-left" aria-hidden="true"></i> {{ __('Voltar para a fila', 'mailbridge') }}</a>
+      <a href="{{ list_url }}"><i class="ti ti-arrow-left" aria-hidden="true"></i> {{ __('Voltar para a fila', 'mailtech') }}</a>
    </p>
 
    <div class="row g-3">
       <div class="col-12 col-xl-5">
          <div class="card mb-3">
             <div class="card-header">
-               <h2 class="card-title h4 m-0 tm-break">{{ mail.subject ?: __('(sem assunto)', 'mailbridge') }}</h2>
+               <h2 class="card-title h4 m-0 tm-break">{{ mail.subject ?: __('(sem assunto)', 'mailtech') }}</h2>
             </div>
             <div class="card-body">
                <p>
@@ -17,23 +17,23 @@
                   <span class="tm-soft">{{ when }}</span>
                </p>
                <dl class="row mb-0">
-                  <dt class="col-sm-4">{{ __('Para', 'mailbridge') }}</dt>
+                  <dt class="col-sm-4">{{ __('Para', 'mailtech') }}</dt>
                   <dd class="col-sm-8 tm-break">{{ mail.recipientname and mail.recipientname != mail.recipient ? mail.recipientname ~ ' <' ~ mail.recipient ~ '>' : mail.recipient }}</dd>
-                  <dt class="col-sm-4">{{ __('De', 'mailbridge') }}</dt>
+                  <dt class="col-sm-4">{{ __('De', 'mailtech') }}</dt>
                   <dd class="col-sm-8 tm-break">{{ mail.sendername ? mail.sendername ~ ' <' ~ mail.sender ~ '>' : mail.sender }}</dd>
                   {% if mail.replyto %}
-                     <dt class="col-sm-4">{{ __('Responder para', 'mailbridge') }}</dt>
+                     <dt class="col-sm-4">{{ __('Responder para', 'mailtech') }}</dt>
                      <dd class="col-sm-8 tm-break">{{ mail.replyto }}</dd>
                   {% endif %}
-                  <dt class="col-sm-4">{{ __('Origem', 'mailbridge') }}</dt>
+                  <dt class="col-sm-4">{{ __('Origem', 'mailtech') }}</dt>
                   <dd class="col-sm-8">{{ mail.event_label }}{% if item_url %} · <a href="{{ item_url }}">{{ item_name }}</a>{% endif %}</dd>
-                  <dt class="col-sm-4">{{ __('Criado em', 'mailbridge') }}</dt>
+                  <dt class="col-sm-4">{{ __('Criado em', 'mailtech') }}</dt>
                   <dd class="col-sm-8">{{ created }} <span class="tm-soft">({{ ago }})</span></dd>
                   {% if sent %}
-                     <dt class="col-sm-4">{{ __('Enviado em', 'mailbridge') }}</dt>
+                     <dt class="col-sm-4">{{ __('Enviado em', 'mailtech') }}</dt>
                      <dd class="col-sm-8">{{ sent }}</dd>
                   {% endif %}
-                  <dt class="col-sm-4">{{ __('Tentativas com falha', 'mailbridge') }}</dt>
+                  <dt class="col-sm-4">{{ __('Tentativas com falha', 'mailtech') }}</dt>
                   <dd class="col-sm-8 mb-0">{{ mail.tries }}</dd>
                </dl>
             </div>
@@ -44,19 +44,19 @@
                      <input type="hidden" name="action" value="queue_apply">
                      <input type="hidden" name="from_detail" value="1">
                      <button type="submit" name="row" value="resend:{{ mail.id }}" class="btn btn-primary"
-                             {%- if mail.state == 'sent' %} data-tm-confirm="{{ __('Este e-mail já foi enviado. Enviar uma cópia de novo?', 'mailbridge') }}"{% endif %}>
-                        <i class="ti ti-send" aria-hidden="true"></i> {{ mail.state == 'pending' ? __('Enviar agora', 'mailbridge') : __('Reenviar', 'mailbridge') }}
+                             {%- if mail.state == 'sent' %} data-tm-confirm="{{ __('Este e-mail já foi enviado. Enviar uma cópia de novo?', 'mailtech') }}"{% endif %}>
+                        <i class="ti ti-send" aria-hidden="true"></i> {{ mail.state == 'pending' ? __('Enviar agora', 'mailtech') : __('Reenviar', 'mailtech') }}
                      </button>
                      {% if mail.can_cancel %}
                         <button type="submit" name="row" value="cancel:{{ mail.id }}" class="btn btn-outline-secondary"
-                                data-tm-confirm="{{ __('Cancelar este e-mail? Ele sai da fila e não será enviado.', 'mailbridge') }}">
-                           {{ __('Cancelar', 'mailbridge') }}
+                                data-tm-confirm="{{ __('Cancelar este e-mail? Ele sai da fila e não será enviado.', 'mailtech') }}">
+                           {{ __('Cancelar', 'mailtech') }}
                         </button>
                      {% endif %}
                      {% if mail.can_delete %}
                         <button type="submit" name="row" value="delete:{{ mail.id }}" class="btn btn-outline-danger"
-                                data-tm-confirm="{{ __('Apagar este e-mail do histórico? Isso não pode ser desfeito.', 'mailbridge') }}">
-                           <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Apagar do histórico', 'mailbridge') }}
+                                data-tm-confirm="{{ __('Apagar este e-mail do histórico? Isso não pode ser desfeito.', 'mailtech') }}">
+                           <i class="ti ti-trash" aria-hidden="true"></i> {{ __('Apagar do histórico', 'mailtech') }}
                         </button>
                      {% endif %}
                   </form>
@@ -66,23 +66,23 @@
 
          {% if attempts %}
             <div class="card">
-               <div class="card-header"><h3 class="card-title h4 m-0">{{ __('Por que não saiu', 'mailbridge') }}</h3></div>
+               <div class="card-header"><h3 class="card-title h4 m-0">{{ __('Por que não saiu', 'mailtech') }}</h3></div>
                <ul class="list-group list-group-flush">
                   {% for attempt in attempts %}
                      <li class="list-group-item">
                         <p class="mb-1">
                            <strong>{{ attempt.title }}</strong>
-                           <span class="tm-soft">{{ attempt.date }}{% if attempt.gave_up %} · {{ __('o GLPI desistiu depois desta tentativa', 'mailbridge') }}{% endif %}</span>
+                           <span class="tm-soft">{{ attempt.date }}{% if attempt.gave_up %} · {{ __('o GLPI desistiu depois desta tentativa', 'mailtech') }}{% endif %}</span>
                         </p>
                         {% if attempt.advice %}
-                           <p class="fw-bold mb-1">{{ __('O que tentar:', 'mailbridge') }}</p>
+                           <p class="fw-bold mb-1">{{ __('O que tentar:', 'mailtech') }}</p>
                            <ul class="mb-1">
                               {% for tip in attempt.advice %}<li>{{ tip }}</li>{% endfor %}
                            </ul>
                         {% endif %}
                         {% if attempt.technical %}
                            <details>
-                              <summary>{{ __('Detalhe técnico', 'mailbridge') }}</summary>
+                              <summary>{{ __('Detalhe técnico', 'mailtech') }}</summary>
                               <code class="tm-break">{{ attempt.technical }}</code>
                            </details>
                         {% endif %}
@@ -95,14 +95,14 @@
 
       <div class="col-12 col-xl-7">
          <div class="card">
-            <div class="card-header"><h3 class="card-title h4 m-0">{{ __('Como o e-mail ficou', 'mailbridge') }}</h3></div>
+            <div class="card-header"><h3 class="card-title h4 m-0">{{ __('Como o e-mail ficou', 'mailtech') }}</h3></div>
             <div class="card-body">
                {% if html %}
-                  <iframe class="tm-preview" sandbox="" title="{{ __('Conteúdo do e-mail', 'mailbridge') }}"
+                  <iframe class="tm-preview" sandbox="" title="{{ __('Conteúdo do e-mail', 'mailtech') }}"
                           srcdoc="{{ '<!doctype html><meta charset="utf-8"><body style="font-family:sans-serif;font-size:14px;margin:12px;color:#222;background:#fff">' ~ html ~ '</body>' }}"></iframe>
                {% endif %}
                <details class="mt-2"{{ html ? '' : ' open' }}>
-                  <summary>{{ __('Ver a versão em texto simples', 'mailbridge') }}</summary>
+                  <summary>{{ __('Ver a versão em texto simples', 'mailtech') }}</summary>
                   <pre class="tm-pre mb-0">{{ mail.body_text }}</pre>
                </details>
             </div>

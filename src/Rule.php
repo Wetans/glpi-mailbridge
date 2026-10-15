@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use CommonDBTM;
 use Dropdown;
@@ -11,8 +11,8 @@ use Ticket;
  * Regra de notificação: "quando acontecer EVENTO num chamado que atenda aos
  * FILTROS, enviar ASSUNTO/CORPO para estes DESTINATÁRIOS".
  *
- * As telas ficam em MailBridge > Eventos e destinatários (regra) e
- * MailBridge > Modelos (mensagem); esta classe guarda só o modelo de dados.
+ * As telas ficam em MailTech > Eventos e destinatários (regra) e
+ * MailTech > Modelos (mensagem); esta classe guarda só o modelo de dados.
  */
 class Rule extends CommonDBTM
 {
@@ -36,7 +36,7 @@ class Rule extends CommonDBTM
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Regra de notificação para técnicos', 'Regras de notificação para técnicos', $nb, 'mailbridge');
+        return _n('Regra de notificação para técnicos', 'Regras de notificação para técnicos', $nb, 'mailtech');
     }
 
     public static function getIcon()
@@ -81,12 +81,12 @@ class Rule extends CommonDBTM
     public static function getEvents(): array
     {
         return [
-            self::EVENT_NEW_TICKET => __('Novo chamado aberto', 'mailbridge'),
-            self::EVENT_ASSIGNED   => __('Chamado atribuído (técnico ou grupo)', 'mailbridge'),
-            self::EVENT_FOLLOWUP   => __('Novo acompanhamento', 'mailbridge'),
-            self::EVENT_TASK       => __('Nova tarefa', 'mailbridge'),
-            self::EVENT_SOLUTION   => __('Solução registrada', 'mailbridge'),
-            self::EVENT_STATUS     => __('Mudança de status', 'mailbridge'),
+            self::EVENT_NEW_TICKET => __('Novo chamado aberto', 'mailtech'),
+            self::EVENT_ASSIGNED   => __('Chamado atribuído (técnico ou grupo)', 'mailtech'),
+            self::EVENT_FOLLOWUP   => __('Novo acompanhamento', 'mailtech'),
+            self::EVENT_TASK       => __('Nova tarefa', 'mailtech'),
+            self::EVENT_SOLUTION   => __('Solução registrada', 'mailtech'),
+            self::EVENT_STATUS     => __('Mudança de status', 'mailtech'),
         ];
     }
 
@@ -136,22 +136,22 @@ class Rule extends CommonDBTM
     public static function fieldLabels(): array
     {
         return [
-            'name'                     => __('Nome', 'mailbridge'),
-            'event'                    => __('Evento', 'mailbridge'),
-            'is_active'                => __('Ativa', 'mailbridge'),
-            'subject'                  => __('Assunto', 'mailbridge'),
-            'body'                     => __('Mensagem', 'mailbridge'),
-            'body_text'                => __('Versão em texto simples', 'mailbridge'),
-            'extra_emails'             => __('E-mails fixos', 'mailbridge'),
-            'notify_assigned_users'    => __('Técnicos atribuídos ao chamado', 'mailbridge'),
-            'notify_assigned_groups'   => __('Membros dos grupos técnicos atribuídos', 'mailbridge'),
-            'notify_requesters'        => __('Solicitantes do chamado', 'mailbridge'),
-            'notify_observers'         => __('Observadores do chamado', 'mailbridge'),
-            'exclude_author'           => __('Não avisar quem executou a ação', 'mailbridge'),
-            'filter_entities_id'       => __('Entidade (inclui subentidades)', 'mailbridge'),
-            'filter_itilcategories_id' => __('Categoria (inclui subcategorias)', 'mailbridge'),
-            'filter_type'              => __('Tipo do chamado', 'mailbridge'),
-            'filter_min_priority'      => __('Prioridade mínima', 'mailbridge'),
+            'name'                     => __('Nome', 'mailtech'),
+            'event'                    => __('Evento', 'mailtech'),
+            'is_active'                => __('Ativa', 'mailtech'),
+            'subject'                  => __('Assunto', 'mailtech'),
+            'body'                     => __('Mensagem', 'mailtech'),
+            'body_text'                => __('Versão em texto simples', 'mailtech'),
+            'extra_emails'             => __('E-mails fixos', 'mailtech'),
+            'notify_assigned_users'    => __('Técnicos atribuídos ao chamado', 'mailtech'),
+            'notify_assigned_groups'   => __('Membros dos grupos técnicos atribuídos', 'mailtech'),
+            'notify_requesters'        => __('Solicitantes do chamado', 'mailtech'),
+            'notify_observers'         => __('Observadores do chamado', 'mailtech'),
+            'exclude_author'           => __('Não avisar quem executou a ação', 'mailtech'),
+            'filter_entities_id'       => __('Entidade (inclui subentidades)', 'mailtech'),
+            'filter_itilcategories_id' => __('Categoria (inclui subcategorias)', 'mailtech'),
+            'filter_type'              => __('Tipo do chamado', 'mailtech'),
+            'filter_min_priority'      => __('Prioridade mínima', 'mailtech'),
         ];
     }
 
@@ -163,7 +163,7 @@ class Rule extends CommonDBTM
         $options = [
             [
                 'id'   => 'common',
-                'name' => __('Características', 'mailbridge'),
+                'name' => __('Características', 'mailtech'),
             ],
             [
                 'id'            => '1',
@@ -177,7 +177,7 @@ class Rule extends CommonDBTM
                 'id'            => '2',
                 'table'         => $table,
                 'field'         => 'id',
-                'name'          => __('ID', 'mailbridge'),
+                'name'          => __('ID', 'mailtech'),
                 'datatype'      => 'number',
                 'massiveaction' => false,
             ],
@@ -200,7 +200,7 @@ class Rule extends CommonDBTM
                 'id'            => '19',
                 'table'         => $table,
                 'field'         => 'date_mod',
-                'name'          => __('Última atualização', 'mailbridge'),
+                'name'          => __('Última atualização', 'mailtech'),
                 'datatype'      => 'datetime',
                 'massiveaction' => false,
             ],
@@ -208,7 +208,7 @@ class Rule extends CommonDBTM
                 'id'            => '121',
                 'table'         => $table,
                 'field'         => 'date_creation',
-                'name'          => __('Data de criação', 'mailbridge'),
+                'name'          => __('Data de criação', 'mailtech'),
                 'datatype'      => 'datetime',
                 'massiveaction' => false,
             ],
@@ -306,48 +306,48 @@ class Rule extends CommonDBTM
         $who    = [];
         if (!empty($rule['notify_assigned_users'])) {
             $who[] = ((string) $rule['event'] === self::EVENT_ASSIGNED)
-                ? __('o técnico que acabou de ser atribuído', 'mailbridge')
-                : __('os técnicos atribuídos ao chamado', 'mailbridge');
+                ? __('o técnico que acabou de ser atribuído', 'mailtech')
+                : __('os técnicos atribuídos ao chamado', 'mailtech');
         }
         if (!empty($rule['notify_assigned_groups'])) {
             $who[] = ((string) $rule['event'] === self::EVENT_ASSIGNED)
-                ? __('os membros do grupo que acabou de ser atribuído', 'mailbridge')
-                : __('os membros dos grupos técnicos atribuídos', 'mailbridge');
+                ? __('os membros do grupo que acabou de ser atribuído', 'mailtech')
+                : __('os membros dos grupos técnicos atribuídos', 'mailtech');
         }
         if (!empty($rule['notify_requesters'])) {
-            $who[] = __('os solicitantes do chamado', 'mailbridge');
+            $who[] = __('os solicitantes do chamado', 'mailtech');
         }
         if (!empty($rule['notify_observers'])) {
-            $who[] = __('os observadores do chamado', 'mailbridge');
+            $who[] = __('os observadores do chamado', 'mailtech');
         }
         [$extra] = Validation::emailList(Text::decode((string) ($rule['extra_emails'] ?? '')));
         if ($extra) {
             $who[] = count($extra) <= 2
                 ? implode(', ', $extra)
-                : sprintf(__('%d e-mails fixos', 'mailbridge'), count($extra));
+                : sprintf(__('%d e-mails fixos', 'mailtech'), count($extra));
         }
 
         $filters = [];
         $entity  = (int) ($rule['filter_entities_id'] ?? 0);
         if ($entity > 0) {
-            $filters[] = sprintf(__('entidade %s e as que estão dentro dela', 'mailbridge'), $entities[$entity] ?? ('#' . $entity));
+            $filters[] = sprintf(__('entidade %s e as que estão dentro dela', 'mailtech'), $entities[$entity] ?? ('#' . $entity));
         }
         $category = (int) ($rule['filter_itilcategories_id'] ?? 0);
         if ($category > 0) {
-            $filters[] = sprintf(__('categoria %s e as que estão dentro dela', 'mailbridge'), $categories[$category] ?? ('#' . $category));
+            $filters[] = sprintf(__('categoria %s e as que estão dentro dela', 'mailtech'), $categories[$category] ?? ('#' . $category));
         }
         $type = (int) ($rule['filter_type'] ?? 0);
         if ($type > 0) {
-            $filters[] = sprintf(__('tipo %s', 'mailbridge'), $types[$type] ?? ('#' . $type));
+            $filters[] = sprintf(__('tipo %s', 'mailtech'), $types[$type] ?? ('#' . $type));
         }
         $priority = (int) ($rule['filter_min_priority'] ?? 0);
         if ($priority > 0) {
-            $filters[] = sprintf(__('prioridade a partir de %s', 'mailbridge'), $priorities[$priority] ?? ('#' . $priority));
+            $filters[] = sprintf(__('prioridade a partir de %s', 'mailtech'), $priorities[$priority] ?? ('#' . $priority));
         }
 
         $notes = [];
         if (!empty($rule['exclude_author'])) {
-            $notes[] = __('Quem fez a ação não recebe.', 'mailbridge');
+            $notes[] = __('Quem fez a ação não recebe.', 'mailtech');
         }
 
         return [
@@ -377,7 +377,7 @@ class Rule extends CommonDBTM
     private function normalizeInput(array $input, bool $creating)
     {
         if (isset($input['event']) && !array_key_exists($input['event'], self::getEvents())) {
-            Session::addMessageAfterRedirect(__('Evento inválido.', 'mailbridge'), false, ERROR);
+            Session::addMessageAfterRedirect(__('Evento inválido.', 'mailtech'), false, ERROR);
 
             return false;
         }

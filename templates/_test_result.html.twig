@@ -9,25 +9,25 @@
          {% for step in result.steps %}
             <li>
                {% if step.status == 'ok' %}
-                  <i class="ti ti-circle-check text-success" aria-hidden="true"></i><span class="visually-hidden">{{ __('Feito', 'mailbridge') }}:</span>
+                  <i class="ti ti-circle-check text-success" aria-hidden="true"></i><span class="visually-hidden">{{ __('Feito', 'mailtech') }}:</span>
                {% elseif step.status == 'fail' %}
-                  <i class="ti ti-circle-x text-danger" aria-hidden="true"></i><span class="visually-hidden">{{ __('Falhou', 'mailbridge') }}:</span>
+                  <i class="ti ti-circle-x text-danger" aria-hidden="true"></i><span class="visually-hidden">{{ __('Falhou', 'mailtech') }}:</span>
                {% else %}
-                  <i class="ti ti-minus" aria-hidden="true"></i><span class="visually-hidden">{{ __('Não se aplica', 'mailbridge') }}:</span>
+                  <i class="ti ti-minus" aria-hidden="true"></i><span class="visually-hidden">{{ __('Não se aplica', 'mailtech') }}:</span>
                {% endif %}
                <span>{{ step.label }}{% if step.detail %} <span class="tm-soft">{{ step.detail }}</span>{% endif %}</span>
             </li>
          {% endfor %}
       </ol>
       {% if result.advice is defined and result.advice %}
-         <p class="fw-bold mt-2 mb-1">{{ __('O que tentar:', 'mailbridge') }}</p>
+         <p class="fw-bold mt-2 mb-1">{{ __('O que tentar:', 'mailtech') }}</p>
          <ul class="mb-0">
             {% for tip in result.advice %}<li>{{ tip }}</li>{% endfor %}
          </ul>
       {% endif %}
       {% if result.technical is defined and result.technical %}
          <details class="mt-2">
-            <summary>{{ __('Detalhe técnico', 'mailbridge') }}</summary>
+            <summary>{{ __('Detalhe técnico', 'mailtech') }}</summary>
             <code class="tm-break">{{ result.technical }}</code>
          </details>
       {% endif %}

@@ -1,16 +1,16 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
-use GlpiPlugin\Mailbridge\ErrorExplainer;
-use GlpiPlugin\Mailbridge\Facts;
-use GlpiPlugin\Mailbridge\FailureLog;
-use GlpiPlugin\Mailbridge\Health;
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Queue;
-use GlpiPlugin\Mailbridge\QueueState;
-use GlpiPlugin\Mailbridge\Text;
-use GlpiPlugin\Mailbridge\Validation;
+use GlpiPlugin\Mailtech\ErrorExplainer;
+use GlpiPlugin\Mailtech\Facts;
+use GlpiPlugin\Mailtech\FailureLog;
+use GlpiPlugin\Mailtech\Health;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Queue;
+use GlpiPlugin\Mailtech\QueueState;
+use GlpiPlugin\Mailtech\Text;
+use GlpiPlugin\Mailtech\Validation;
 use Html;
 
 /**
@@ -64,7 +64,7 @@ final class QueueScreen
                 $last          = $failures[$row['id']][0]['error'] ?? '';
                 $row['reason'] = $last !== ''
                     ? ErrorExplainer::explain($last)['title']
-                    : __('O GLPI não registrou o motivo desta falha.', 'mailbridge');
+                    : __('O GLPI não registrou o motivo desta falha.', 'mailtech');
             }
             $row['when']       = self::when($row, $policy['max_retries']);
             $row['detail_url'] = Page::url('queue', ['id' => $row['id']]);
@@ -80,11 +80,11 @@ final class QueueScreen
 
         $counts  = Queue::counts();
         $labels  = [
-            'all'       => __('Todos', 'mailbridge'),
-            'queued'    => __('Na fila', 'mailbridge'),
-            'failed'    => __('Com falha', 'mailbridge'),
-            'sent'      => __('Enviados', 'mailbridge'),
-            'cancelled' => __('Cancelados', 'mailbridge'),
+            'all'       => __('Todos', 'mailtech'),
+            'queued'    => __('Na fila', 'mailtech'),
+            'failed'    => __('Com falha', 'mailtech'),
+            'sent'      => __('Enviados', 'mailtech'),
+            'cancelled' => __('Cancelados', 'mailtech'),
         ];
         $filters = [];
         foreach ($labels as $code => $label) {
@@ -98,11 +98,11 @@ final class QueueScreen
         }
 
         $empty = [
-            'all'       => __('Nenhum e-mail no histórico ainda.', 'mailbridge'),
-            'queued'    => __('Nenhum e-mail na fila: tudo em dia.', 'mailbridge'),
-            'failed'    => __('Nenhuma falha de envio. Tudo certo por aqui.', 'mailbridge'),
-            'sent'      => __('Nenhum e-mail enviado no período guardado.', 'mailbridge'),
-            'cancelled' => __('Nenhum e-mail cancelado.', 'mailbridge'),
+            'all'       => __('Nenhum e-mail no histórico ainda.', 'mailtech'),
+            'queued'    => __('Nenhum e-mail na fila: tudo em dia.', 'mailtech'),
+            'failed'    => __('Nenhuma falha de envio. Tudo certo por aqui.', 'mailtech'),
+            'sent'      => __('Nenhum e-mail enviado no período guardado.', 'mailtech'),
+            'cancelled' => __('Nenhum e-mail cancelado.', 'mailtech'),
         ];
 
         // Situação da rotina automática (a mesma verificação da Visão geral).
@@ -115,8 +115,8 @@ final class QueueScreen
         $routine = Queue::routine();
         $flash   = Page::pullFlash('policy');
 
-        $result = $_SESSION['plugin_mailbridge_result'] ?? null;
-        unset($_SESSION['plugin_mailbridge_result']);
+        $result = $_SESSION['plugin_mailtech_result'] ?? null;
+        unset($_SESSION['plugin_mailtech_result']);
 
         return ['queue.html.twig', [
             'rows'          => $rows,
@@ -126,7 +126,7 @@ final class QueueScreen
             'q'             => $text,
             'only'          => $only,
             'start'         => $start,
-            'empty'         => ($text !== '' || $only) ? __('Nenhum e-mail encontrado com essa busca.', 'mailbridge') : $empty[$filter],
+            'empty'         => ($text !== '' || $only) ? __('Nenhum e-mail encontrado com essa busca.', 'mailtech') : $empty[$filter],
             'pager'         => EventsScreen::pager(Page::url('queue', $params), 'start', $start, $found['total'], Queue::PER_PAGE),
             'search_url'    => Page::url(''),
             'clear_url'     => Page::url('queue', $filter !== 'all' ? ['filter' => $filter] : []),
@@ -150,24 +150,24 @@ final class QueueScreen
     {
         switch ($row['state']) {
             case QueueState::SENT:
-                return sprintf(__('Enviado em %s', 'mailbridge'), Html::convDateTime($row['sent_time']));
+                return sprintf(__('Enviado em %s', 'mailtech'), Html::convDateTime($row['sent_time']));
             case QueueState::PENDING:
-                return sprintf(__('Na fila desde %s', 'mailbridge'), Html::convDateTime($row['create_time']));
+                return sprintf(__('Na fila desde %s', 'mailtech'), Html::convDateTime($row['create_time']));
             case QueueState::RETRYING:
                 return sprintf(
-                    __('Tentativa %1$d de %2$d falhou. Próxima: %3$s', 'mailbridge'),
+                    __('Tentativa %1$d de %2$d falhou. Próxima: %3$s', 'mailtech'),
                     $row['tries'],
                     $max_retries + 1,
                     Html::convDateTime($row['send_time'])
                 );
             case QueueState::FAILED:
                 return sprintf(
-                    _n('Parou após %d tentativa', 'Parou após %d tentativas', $row['tries'], 'mailbridge'),
+                    _n('Parou após %d tentativa', 'Parou após %d tentativas', $row['tries'], 'mailtech'),
                     $row['tries']
                 );
         }
 
-        return sprintf(__('Criado em %s', 'mailbridge'), Html::convDateTime($row['create_time']));
+        return sprintf(__('Criado em %s', 'mailtech'), Html::convDateTime($row['create_time']));
     }
 
     /**
@@ -187,7 +187,7 @@ final class QueueScreen
         foreach (FailureLog::forQueueIds([$id])[$id] ?? [] as $failure) {
             $explained = $failure['error'] !== ''
                 ? ErrorExplainer::explain($failure['error'])
-                : ['title' => __('O GLPI não registrou o motivo desta falha.', 'mailbridge'), 'advice' => []];
+                : ['title' => __('O GLPI não registrou o motivo desta falha.', 'mailtech'), 'advice' => []];
             $attempts[] = [
                 'date'      => Html::convDateTime($failure['date']),
                 'title'     => $explained['title'],

@@ -1,18 +1,18 @@
-{% extends '@mailbridge/layout.html.twig' %}
+{% extends '@mailtech/layout.html.twig' %}
 
 {% block content %}
    <div class="card">
       <div class="card-header">
-         <h2 class="card-title h4 m-0">{{ __('Mensagens dos avisos', 'mailbridge') }}</h2>
+         <h2 class="card-title h4 m-0">{{ __('Mensagens dos avisos', 'mailtech') }}</h2>
       </div>
       {% if list is empty %}
          <div class="card-body text-center">
-            <p class="mb-2">{{ __('Ainda não há mensagens: cada regra de aviso tem a sua.', 'mailbridge') }}</p>
-            <a class="btn btn-primary" href="{{ events_url }}">{{ __('Criar uma regra', 'mailbridge') }}</a>
+            <p class="mb-2">{{ __('Ainda não há mensagens: cada regra de aviso tem a sua.', 'mailtech') }}</p>
+            <a class="btn btn-primary" href="{{ events_url }}">{{ __('Criar uma regra', 'mailtech') }}</a>
          </div>
       {% else %}
          <div class="card-body pb-0">
-            <p class="tm-soft">{{ __('Cada regra tem a própria mensagem. Escolha uma para editar o assunto e o texto, ver a prévia e enviar um teste.', 'mailbridge') }}</p>
+            <p class="tm-soft">{{ __('Cada regra tem a própria mensagem. Escolha uma para editar o assunto e o texto, ver a prévia e enviar um teste.', 'mailtech') }}</p>
          </div>
          <ul class="list-group list-group-flush">
             {% for item in list %}
@@ -21,17 +21,17 @@
                      <div class="flex-fill tm-minw">
                         <div>
                            <strong class="tm-break">{{ item.name }}</strong>
-                           {% if not item.active %}<span class="badge bg-secondary-lt">{{ __('Regra desligada', 'mailbridge') }}</span>{% endif %}
+                           {% if not item.active %}<span class="badge bg-secondary-lt">{{ __('Regra desligada', 'mailtech') }}</span>{% endif %}
                            {% for language in item.languages %}
-                              <span class="badge bg-secondary-lt" title="{{ __('Modelo traduzido para este idioma', 'mailbridge') }}">{{ language }}</span>
+                              <span class="badge bg-secondary-lt" title="{{ __('Modelo traduzido para este idioma', 'mailtech') }}">{{ language }}</span>
                            {% endfor %}
                         </div>
                         <div class="tm-soft">{{ item.event }}</div>
-                        <div class="tm-break"><span class="tm-soft">{{ __('Assunto:', 'mailbridge') }}</span> {{ item.subject }}</div>
+                        <div class="tm-break"><span class="tm-soft">{{ __('Assunto:', 'mailtech') }}</span> {{ item.subject }}</div>
                      </div>
                      <a class="btn btn-sm btn-outline-secondary" href="{{ item.url }}"
-                        aria-label="{{ __('Editar a mensagem de %s', 'mailbridge')|format(item.name) }}">
-                        <i class="ti ti-pencil" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailbridge') }}
+                        aria-label="{{ __('Editar a mensagem de %s', 'mailtech')|format(item.name) }}">
+                        <i class="ti ti-pencil" aria-hidden="true"></i> {{ __('Editar mensagem', 'mailtech') }}
                      </a>
                   </div>
                </li>

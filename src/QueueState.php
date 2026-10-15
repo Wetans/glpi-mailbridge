@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Situação de cada e-mail da fila do GLPI e o que pode ser feito com ele.
@@ -48,15 +48,15 @@ final class QueueState
     {
         switch ($state) {
             case self::PENDING:
-                return __('Na fila', 'mailbridge');
+                return __('Na fila', 'mailtech');
             case self::RETRYING:
-                return __('Falhou, vai tentar de novo', 'mailbridge');
+                return __('Falhou, vai tentar de novo', 'mailtech');
             case self::SENT:
-                return __('Enviado', 'mailbridge');
+                return __('Enviado', 'mailtech');
             case self::FAILED:
-                return __('Não foi entregue', 'mailbridge');
+                return __('Não foi entregue', 'mailtech');
             case self::CANCELLED:
-                return __('Cancelado', 'mailbridge');
+                return __('Cancelado', 'mailtech');
         }
 
         return $state;

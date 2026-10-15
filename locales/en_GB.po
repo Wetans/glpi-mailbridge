@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: MailBridge\n"
+"Project-Id-Version: MailTech\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -8,8 +8,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ajax/action.php
-msgid "O MailBridge está desativado. Ative-o em Configurar > Plugins."
-msgstr "MailBridge is turned off. Activate it in Setup > Plugins."
+msgid "O MailTech está desativado. Ative-o em Configurar > Plugins."
+msgstr "MailTech is turned off. Activate it in Setup > Plugins."
 
 #: src/Actions.php
 msgid "Muitos testes em pouco tempo. Espere %d segundo e tente de novo."
@@ -76,8 +76,8 @@ msgid "Não entendi o que foi pedido. Recarregue a página e tente de novo."
 msgstr "The request was not understood. Reload the page and try again."
 
 #: src/Actions.php
-msgid "Seu perfil não tem permissão para fazer isso no MailBridge."
-msgstr "Your profile is not allowed to do this in MailBridge."
+msgid "Seu perfil não tem permissão para fazer isso no MailTech."
+msgstr "Your profile is not allowed to do this in MailTech."
 
 #: src/Actions.php
 msgid "Algo deu errado ao executar a ação. Nada foi alterado; tente de novo."
@@ -136,12 +136,12 @@ msgid "O %s recusa e-mails com esse remetente. Em \"E-mail do remetente\", infor
 msgstr "%s refuses e-mails from that sender. In \"Sender email\", enter the address of the account that signs in, click Save and test again."
 
 #: src/Actions.php
-msgid "Avisos do MailBridge ligados."
-msgstr "MailBridge notices turned on."
+msgid "Avisos do MailTech ligados."
+msgstr "MailTech notices turned on."
 
 #: src/Actions.php
-msgid "Avisos do MailBridge desligados: as regras não geram e-mails até você ligar de novo."
-msgstr "MailBridge notices turned off: the rules create no emails until you turn them on again."
+msgid "Avisos do MailTech desligados: as regras não geram e-mails até você ligar de novo."
+msgstr "MailTech notices turned off: the rules create no emails until you turn them on again."
 
 #: src/Actions.php
 msgid "Essa regra não existe mais. Recarregue a página."
@@ -232,12 +232,12 @@ msgid "Regras da fila salvas."
 msgstr "Queue rules saved."
 
 #: src/Actions.php
-msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge SERÃO apagados."
-msgstr "Saved: when the plugin is uninstalled, MailBridge rules, templates and settings WILL be deleted."
+msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailTech SERÃO apagados."
+msgstr "Saved: when the plugin is uninstalled, MailTech rules, templates and settings WILL be deleted."
 
 #: src/Actions.php
-msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge ficam guardados."
-msgstr "Saved: when the plugin is uninstalled, MailBridge rules, templates and settings are kept."
+msgid "Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailTech ficam guardados."
+msgstr "Saved: when the plugin is uninstalled, MailTech rules, templates and settings are kept."
 
 #: src/Actions.php
 msgid "Escolha o arquivo .json gerado pelo botão \"Exportar\" antes de importar."
@@ -256,8 +256,8 @@ msgid "Servidor de envio importado: digite a senha de novo em Envio."
 msgstr "Mail server imported: type the password again under Sending."
 
 #: src/Actions.php
-msgid "Ajustes do MailBridge restaurados para o padrão. As regras, os modelos e o servidor de envio não foram alterados."
-msgstr "MailBridge settings restored to their defaults. Rules, templates and the mail server were not changed."
+msgid "Ajustes do MailTech restaurados para o padrão. As regras, os modelos e o servidor de envio não foram alterados."
+msgstr "MailTech settings restored to their defaults. Rules, templates and the mail server were not changed."
 
 #: src/Audit.php src/Template.php
 msgid "Sistema"
@@ -360,52 +360,52 @@ msgid "Anexar documentos do chamado"
 msgstr "Attach ticket documents"
 
 #: src/Audit.php
-msgid "Avisos do MailBridge (liga/desliga)"
-msgstr "MailBridge notices (on/off)"
+msgid "Avisos do MailTech (liga/desliga)"
+msgstr "MailTech notices (on/off)"
 
 #: src/Audit.php
-msgid "MailBridge: enviar na hora"
-msgstr "MailBridge: send immediately"
+msgid "MailTech: enviar na hora"
+msgstr "MailTech: send immediately"
 
 #: src/Audit.php
-msgid "MailBridge: remetente próprio"
-msgstr "MailBridge: own sender"
+msgid "MailTech: remetente próprio"
+msgstr "MailTech: own sender"
 
 #: src/Audit.php
-msgid "MailBridge: nome do remetente próprio"
-msgstr "MailBridge: own sender name"
+msgid "MailTech: nome do remetente próprio"
+msgstr "MailTech: own sender name"
 
 #: src/Audit.php
-msgid "MailBridge: registro detalhado"
-msgstr "MailBridge: detailed log"
+msgid "MailTech: registro detalhado"
+msgstr "MailTech: detailed log"
 
 #: src/Audit.php
-msgid "MailBridge: nunca enviar para"
-msgstr "MailBridge: never send to"
+msgid "MailTech: nunca enviar para"
+msgstr "MailTech: never send to"
 
 #: src/Audit.php
-msgid "MailBridge: só enviar para"
-msgstr "MailBridge: only send to"
+msgid "MailTech: só enviar para"
+msgstr "MailTech: only send to"
 
 #: src/Audit.php
-msgid "MailBridge: escolhas por entidade"
-msgstr "MailBridge: choices per entity"
+msgid "MailTech: escolhas por entidade"
+msgstr "MailTech: choices per entity"
 
 #: src/Audit.php
-msgid "MailBridge: último teste com sucesso"
-msgstr "MailBridge: last successful test"
+msgid "MailTech: último teste com sucesso"
+msgstr "MailTech: last successful test"
 
 #: src/Audit.php
-msgid "MailBridge: apagar dados ao desinstalar"
-msgstr "MailBridge: delete data on uninstall"
+msgid "MailTech: apagar dados ao desinstalar"
+msgstr "MailTech: delete data on uninstall"
 
 #: src/Audit.php
-msgid "MailBridge: dados trazidos do plugin antigo"
-msgstr "MailBridge: data brought over from the old plugin"
+msgid "MailTech: dados trazidos do plugin antigo"
+msgstr "MailTech: data brought over from the old plugin"
 
 #: src/Audit.php
-msgid "MailBridge: configuração usada no último teste"
-msgstr "MailBridge: settings used in the last test"
+msgid "MailTech: configuração usada no último teste"
+msgstr "MailTech: settings used in the last test"
 
 #: src/ErrorExplainer.php src/Health.php
 msgid "Falta guardar a senha do servidor de envio."
@@ -666,28 +666,28 @@ msgid "Ligar o envio"
 msgstr "Turn sending on"
 
 #: src/Health.php
-msgid "Os avisos do MailBridge estão ligados."
-msgstr "MailBridge notices are on."
+msgid "Os avisos do MailTech estão ligados."
+msgstr "MailTech notices are on."
 
 #: src/Health.php
-msgid "Os avisos do MailBridge estão desligados."
-msgstr "MailBridge notices are off."
+msgid "Os avisos do MailTech estão desligados."
+msgstr "MailTech notices are off."
 
 #: src/Health.php
-msgid "As regras do MailBridge não geram e-mails enquanto estiver desligado."
-msgstr "MailBridge rules create no emails while it is off."
+msgid "As regras do MailTech não geram e-mails enquanto estiver desligado."
+msgstr "MailTech rules create no emails while it is off."
 
 #: src/Health.php
 msgid "Ligar os avisos"
 msgstr "Turn notices on"
 
 #: src/Health.php
-msgid "O plugin antigo (Techmail) está ativo junto com o MailBridge."
-msgstr "The old plugin (Techmail) is active together with MailBridge."
+msgid "O plugin antigo (%s) está ativo junto com o MailTech."
+msgstr "The old plugin (%s) is active together with MailTech."
 
 #: src/Health.php
-msgid "Para não mandar o mesmo aviso duas vezes, os avisos do MailBridge ficam parados. Desative o Techmail em Configurar > Plugins."
-msgstr "To avoid sending the same notice twice, MailBridge notices are paused. Deactivate Techmail in Setup > Plugins."
+msgid "Para não mandar o mesmo aviso duas vezes, os avisos do MailTech ficam parados. Desative o %s em Configurar > Plugins."
+msgstr "To avoid sending the same notice twice, MailTech notices are paused. Deactivate %s in Setup > Plugins."
 
 #: src/Health.php
 msgid "Envio pela função de e-mail do próprio servidor do GLPI."
@@ -822,8 +822,8 @@ msgid "Nenhuma regra de aviso está ligada."
 msgstr "No notice rule is turned on."
 
 #: src/Health.php
-msgid "Sem regras ligadas, o MailBridge não avisa ninguém."
-msgstr "With no rule turned on, MailBridge notifies nobody."
+msgid "Sem regras ligadas, o MailTech não avisa ninguém."
+msgstr "With no rule turned on, MailTech notifies nobody."
 
 #: src/Health.php
 msgid "Ver as regras"
@@ -842,8 +842,8 @@ msgid "O registro em arquivos do GLPI está desligado."
 msgstr "GLPI logging to files is turned off."
 
 #: src/Health.php
-msgid "Sem ele o MailBridge não consegue mostrar o motivo das falhas de envio. Ligue em Configurar > Geral > Sistema."
-msgstr "Without it MailBridge cannot show why an email failed. Turn it on under Setup > General > System."
+msgid "Sem ele o MailTech não consegue mostrar o motivo das falhas de envio. Ligue em Configurar > Geral > Sistema."
+msgstr "Without it MailTech cannot show why an email failed. Turn it on under Setup > General > System."
 
 #: src/Health.php
 msgid "Os links dos e-mails apontam para \"%s\"."
@@ -870,8 +870,8 @@ msgid "Enviar um e-mail de teste com sucesso"
 msgstr "Send a test email successfully"
 
 #: src/Health.php
-msgid "Ligar o envio de e-mails e os avisos do MailBridge"
-msgstr "Turn on email sending and MailBridge notices"
+msgid "Ligar o envio de e-mails e os avisos do MailTech"
+msgstr "Turn on email sending and MailTech notices"
 
 #: src/Health.php
 msgid "Ela só roda enquanto alguém usa o GLPI; para envio contínuo, peça para agendar o \"cron\" do GLPI no servidor."
@@ -918,12 +918,12 @@ msgid "há menos de 1 minuto"
 msgstr "less than 1 minute ago"
 
 #: src/Notifier.php
-msgid "Este é um e-mail de teste do plugin MailBridge. Se você está lendo isto, o envio de e-mails do GLPI está funcionando."
-msgstr "This is a test email from the MailBridge plugin. If you are reading this, GLPI email sending is working."
+msgid "Este é um e-mail de teste do plugin MailTech. Se você está lendo isto, o envio de e-mails do GLPI está funcionando."
+msgstr "This is a test email from the MailTech plugin. If you are reading this, GLPI email sending is working."
 
 #: src/Notifier.php
-msgid "[GLPI] E-mail de teste do MailBridge"
-msgstr "[GLPI] MailBridge test email"
+msgid "[GLPI] E-mail de teste do MailTech"
+msgstr "[GLPI] MailTech test email"
 
 #: src/Page.php
 msgid "Visão geral"
@@ -1006,12 +1006,12 @@ msgid "Não consegui ler o arquivo: ele precisa ser o arquivo .json gerado pelo 
 msgstr "The file could not be read: it must be the .json file created by the \"Export\" button."
 
 #: src/Porter.php
-msgid "Este arquivo não é uma exportação do MailBridge."
-msgstr "This file is not a MailBridge export."
+msgid "Este arquivo não é uma exportação do MailTech."
+msgstr "This file is not a MailTech export."
 
 #: src/Porter.php
-msgid "Este arquivo foi gerado por uma versão mais nova do MailBridge. Atualize o plugin antes de importar."
-msgstr "This file was created by a newer version of MailBridge. Update the plugin before importing."
+msgid "Este arquivo foi gerado por uma versão mais nova do MailTech. Atualize o plugin antes de importar."
+msgstr "This file was created by a newer version of MailTech. Update the plugin before importing."
 
 #: src/Porter.php
 msgid "A configuração do servidor de envio do arquivo tem erros e não foi importada."
@@ -1022,20 +1022,20 @@ msgid "Regra \"%s\" ignorada: %s"
 msgstr "Rule \"%s\" skipped: %s"
 
 #: src/Profile.php
-msgid "MailBridge (e-mails de notificação)"
-msgstr "MailBridge (notification emails)"
+msgid "MailTech (e-mails de notificação)"
+msgstr "MailTech (notification emails)"
 
 #: src/Profile.php
-msgid "Quem já tem o direito de alterar a configuração geral do GLPI tem acesso total ao MailBridge, mesmo sem marcar nada aqui."
-msgstr "Anyone allowed to change GLPI's general setup has full access to MailBridge, even with nothing ticked here."
+msgid "Quem já tem o direito de alterar a configuração geral do GLPI tem acesso total ao MailTech, mesmo sem marcar nada aqui."
+msgstr "Anyone allowed to change GLPI's general setup has full access to MailTech, even with nothing ticked here."
 
 #: src/Queue.php
-msgid "MailBridge: e-mail de teste"
-msgstr "MailBridge: test email"
+msgid "MailTech: e-mail de teste"
+msgstr "MailTech: test email"
 
 #: src/Queue.php
-msgid "MailBridge: %s"
-msgstr "MailBridge: %s"
+msgid "MailTech: %s"
+msgstr "MailTech: %s"
 
 #: src/Queue.php
 msgid "Aviso do GLPI"
@@ -1244,8 +1244,8 @@ msgid "Evento inválido."
 msgstr "Invalid event."
 
 #: src/Screen/EventsScreen.php templates/events.html.twig
-msgid "Avisos do MailBridge"
-msgstr "MailBridge notices"
+msgid "Avisos do MailTech"
+msgstr "MailTech notices"
 
 #: src/Screen/EventsScreen.php
 msgid "Por entidade"
@@ -1618,8 +1618,8 @@ msgid "Assinatura longa demais: use até 2000 caracteres."
 msgstr "Signature too long: use up to 2000 characters."
 
 #: src/Validation.php
-msgid "E-mail do remetente do MailBridge inválido. Exemplo: suporte@suaempresa.com.br"
-msgstr "Invalid MailBridge sender email. Example: support@yourcompany.com"
+msgid "E-mail do remetente do MailTech inválido. Exemplo: suporte@suaempresa.com.br"
+msgstr "Invalid MailTech sender email. Example: support@yourcompany.com"
 
 #: src/Validation.php
 msgid "Não entendi: %s. Use um endereço (pessoa@empresa.com) ou um domínio (@empresa.com) por linha."
@@ -1750,8 +1750,8 @@ msgid "Manutenção"
 msgstr "Maintenance"
 
 #: templates/diagnostics.html.twig
-msgid "Apagar os dados do MailBridge ao desinstalar o plugin"
-msgstr "Delete MailBridge data when the plugin is uninstalled"
+msgid "Apagar os dados do MailTech ao desinstalar o plugin"
+msgstr "Delete MailTech data when the plugin is uninstalled"
 
 #: templates/diagnostics.html.twig
 msgid "Desligado (recomendado): ao desinstalar, regras, modelos e ajustes ficam guardados para uma reinstalação."
@@ -1762,12 +1762,12 @@ msgid "Salvar"
 msgstr "Save"
 
 #: templates/diagnostics.html.twig
-msgid "Volta os ajustes próprios do MailBridge ao padrão (avisos ligados, sem remetente próprio, sem listas, sem escolhas por entidade). Não mexe nas regras, nos modelos nem no servidor de envio."
-msgstr "Returns MailBridge's own settings to their defaults (notices on, no own sender, no lists, no choices per entity). Rules, templates and the mail server are not touched."
+msgid "Volta os ajustes próprios do MailTech ao padrão (avisos ligados, sem remetente próprio, sem listas, sem escolhas por entidade). Não mexe nas regras, nos modelos nem no servidor de envio."
+msgstr "Returns MailTech's own settings to their defaults (notices on, no own sender, no lists, no choices per entity). Rules, templates and the mail server are not touched."
 
 #: templates/diagnostics.html.twig
-msgid "Restaurar os ajustes do MailBridge para o padrão? Remetente próprio, listas e escolhas por entidade serão apagados."
-msgstr "Restore MailBridge settings to their defaults? The own sender, the lists and the choices per entity will be removed."
+msgid "Restaurar os ajustes do MailTech para o padrão? Remetente próprio, listas e escolhas por entidade serão apagados."
+msgstr "Restore MailTech settings to their defaults? The own sender, the lists and the choices per entity will be removed."
 
 #: templates/diagnostics.html.twig
 msgid "Restaurar padrões"
@@ -1778,28 +1778,28 @@ msgid "Permissões e versões"
 msgstr "Permissions and versions"
 
 #: templates/diagnostics.html.twig
-msgid "Quem pode alterar a configuração geral do GLPI tem acesso total ao MailBridge. Para liberar só uma parte a outros perfis, use a aba MailBridge no cadastro do perfil:"
-msgstr "Anyone allowed to change GLPI's general setup has full access to MailBridge. To give other profiles only part of it, use the MailBridge tab of the profile:"
+msgid "Quem pode alterar a configuração geral do GLPI tem acesso total ao MailTech. Para liberar só uma parte a outros perfis, use a aba MailTech no cadastro do perfil:"
+msgstr "Anyone allowed to change GLPI's general setup has full access to MailTech. To give other profiles only part of it, use the MailTech tab of the profile:"
 
 #: templates/diagnostics.html.twig
 msgid "Abrir os perfis"
 msgstr "Open the profiles"
 
 #: templates/diagnostics.html.twig
-msgid "Os dados do plugin antigo (Techmail %1$s) foram trazidos em %2$s: %3$d regras, %4$d traduções de modelos e %5$d perfis com permissão. Nada do plugin antigo foi apagado."
-msgstr "Data from the old plugin (Techmail %1$s) was brought over on %2$s: %3$d rules, %4$d template translations and %5$d profiles with permissions. Nothing from the old plugin was deleted."
+msgid "Os dados do plugin antigo (%1$s %2$s) foram trazidos em %3$s: %4$d regras, %5$d traduções de modelos e %6$d perfis com permissão. Nada do plugin antigo foi apagado."
+msgstr "Data from the old plugin (%1$s %2$s) was brought over on %3$s: %4$d rules, %5$d template translations and %6$d profiles with permissions. Nothing from the old plugin was deleted."
 
 #: templates/diagnostics.html.twig
-msgid "Depois de conferir que está tudo aqui, desinstale o Techmail em Configurar > Plugins."
-msgstr "After checking that everything is here, uninstall Techmail in Setup > Plugins."
+msgid "Depois de conferir que está tudo aqui, desinstale o %s em Configurar > Plugins."
+msgstr "After checking that everything is here, uninstall %s in Setup > Plugins."
 
 #: templates/events.html.twig
 msgid "Partes de Eventos e destinatários"
 msgstr "Parts of Events and recipients"
 
 #: templates/events.html.twig
-msgid "Desligar os avisos do MailBridge? Nenhuma regra abaixo vai gerar e-mail até você ligar de novo. Os avisos nativos do GLPI continuam."
-msgstr "Turn MailBridge notices off? No rule below will create emails until you turn them on again. Native GLPI notices keep working."
+msgid "Desligar os avisos do MailTech? Nenhuma regra abaixo vai gerar e-mail até você ligar de novo. Os avisos nativos do GLPI continuam."
+msgstr "Turn MailTech notices off? No rule below will create emails until you turn them on again. Native GLPI notices keep working."
 
 #: templates/events.html.twig
 msgid "Chave geral: desligada, nenhuma regra abaixo gera e-mail."
@@ -1826,8 +1826,8 @@ msgid "Nenhuma regra criada ainda."
 msgstr "No rule created yet."
 
 #: templates/events.html.twig
-msgid "Sem regras, o MailBridge não avisa ninguém. Crie a primeira em \"Nova regra\"."
-msgstr "Without rules, MailBridge notifies nobody. Create the first one with \"New rule\"."
+msgid "Sem regras, o MailTech não avisa ninguém. Crie a primeira em \"Nova regra\"."
+msgstr "Without rules, MailTech notifies nobody. Create the first one with \"New rule\"."
 
 #: templates/events.html.twig
 msgid "Regra ligada: %s"
@@ -1870,12 +1870,12 @@ msgid "Editar mensagem"
 msgstr "Edit message"
 
 #: templates/events.html.twig
-msgid "Avisos do MailBridge por entidade"
-msgstr "MailBridge notices per entity"
+msgid "Avisos do MailTech por entidade"
+msgstr "MailTech notices per entity"
 
 #: templates/events.html.twig
-msgid "Este GLPI tem uma entidade só: a chave geral \"Avisos do MailBridge\" já vale para tudo. Quando houver mais entidades, você poderá desligar os avisos em cada uma aqui."
-msgstr "This GLPI has a single entity: the master switch \"MailBridge notices\" already covers everything. When there are more entities, you will be able to turn notices off for each one here."
+msgid "Este GLPI tem uma entidade só: a chave geral \"Avisos do MailTech\" já vale para tudo. Quando houver mais entidades, você poderá desligar os avisos em cada uma aqui."
+msgstr "This GLPI has a single entity: the master switch \"MailTech notices\" already covers everything. When there are more entities, you will be able to turn notices off for each one here."
 
 #: templates/events.html.twig
 msgid "\"Seguir a entidade de cima\" usa a escolha da entidade mais próxima acima dela. Se nenhuma tiver escolha, os avisos ficam ligados."
@@ -1930,8 +1930,8 @@ msgid "Avisos nativos do GLPI que saem por e-mail"
 msgstr "Native GLPI notices sent by email"
 
 #: templates/events.html.twig
-msgid "Além das regras do MailBridge, o GLPI tem os próprios avisos (para solicitantes, administradores etc.). Com o envio de e-mails ligado, os que estiverem ligados aqui também disparam."
-msgstr "Besides the MailBridge rules, GLPI has its own notices (for requesters, administrators, etc.). With email sending on, the ones turned on here are sent too."
+msgid "Além das regras do MailTech, o GLPI tem os próprios avisos (para solicitantes, administradores etc.). Com o envio de e-mails ligado, os que estiverem ligados aqui também disparam."
+msgstr "Besides the MailTech rules, GLPI has its own notices (for requesters, administrators, etc.). With email sending on, the ones turned on here are sent too."
 
 #: templates/events.html.twig
 msgid "%1$d de %2$d ligados."
@@ -1998,8 +1998,8 @@ msgid "Integração e diagnóstico de e-mail para o GLPI"
 msgstr "Email Integration & Diagnostics for GLPI"
 
 #: templates/layout.html.twig
-msgid "Seções do MailBridge"
-msgstr "MailBridge sections"
+msgid "Seções do MailTech"
+msgstr "MailTech sections"
 
 #: templates/macros.html.twig
 msgid "Não foi possível salvar. Corrija os campos marcados:"
@@ -2118,8 +2118,8 @@ msgid "Procurar por destinatário ou assunto"
 msgstr "Search by recipient or subject"
 
 #: templates/queue.html.twig
-msgid "Só os do MailBridge"
-msgstr "MailBridge only"
+msgid "Só os do MailTech"
+msgstr "MailTech only"
 
 #: templates/queue.html.twig
 msgid "Limpar busca"
@@ -2430,8 +2430,8 @@ msgid "Enviar e-mails de notificação"
 msgstr "Send notification emails"
 
 #: templates/sending.html.twig
-msgid "Vale para todos os e-mails do GLPI: os avisos do MailBridge e os avisos nativos. Desligado, nenhum e-mail sai."
-msgstr "Applies to every GLPI email: MailBridge notices and native notices. When off, no email goes out."
+msgid "Vale para todos os e-mails do GLPI: os avisos do MailTech e os avisos nativos. Desligado, nenhum e-mail sai."
+msgstr "Applies to every GLPI email: MailTech notices and native notices. When off, no email goes out."
 
 #: templates/sending.html.twig
 msgid "Desligar o envio de e-mails? Nenhuma notificação por e-mail sairá do GLPI e o que já está na fila fica parado até você ligar de novo."
@@ -2562,8 +2562,8 @@ msgid "Equipe de Suporte de TI"
 msgstr "IT Support Team"
 
 #: templates/sending.html.twig
-msgid "Texto colocado no fim dos avisos nativos do GLPI. Os modelos do MailBridge têm o próprio texto."
-msgstr "Text placed at the end of native GLPI notices. MailBridge templates have their own text."
+msgid "Texto colocado no fim dos avisos nativos do GLPI. Os modelos do MailTech têm o próprio texto."
+msgstr "Text placed at the end of native GLPI notices. MailTech templates have their own text."
 
 #: templates/sending.html.twig
 msgid "Opções avançadas dos e-mails"
@@ -2594,16 +2594,16 @@ msgid "Abrir as entidades"
 msgstr "Open the entities"
 
 #: templates/sending.html.twig
-msgid "Opções avançadas dos avisos do MailBridge"
-msgstr "Advanced options for MailBridge notices"
+msgid "Opções avançadas dos avisos do MailTech"
+msgstr "Advanced options for MailTech notices"
 
 #: templates/sending.html.twig
-msgid "Remetente só para o MailBridge (opcional)"
-msgstr "Sender for MailBridge only (optional)"
+msgid "Remetente só para o MailTech (opcional)"
+msgstr "Sender for MailTech only (optional)"
 
 #: templates/sending.html.twig
-msgid "Em branco, os avisos do MailBridge usam o remetente acima."
-msgstr "If empty, MailBridge notices use the sender above."
+msgid "Em branco, os avisos do MailTech usam o remetente acima."
+msgstr "If empty, MailTech notices use the sender above."
 
 #: templates/sending.html.twig
 msgid "Nome desse remetente"
@@ -2622,20 +2622,20 @@ msgid "Registrar o motivo de cada aviso gerado ou ignorado"
 msgstr "Record the reason for each notice created or skipped"
 
 #: templates/sending.html.twig
-msgid "Para investigar por que alguém não recebeu um aviso. Grava no arquivo mailbridge.log do GLPI."
-msgstr "To find out why someone did not receive a notice. Written to GLPI's mailbridge.log file."
+msgid "Para investigar por que alguém não recebeu um aviso. Grava no arquivo mailtech.log do GLPI."
+msgstr "To find out why someone did not receive a notice. Written to GLPI's mailtech.log file."
 
 #: templates/sending.html.twig
-msgid "Nunca enviar avisos do MailBridge para"
-msgstr "Never send MailBridge notices to"
+msgid "Nunca enviar avisos do MailTech para"
+msgstr "Never send MailTech notices to"
 
 #: templates/sending.html.twig
 msgid "Um endereço (pessoa@empresa.com) ou domínio (@empresa.com) por linha."
 msgstr "One address (person@company.com) or domain (@company.com) per line."
 
 #: templates/sending.html.twig
-msgid "Só enviar avisos do MailBridge para"
-msgstr "Only send MailBridge notices to"
+msgid "Só enviar avisos do MailTech para"
+msgstr "Only send MailTech notices to"
 
 #: templates/sending.html.twig
 msgid "Em branco, envia para qualquer endereço. Útil em testes: só os domínios listados recebem."

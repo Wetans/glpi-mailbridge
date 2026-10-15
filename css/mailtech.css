@@ -1,80 +1,80 @@
 /*
- * MailBridge - ajustes visuais das telas do plugin.
- * Tudo fica dentro de ".mailbridge" e usa os componentes do próprio GLPI
+ * MailTech - ajustes visuais das telas do plugin.
+ * Tudo fica dentro de ".mailtech" e usa os componentes do próprio GLPI
  * (Bootstrap/Tabler). Não define cores de texto: herda as do tema em uso.
  */
 
-.mailbridge .tm-soft,
-.mailbridge .form-text {
+.mailtech .tm-soft,
+.mailtech .form-text {
    color: inherit;
    opacity: .75;
 }
 
 /* Bloco de texto que divide a linha com botões: encolhe antes de quebrar. */
-.mailbridge .tm-minw {
+.mailtech .tm-minw {
    flex: 1 1 12rem !important;
    min-width: 0;
 }
 
 /* Seções: numa tela estreita a barra rola de lado em vez de quebrar. */
-.mailbridge .tm-nav {
+.mailtech .tm-nav {
    flex-wrap: nowrap;
    min-width: 0; /* dentro de uma linha flexível, encolhe e rola em vez de alargar a página */
    overflow-x: auto;
    overflow-y: hidden;
 }
 
-.mailbridge .tm-nav .nav-link {
+.mailtech .tm-nav .nav-link {
    white-space: nowrap;
 }
 
-.mailbridge .tm-status-badge {
+.mailtech .tm-status-badge {
    font-size: .875rem;
    text-decoration: none;
 }
 
-.mailbridge .tm-counter {
+.mailtech .tm-counter {
    font-size: 2rem;
    font-weight: 600;
    line-height: 1.1;
 }
 
 /* Foco sempre visível, em qualquer tema. */
-.mailbridge a:focus-visible,
-.mailbridge button:focus-visible,
-.mailbridge summary:focus-visible,
-.mailbridge .form-check-input:focus-visible,
-.mailbridge [tabindex]:focus-visible {
+.mailtech a:focus-visible,
+.mailtech button:focus-visible,
+.mailtech summary:focus-visible,
+.mailtech .form-check-input:focus-visible,
+.mailtech [tabindex]:focus-visible {
    outline: 2px solid currentColor;
    outline-offset: 2px;
 }
 
 /* Opções avançadas recolhidas. */
-.mailbridge details.tm-advanced > summary {
+.mailtech details.tm-advanced > summary {
    cursor: pointer;
    font-weight: 600;
    padding: .5rem 0;
 }
 
-.mailbridge details.tm-advanced[open] > summary {
+.mailtech details.tm-advanced[open] > summary {
    margin-bottom: .5rem;
 }
 
 /* Barra de salvar sempre à vista. */
-.mailbridge .tm-savebar {
+.mailtech .tm-savebar {
    position: sticky;
    bottom: 0;
    z-index: 5;
 }
 
 /* Resultado dos testes, passo a passo. */
-.mailbridge .tm-steps {
+.mailtech .tm-steps {
    list-style: none;
    margin: 0;
    padding: 0;
 }
 
-.mailbridge .tm-steps li {
+.mailtech .tm-steps li {
    align-items: baseline;
    display: flex;
    gap: .5rem;
@@ -82,18 +82,18 @@
 }
 
 /* Variáveis clicáveis do editor de modelos. */
-.mailbridge .tm-vars {
+.mailtech .tm-vars {
    display: flex;
    flex-wrap: wrap;
    gap: .35rem;
 }
 
-.mailbridge .tm-vars .btn {
+.mailtech .tm-vars .btn {
    font-family: var(--tblr-font-monospace, monospace);
    font-size: .8rem;
 }
 
-.mailbridge .tm-preview {
+.mailtech .tm-preview {
    background: #fff;
    border: 1px solid rgba(128, 128, 128, .35);
    border-radius: 4px;
@@ -101,7 +101,7 @@
    width: 100%;
 }
 
-.mailbridge .tm-pre {
+.mailtech .tm-pre {
    max-height: 20rem;
    overflow: auto;
    white-space: pre-wrap;
@@ -109,31 +109,31 @@
 }
 
 /* Tabelas largas rolam dentro do próprio cartão. */
-.mailbridge .tm-table-wrap {
+.mailtech .tm-table-wrap {
    overflow-x: auto;
    position: relative; /* textos só para leitores de tela (posição absoluta) ficam presos aqui */
 }
 
-.mailbridge .tm-table td,
-.mailbridge .tm-table th {
+.mailtech .tm-table td,
+.mailtech .tm-table th {
    vertical-align: middle;
 }
 
-.mailbridge .tm-break {
+.mailtech .tm-break {
    overflow-wrap: anywhere;
 }
 
-.mailbridge .tm-busy {
+.mailtech .tm-busy {
    opacity: .6;
    pointer-events: none;
 }
 
 @media (max-width: 575.98px) {
-   .mailbridge .tm-hide-xs {
+   .mailtech .tm-hide-xs {
       display: none !important;
    }
 
-   .mailbridge .tm-savebar .btn {
+   .mailtech .tm-savebar .btn {
       flex: 1 1 auto;
    }
 }
@@ -142,12 +142,12 @@
  * Sub-abas (pílulas): a cor de destaque de alguns temas do GLPI é clara demais
  * para servir de fundo de texto, então a aba atual usa a cor do texto do tema.
  */
-.mailbridge .nav-pills .nav-link {
+.mailtech .nav-pills .nav-link {
    border-radius: 4px;
    color: inherit;
 }
 
-.mailbridge .nav-pills .nav-link.active {
+.mailtech .nav-pills .nav-link.active {
    background: rgba(128, 128, 128, .2);
    box-shadow: inset 0 -2px 0 currentColor;
    color: inherit;
@@ -155,35 +155,35 @@
 }
 
 /* Texto menor (a classe "small" do GLPI muda a largura do elemento, por isso não é usada). */
-.mailbridge .tm-small {
+.mailtech .tm-small {
    font-size: .8125rem;
 }
 
 /* Larguras mínimas das colunas da fila (em tela estreita a tabela rola de lado). */
-.mailbridge .tm-col-state {
+.mailtech .tm-col-state {
    min-width: 13rem;
 }
 
-.mailbridge .tm-col-to {
+.mailtech .tm-col-to {
    min-width: 11rem;
 }
 
-.mailbridge .tm-col-subject {
+.mailtech .tm-col-subject {
    min-width: 13rem;
 }
 
 /* Botões com texto longo quebram a linha em vez de alargar a página. */
-.mailbridge .btn {
+.mailtech .btn {
    white-space: normal;
 }
 
 /* Identidade: marca (envelope + ligação) e frase de apresentação. Herdam a cor do tema em uso. */
-.mailbridge .tm-logo {
+.mailtech .tm-logo {
    margin-right: .2rem;
    vertical-align: -7px;
 }
 
-.mailbridge .tm-tagline {
+.mailtech .tm-tagline {
    font-size: .9rem;
    opacity: .75;
 }

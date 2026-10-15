@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use QueuedNotification;
 
@@ -20,7 +20,7 @@ final class FailureLog
 
     public static function getTable(): string
     {
-        return 'glpi_plugin_mailbridge_failures';
+        return 'glpi_plugin_mailtech_failures';
     }
 
     /**
@@ -84,7 +84,7 @@ final class FailureLog
 
         // Reconstrói a frase exata que o GLPI escreveu (no idioma desta execução),
         // com um marcador no lugar do erro.
-        $marker = "\x01MAILBRIDGE\x01";
+        $marker = "\x01MAILTECH\x01";
         $line   = sprintf(
             __('%1$s. Message: %2$s, Error: %3$s'),
             sprintf(

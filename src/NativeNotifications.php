@@ -1,13 +1,13 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Notification;
 use NotificationTarget;
 
 /**
  * Avisos por e-mail NATIVOS do GLPI (os de Configurar > Notificações).
- * Com o modo e-mail ligado eles também disparam; o MailBridge só os lista e
+ * Com o modo e-mail ligado eles também disparam; o MailTech só os lista e
  * permite ligar/desligar cada um. Destinatários e modelos deles continuam
  * sendo editados na tela nativa.
  */

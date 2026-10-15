@@ -1,13 +1,13 @@
 <?php
 
-use GlpiPlugin\Mailbridge\Db;
-use GlpiPlugin\Mailbridge\FailureLog;
-use GlpiPlugin\Mailbridge\LegacyImport;
-use GlpiPlugin\Mailbridge\Rights;
-use GlpiPlugin\Mailbridge\Rule;
-use GlpiPlugin\Mailbridge\Settings;
-use GlpiPlugin\Mailbridge\Text;
-use GlpiPlugin\Mailbridge\Translation;
+use GlpiPlugin\Mailtech\Db;
+use GlpiPlugin\Mailtech\FailureLog;
+use GlpiPlugin\Mailtech\LegacyImport;
+use GlpiPlugin\Mailtech\Rights;
+use GlpiPlugin\Mailtech\Rule;
+use GlpiPlugin\Mailtech\Settings;
+use GlpiPlugin\Mailtech\Text;
+use GlpiPlugin\Mailtech\Translation;
 
 /**
  * Instalação e atualização (a mesma função serve para os dois casos e pode
@@ -17,17 +17,17 @@ use GlpiPlugin\Mailbridge\Translation;
  * - Techmail 1.1.0: novos destinatários (solicitantes, observadores), versão
  *                   em texto do modelo, traduções de modelos, motivo das
  *                   falhas de envio e permissões finas.
- * - MailBridge 1.0: o plugin passa a se chamar MailBridge (pasta `mailbridge`).
- *                   Se existir uma instalação com o nome antigo (Techmail), os
- *                   dados dela são COPIADOS para cá (veja LegacyImport); nada
- *                   do antigo é apagado.
+ * - MailTech 1.0:    o plugin passa a se chamar MailTech (pasta `mailtech`).
+ *                   Se existir uma instalação com um nome anterior (MailBridge,
+ *                   pasta `mailbridge`, ou Techmail), os dados dela são COPIADOS
+ *                   para cá (veja LegacyImport); nada do anterior é apagado.
  */
-function plugin_mailbridge_install(): bool
+function plugin_mailtech_install(): bool
 {
     /** @var DBmysql $DB */
     global $DB;
 
-    $migration = new Migration(PLUGIN_MAILBRIDGE_VERSION);
+    $migration = new Migration(PLUGIN_MAILTECH_VERSION);
 
     $charset   = DBConnection::getDefaultCharset();
     $collation = DBConnection::getDefaultCollation();
@@ -138,14 +138,14 @@ function plugin_mailbridge_install(): bool
     if (!$DB->tableExists($table)) {
         $query = "CREATE TABLE `$table` (
             `id` int {$key_sign} NOT NULL AUTO_INCREMENT,
-            `plugin_mailbridge_rules_id` int {$key_sign} NOT NULL DEFAULT '0',
+            `plugin_mailtech_rules_id` int {$key_sign} NOT NULL DEFAULT '0',
             `language` varchar(10) NOT NULL DEFAULT '',
             `subject` varchar(255) DEFAULT NULL,
             `body` mediumtext,
             `body_text` mediumtext,
             `date_mod` timestamp NULL DEFAULT NULL,
             PRIMARY KEY (`id`),
-            UNIQUE KEY `unicity` (`plugin_mailbridge_rules_id`,`language`),
+            UNIQUE KEY `unicity` (`plugin_mailtech_rules_id`,`language`),
             KEY `date_mod` (`date_mod`)
         ) {$suffix};";
         if (!Db::run($query)) {
@@ -178,11 +178,12 @@ function plugin_mailbridge_install(): bool
         }
     }
 
-    // MailBridge 1.0: traz os dados de uma instalação com o nome antigo (Techmail), sem apagar nada dela.
+    // MailTech 1.0: traz os dados de uma instalação com um nome anterior (MailBridge ou Techmail), sem apagar nada dela.
     $imported = LegacyImport::run();
     if (!empty($imported['ran'])) {
         $migration->displayMessage(sprintf(
-            'Dados do Techmail %s trazidos para o MailBridge: %d regras, %d traduções, %d ajustes, %d perfis com permissão.',
+            'Dados do %s %s trazidos para o MailTech: %d regras, %d traduções, %d ajustes, %d perfis com permissão.',
+            $imported['name'],
             $imported['version'],
             $imported['rules'],
             $imported['translations'],
@@ -190,7 +191,7 @@ function plugin_mailbridge_install(): bool
             $imported['rights']
         ));
         if (!empty($imported['deactivated'])) {
-            $migration->displayMessage('O plugin Techmail foi desativado (os dados dele continuam guardados).');
+            $migration->displayMessage('O plugin anterior foi desativado (os dados dele continuam guardados).');
         }
     } elseif ($first_time && !$with_legacy) {
         $seed_examples();
@@ -215,11 +216,12 @@ function plugin_mailbridge_install(): bool
 /**
  * Desinstalação: por padrão NÃO apaga nada (regras, modelos, traduções e
  * ajustes ficam guardados para uma reinstalação). Só apaga se a opção
- * "Apagar os dados ao desinstalar" estiver ligada em MailBridge > Diagnóstico.
+ * "Apagar os dados ao desinstalar" estiver ligada em MailTech > Diagnóstico.
  * Os e-mails já colocados na fila do GLPI nunca são tocados, e os dados de uma
- * instalação antiga (Techmail) também não: quem os apaga é o plugin antigo.
+ * instalação anterior (MailBridge, Techmail) também não: quem os apaga é o
+ * plugin anterior.
  */
-function plugin_mailbridge_uninstall(): bool
+function plugin_mailtech_uninstall(): bool
 {
     /** @var DBmysql $DB */
     global $DB;

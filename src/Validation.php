@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Validação de tudo que chega das telas. Classe pura: não lê nem grava nada,
@@ -129,7 +129,7 @@ final class Validation
         ]);
         [, $empty]  = self::sending(['transport' => 'smtp', 'security' => 'none', 'mailing_on' => 1]);
         [, $policy] = self::queuePolicy([]);
-        [, $own]    = self::mailbridge(['sender_email' => 'x']);
+        [, $own]    = self::mailtech(['sender_email' => 'x']);
 
         return $invalid + $policy + $own + [
             'smtp_host_required'  => $empty['smtp_host'] ?? '',
@@ -163,18 +163,18 @@ final class Validation
             $modes    = ['none' => 1, 'ssl' => 2, 'tls' => 3];
             $security = (string) ($in['security'] ?? 'none');
             if (!isset($modes[$security])) {
-                $errors['security'] = __('Escolha o tipo de segurança da conexão.', 'mailbridge');
+                $errors['security'] = __('Escolha o tipo de segurança da conexão.', 'mailtech');
             } else {
                 $clean['smtp_mode'] = $modes[$security];
             }
 
             $host = trim((string) ($in['smtp_host'] ?? ''));
             if ($host === '') {
-                $errors['smtp_host'] = __('Informe o servidor de envio. Exemplo: smtp.suaempresa.com.br', 'mailbridge');
+                $errors['smtp_host'] = __('Informe o servidor de envio. Exemplo: smtp.suaempresa.com.br', 'mailtech');
             } elseif (!self::isHost($host)) {
                 $errors['smtp_host'] = __(
                     'Servidor inválido: digite só o nome ou o IP, sem "http://", sem espaços e sem a porta. Exemplo: smtp.suaempresa.com.br',
-                    'mailbridge'
+                    'mailtech'
                 );
             } else {
                 $clean['smtp_host'] = strtolower($host);
@@ -182,14 +182,14 @@ final class Validation
 
             $port = self::intBetween($in['smtp_port'] ?? '', 1, 65535);
             if ($port === null) {
-                $errors['smtp_port'] = __('Porta inválida: use um número de 1 a 65535. As mais comuns são 587, 465 e 25.', 'mailbridge');
+                $errors['smtp_port'] = __('Porta inválida: use um número de 1 a 65535. As mais comuns são 587, 465 e 25.', 'mailtech');
             } else {
                 $clean['smtp_port'] = $port;
             }
 
             $username = (string) ($in['smtp_username'] ?? '');
             if (preg_match('/[\x00-\x1F\x7F]/', $username) || strlen($username) > 255) {
-                $errors['smtp_username'] = __('Usuário inválido: use até 255 caracteres, numa linha só.', 'mailbridge');
+                $errors['smtp_username'] = __('Usuário inválido: use até 255 caracteres, numa linha só.', 'mailtech');
             } else {
                 $clean['smtp_username'] = trim($username);
             }
@@ -199,7 +199,7 @@ final class Validation
                 $clean['smtp_passwd'] = '';
             } elseif ($password !== '') {
                 if (preg_match('/[\x00-\x1F\x7F]/', $password) || strlen($password) > 255) {
-                    $errors['smtp_passwd'] = __('Senha inválida: use até 255 caracteres, numa linha só.', 'mailbridge');
+                    $errors['smtp_passwd'] = __('Senha inválida: use até 255 caracteres, numa linha só.', 'mailtech');
                 } else {
                     $clean['smtp_passwd'] = $password;
                 }
@@ -210,20 +210,20 @@ final class Validation
 
             $return_path = trim((string) ($in['smtp_sender'] ?? ''));
             if ($return_path !== '' && !self::isEmail($return_path)) {
-                $errors['smtp_sender'] = __('Endereço de retorno inválido. Exemplo: devolvidos@suaempresa.com.br', 'mailbridge');
+                $errors['smtp_sender'] = __('Endereço de retorno inválido. Exemplo: devolvidos@suaempresa.com.br', 'mailtech');
             } else {
                 $clean['smtp_sender'] = $return_path;
             }
         } elseif ($transport !== 'oauth') {
-            $errors['transport'] = __('Escolha como os e-mails serão enviados.', 'mailbridge');
+            $errors['transport'] = __('Escolha como os e-mails serão enviados.', 'mailtech');
         }
 
         // Endereços e nomes.
         $addresses = [
-            'from_email'    => __('E-mail do remetente inválido. Exemplo: suporte@suaempresa.com.br', 'mailbridge'),
-            'replyto_email' => __('E-mail de resposta inválido. Exemplo: suporte@suaempresa.com.br', 'mailbridge'),
-            'noreply_email' => __('E-mail "não responda" inválido. Exemplo: naoresponda@suaempresa.com.br', 'mailbridge'),
-            'admin_email'   => __('E-mail do administrador inválido. Exemplo: ti@suaempresa.com.br', 'mailbridge'),
+            'from_email'    => __('E-mail do remetente inválido. Exemplo: suporte@suaempresa.com.br', 'mailtech'),
+            'replyto_email' => __('E-mail de resposta inválido. Exemplo: suporte@suaempresa.com.br', 'mailtech'),
+            'noreply_email' => __('E-mail "não responda" inválido. Exemplo: naoresponda@suaempresa.com.br', 'mailtech'),
+            'admin_email'   => __('E-mail do administrador inválido. Exemplo: ti@suaempresa.com.br', 'mailtech'),
         ];
         foreach ($addresses as $key => $message) {
             $value = trim((string) ($in[$key] ?? ''));
@@ -240,14 +240,14 @@ final class Validation
         ) {
             $errors['from_email'] = __(
                 'Informe o e-mail do remetente: sem ele nenhum e-mail pode sair. Exemplo: suporte@suaempresa.com.br',
-                'mailbridge'
+                'mailtech'
             );
         }
 
         $signature = (string) preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', (string) ($in['mailing_signature'] ?? ''));
         $signature = str_replace(["\r\n", "\r"], "\n", $signature);
         if (strlen($signature) > 2000) {
-            $errors['mailing_signature'] = __('Assinatura longa demais: use até 2000 caracteres.', 'mailbridge');
+            $errors['mailing_signature'] = __('Assinatura longa demais: use até 2000 caracteres.', 'mailtech');
         } else {
             $clean['mailing_signature'] = trim($signature);
         }
@@ -258,12 +258,12 @@ final class Validation
     }
 
     /**
-     * Ajustes próprios do MailBridge.
+     * Ajustes próprios do MailTech.
      *
      * @param array $in valores como digitados (só as chaves presentes são tratadas)
      * @return array{0: array, 1: array<string,string>}
      */
-    public static function mailbridge(array $in): array
+    public static function mailtech(array $in): array
     {
         $clean  = [];
         $errors = [];
@@ -277,7 +277,7 @@ final class Validation
         if (array_key_exists('sender_email', $in)) {
             $sender = trim((string) $in['sender_email']);
             if ($sender !== '' && !self::isEmail($sender)) {
-                $errors['sender_email'] = __('E-mail do remetente do MailBridge inválido. Exemplo: suporte@suaempresa.com.br', 'mailbridge');
+                $errors['sender_email'] = __('E-mail do remetente do MailTech inválido. Exemplo: suporte@suaempresa.com.br', 'mailtech');
             } else {
                 $clean['sender_email'] = $sender;
             }
@@ -293,7 +293,7 @@ final class Validation
             [$valid, $invalid] = self::addressList((string) $in[$list]);
             if ($invalid) {
                 $errors[$list] = sprintf(
-                    __('Não entendi: %s. Use um endereço (pessoa@empresa.com) ou um domínio (@empresa.com) por linha.', 'mailbridge'),
+                    __('Não entendi: %s. Use um endereço (pessoa@empresa.com) ou um domínio (@empresa.com) por linha.', 'mailtech'),
                     implode(', ', array_slice($invalid, 0, 5))
                 );
             } else {
@@ -314,10 +314,10 @@ final class Validation
         $clean  = [];
         $errors = [];
         $fields = [
-            'max_retries'   => [0, 20, __('Número de novas tentativas inválido: use de 0 a 20.', 'mailbridge')],
-            'retry_minutes' => [0, 1440, __('Intervalo inválido: use de 0 a 1440 minutos (1 dia).', 'mailbridge')],
-            'keep_days'     => [0, 3650, __('Prazo inválido: use de 0 a 3650 dias (0 = nunca apagar).', 'mailbridge')],
-            'batch'         => [1, 500, __('Quantidade inválida: use de 1 a 500 e-mails por rodada.', 'mailbridge')],
+            'max_retries'   => [0, 20, __('Número de novas tentativas inválido: use de 0 a 20.', 'mailtech')],
+            'retry_minutes' => [0, 1440, __('Intervalo inválido: use de 0 a 1440 minutos (1 dia).', 'mailtech')],
+            'keep_days'     => [0, 3650, __('Prazo inválido: use de 0 a 3650 dias (0 = nunca apagar).', 'mailtech')],
+            'batch'         => [1, 500, __('Quantidade inválida: use de 1 a 500 e-mails por rodada.', 'mailtech')],
         ];
         foreach ($fields as $key => [$min, $max, $message]) {
             $value = self::intBetween($in[$key] ?? '', $min, $max);
@@ -345,7 +345,7 @@ final class Validation
 
         $event = (string) ($in['event'] ?? '');
         if (!isset($events[$event])) {
-            $errors['event'] = __('Escolha o acontecimento que dispara o aviso.', 'mailbridge');
+            $errors['event'] = __('Escolha o acontecimento que dispara o aviso.', 'mailtech');
         } else {
             $clean['event'] = $event;
         }
@@ -355,7 +355,7 @@ final class Validation
             $name = (string) $events[$event];
         }
         if ($name === '') {
-            $errors['name'] = __('Dê um nome para a regra. Exemplo: Avisar o técnico quando receber um chamado', 'mailbridge');
+            $errors['name'] = __('Dê um nome para a regra. Exemplo: Avisar o técnico quando receber um chamado', 'mailtech');
         } else {
             $clean['name'] = $name;
         }
@@ -367,7 +367,7 @@ final class Validation
         [$valid, $invalid] = self::emailList((string) ($in['extra_emails'] ?? ''));
         if ($invalid) {
             $errors['extra_emails'] = sprintf(
-                __('E-mails inválidos: %s. Corrija ou apague esses endereços (um por linha).', 'mailbridge'),
+                __('E-mails inválidos: %s. Corrija ou apague esses endereços (um por linha).', 'mailtech'),
                 implode(', ', array_slice($invalid, 0, 5))
             );
         } else {
@@ -378,7 +378,7 @@ final class Validation
             && !$clean['notify_assigned_users'] && !$clean['notify_assigned_groups']
             && !$clean['notify_requesters'] && !$clean['notify_observers']
         ) {
-            $errors['recipients'] = __('Escolha pelo menos um destinatário, ou informe um e-mail fixo.', 'mailbridge');
+            $errors['recipients'] = __('Escolha pelo menos um destinatário, ou informe um e-mail fixo.', 'mailtech');
         }
 
         $clean['filter_entities_id']       = max(0, (int) ($in['filter_entities_id'] ?? 0));
@@ -407,16 +407,16 @@ final class Validation
 
         $subject = Text::oneLine((string) ($in['subject'] ?? ''));
         if ($subject === '') {
-            $errors['subject'] = __('Escreva o assunto do e-mail. Exemplo: Chamado ##ticket.id## atribuído a você', 'mailbridge');
+            $errors['subject'] = __('Escreva o assunto do e-mail. Exemplo: Chamado ##ticket.id## atribuído a você', 'mailtech');
         } else {
             $clean['subject'] = $subject;
         }
 
         $body = trim((string) ($in['body'] ?? ''));
         if (trim(strip_tags(str_replace('&nbsp;', ' ', $body))) === '') {
-            $errors['body'] = __('Escreva a mensagem do e-mail. Use "Restaurar padrão" se quiser começar pelo texto sugerido.', 'mailbridge');
+            $errors['body'] = __('Escreva a mensagem do e-mail. Use "Restaurar padrão" se quiser começar pelo texto sugerido.', 'mailtech');
         } elseif (strlen($body) > 200000) {
-            $errors['body'] = __('Mensagem longa demais: reduza o texto.', 'mailbridge');
+            $errors['body'] = __('Mensagem longa demais: reduza o texto.', 'mailtech');
         } else {
             $clean['body'] = $body;
         }

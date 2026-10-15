@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use Html;
 use Session;
@@ -9,12 +9,12 @@ use Session;
  * Permissões do plugin.
  *
  * Quem tem o direito de configuração do GLPI ("config") continua com acesso
- * total, como no Techmail 1.0.0. A permissão própria ("plugin_mailbridge") serve
+ * total, como no Techmail 1.0.0. A permissão própria ("plugin_mailtech") serve
  * para liberar partes do plugin a outros perfis, sem dar a configuração geral.
  */
 final class Rights
 {
-    public const NAME = 'plugin_mailbridge';
+    public const NAME = 'plugin_mailtech';
 
     /**
      * Cria a permissão (sem ninguém) nos perfis que ainda não a têm. Pode rodar
@@ -75,10 +75,10 @@ final class Rights
     public static function labels(): array
     {
         return [
-            self::VIEW   => __('Ver', 'mailbridge'),
-            self::MANAGE => __('Gerenciar', 'mailbridge'),
-            self::TEST   => __('Testar envio', 'mailbridge'),
-            self::QUEUE  => __('Operar a fila', 'mailbridge'),
+            self::VIEW   => __('Ver', 'mailtech'),
+            self::MANAGE => __('Gerenciar', 'mailtech'),
+            self::TEST   => __('Testar envio', 'mailtech'),
+            self::QUEUE  => __('Operar a fila', 'mailtech'),
         ];
     }
 }

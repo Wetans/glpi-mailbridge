@@ -1,20 +1,20 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
 use Entity;
-use GlpiPlugin\Mailbridge\Entities;
-use GlpiPlugin\Mailbridge\NativeNotifications;
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Rule;
-use GlpiPlugin\Mailbridge\Settings;
-use GlpiPlugin\Mailbridge\Text;
-use GlpiPlugin\Mailbridge\Translation;
+use GlpiPlugin\Mailtech\Entities;
+use GlpiPlugin\Mailtech\NativeNotifications;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Rule;
+use GlpiPlugin\Mailtech\Settings;
+use GlpiPlugin\Mailtech\Text;
+use GlpiPlugin\Mailtech\Translation;
 use ITILCategory;
 use Ticket;
 
 /**
- * Eventos e destinatários: regras do MailBridge (quem recebe o quê), liga/desliga
+ * Eventos e destinatários: regras do MailTech (quem recebe o quê), liga/desliga
  * por entidade e os avisos nativos do GLPI.
  */
 final class EventsScreen
@@ -39,14 +39,14 @@ final class EventsScreen
         $data   = [
             'tab'          => $tab,
             'tabs'         => [
-                'rules'    => ['label' => __('Avisos do MailBridge', 'mailbridge'), 'url' => Page::url('events')],
-                'entities' => ['label' => __('Por entidade', 'mailbridge'), 'url' => Page::url('events', ['tab' => 'entities'])],
+                'rules'    => ['label' => __('Avisos do MailTech', 'mailtech'), 'url' => Page::url('events')],
+                'entities' => ['label' => __('Por entidade', 'mailtech'), 'url' => Page::url('events', ['tab' => 'entities'])],
                 'native'   => [
-                    'label' => sprintf(__('Avisos nativos do GLPI (%d)', 'mailbridge'), $native['total']),
+                    'label' => sprintf(__('Avisos nativos do GLPI (%d)', 'mailtech'), $native['total']),
                     'url'   => Page::url('events', ['tab' => 'native']),
                 ],
             ],
-            'mailbridge_on'  => (int) Settings::get('enabled') === 1,
+            'mailtech_on'  => (int) Settings::get('enabled') === 1,
             'native_count' => $native,
         ];
 
@@ -212,11 +212,11 @@ final class EventsScreen
             'errors'      => $flash['errors'],
             'events'      => Rule::getEvents(),
             'types'       => [
-                0                     => __('Qualquer tipo', 'mailbridge'),
+                0                     => __('Qualquer tipo', 'mailtech'),
                 Ticket::INCIDENT_TYPE => Ticket::getTicketTypeName(Ticket::INCIDENT_TYPE),
                 Ticket::DEMAND_TYPE   => Ticket::getTicketTypeName(Ticket::DEMAND_TYPE),
             ],
-            'priorities'  => [0 => __('Qualquer prioridade', 'mailbridge')] + Rule::priorities(),
+            'priorities'  => [0 => __('Qualquer prioridade', 'mailtech')] + Rule::priorities(),
             'has_filters' => $has_filters,
             'entity_dropdown' => Entity::dropdown([
                 'name'    => 'filter_entities_id',
@@ -232,7 +232,7 @@ final class EventsScreen
                 'display'             => false,
                 'comments'            => false,
                 'display_emptychoice' => true,
-                'emptylabel'          => __('Qualquer categoria', 'mailbridge'),
+                'emptylabel'          => __('Qualquer categoria', 'mailtech'),
             ]),
             'back_url'     => Page::url('events'),
             'template_url' => $is_new ? '' : Page::url('templates', ['rule' => $id]),

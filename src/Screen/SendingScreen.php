@@ -1,13 +1,13 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
-use GlpiPlugin\Mailbridge\Actions;
-use GlpiPlugin\Mailbridge\Facts;
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Sending;
-use GlpiPlugin\Mailbridge\Settings;
-use GlpiPlugin\Mailbridge\Validation;
+use GlpiPlugin\Mailtech\Actions;
+use GlpiPlugin\Mailtech\Facts;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Sending;
+use GlpiPlugin\Mailtech\Settings;
+use GlpiPlugin\Mailtech\Validation;
 
 /**
  * Envio: modo e-mail, servidor, remetentes, assinatura e testes.
@@ -50,8 +50,8 @@ final class SendingScreen
             }
         }
 
-        $result = $_SESSION['plugin_mailbridge_result'] ?? null;
-        unset($_SESSION['plugin_mailbridge_result']);
+        $result = $_SESSION['plugin_mailtech_result'] ?? null;
+        unset($_SESSION['plugin_mailtech_result']);
 
         return ['sending.html.twig', [
             'v'            => $values,
@@ -67,13 +67,13 @@ final class SendingScreen
             'native_url'   => $CFG_GLPI['root_doc'] . '/front/notificationmailingsetting.form.php',
             'entity_url'   => $CFG_GLPI['root_doc'] . '/front/entity.php',
             'transports'   => [
-                'smtp' => __('Servidor de e-mail (SMTP) - recomendado', 'mailbridge'),
-                'mail' => __('Função de e-mail do próprio servidor do GLPI', 'mailbridge'),
+                'smtp' => __('Servidor de e-mail (SMTP) - recomendado', 'mailtech'),
+                'mail' => __('Função de e-mail do próprio servidor do GLPI', 'mailtech'),
             ],
             'securities'   => [
-                'tls'  => __('STARTTLS (o mais comum, porta 587)', 'mailbridge'),
-                'ssl'  => __('SSL/TLS (porta 465)', 'mailbridge'),
-                'none' => __('Nenhuma (porta 25, só em rede interna)', 'mailbridge'),
+                'tls'  => __('STARTTLS (o mais comum, porta 587)', 'mailtech'),
+                'ssl'  => __('SSL/TLS (porta 465)', 'mailtech'),
+                'none' => __('Nenhuma (porta 25, só em rede interna)', 'mailtech'),
             ],
         ]];
     }

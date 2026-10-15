@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use CommonITILActor;
 use Group_Ticket;
@@ -482,14 +482,14 @@ final class Notifier
             'body_html'                => $mail['html'],
             'body_text'                => $mail['text'],
             'mode'                     => Notification_NotificationTemplate::MODE_MAIL,
-            'event'                    => 'plugin_mailbridge_' . $event,
+            'event'                    => 'plugin_mailtech_' . $event,
         ];
 
         self::queue($input, sprintf('regra #%d, evento %s, chamado #%d', $rule['id'], $event, $ticket->getID()));
     }
 
     /**
-     * Campos comuns a todo e-mail do MailBridge: remetente, endereço de resposta
+     * Campos comuns a todo e-mail do MailTech: remetente, endereço de resposta
      * e os cabeçalhos que marcam a mensagem como automática (evitam respostas
      * automáticas em cadeia, como "estou de férias").
      */
@@ -571,7 +571,7 @@ final class Notifier
             'body_html'                => (string) $mail['html'],
             'body_text'                => (string) $mail['text'],
             'mode'                     => Notification_NotificationTemplate::MODE_MAIL,
-            'event'                    => 'plugin_mailbridge_test',
+            'event'                    => 'plugin_mailtech_test',
         ];
 
         try {
@@ -592,10 +592,10 @@ final class Notifier
      */
     public static function testMail(): array
     {
-        $html = '<p>' . Text::esc(__('Este é um e-mail de teste do plugin MailBridge. Se você está lendo isto, o envio de e-mails do GLPI está funcionando.', 'mailbridge')) . '</p>';
+        $html = '<p>' . Text::esc(__('Este é um e-mail de teste do plugin MailTech. Se você está lendo isto, o envio de e-mails do GLPI está funcionando.', 'mailtech')) . '</p>';
 
         return [
-            'subject' => __('[GLPI] E-mail de teste do MailBridge', 'mailbridge'),
+            'subject' => __('[GLPI] E-mail de teste do MailTech', 'mailtech'),
             'html'    => $html,
             'text'    => Text::toPlain($html),
         ];

@@ -1,6 +1,6 @@
 <?php
 
-use GlpiPlugin\Mailbridge\Actions;
+use GlpiPlugin\Mailtech\Actions;
 
 // Mesmas ações de front/action.php, sem recarregar a página (resposta em JSON).
 // O GLPI confere o token CSRF enviado no cabeçalho antes de chegar aqui.
@@ -11,10 +11,10 @@ if (!defined('GLPI_ROOT')) {
 
 header('Content-Type: application/json; charset=UTF-8');
 
-// Com o MailBridge desativado as classes dele não carregam: responde "não encontrado" em vez de um erro.
-if (!Plugin::isPluginActive('mailbridge')) {
+// Com o MailTech desativado as classes dele não carregam: responde "não encontrado" em vez de um erro.
+if (!Plugin::isPluginActive('mailtech')) {
     http_response_code(404);
-    echo json_encode(['ok' => false, 'message' => __('O MailBridge está desativado. Ative-o em Configurar > Plugins.', 'mailbridge')]);
+    echo json_encode(['ok' => false, 'message' => __('O MailTech está desativado. Ative-o em Configurar > Plugins.', 'mailtech')]);
     return;
 }
 Html::header_nocache();

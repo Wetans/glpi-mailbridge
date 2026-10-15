@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Traduções dos modelos: um assunto/corpo por regra e por idioma.
@@ -12,7 +12,7 @@ final class Translation
 {
     public static function getTable(): string
     {
-        return 'glpi_plugin_mailbridge_ruletranslations';
+        return 'glpi_plugin_mailtech_ruletranslations';
     }
 
     /**
@@ -31,7 +31,7 @@ final class Translation
         }
         $rows = $DB->request([
             'FROM'  => self::getTable(),
-            'WHERE' => ['plugin_mailbridge_rules_id' => $rules_id],
+            'WHERE' => ['plugin_mailtech_rules_id' => $rules_id],
             'ORDER' => ['language'],
         ]);
         foreach ($rows as $row) {
@@ -63,13 +63,13 @@ final class Translation
 
         $out  = [];
         $rows = $DB->request([
-            'SELECT' => ['plugin_mailbridge_rules_id', 'language'],
+            'SELECT' => ['plugin_mailtech_rules_id', 'language'],
             'FROM'   => self::getTable(),
-            'WHERE'  => ['plugin_mailbridge_rules_id' => $rules_ids],
+            'WHERE'  => ['plugin_mailtech_rules_id' => $rules_ids],
             'ORDER'  => ['language'],
         ]);
         foreach ($rows as $row) {
-            $out[(int) $row['plugin_mailbridge_rules_id']][] = (string) $row['language'];
+            $out[(int) $row['plugin_mailtech_rules_id']][] = (string) $row['language'];
         }
 
         return $out;
@@ -95,7 +95,7 @@ final class Translation
             'body_text' => (string) ($data['body_text'] ?? ''),
             'date_mod'  => $_SESSION['glpi_currenttime'] ?? date('Y-m-d H:i:s'),
         ]);
-        $where = ['plugin_mailbridge_rules_id' => $rules_id, 'language' => $language];
+        $where = ['plugin_mailtech_rules_id' => $rules_id, 'language' => $language];
 
         if (countElementsInTable(self::getTable(), $where) > 0) {
             return (bool) $DB->update(self::getTable(), $values, $where);
@@ -115,7 +115,7 @@ final class Translation
 
         return (bool) $DB->delete(
             self::getTable(),
-            ['plugin_mailbridge_rules_id' => $rules_id, 'language' => $language]
+            ['plugin_mailtech_rules_id' => $rules_id, 'language' => $language]
         );
     }
 
@@ -125,7 +125,7 @@ final class Translation
         global $DB;
 
         if ($rules_id > 0) {
-            $DB->delete(self::getTable(), ['plugin_mailbridge_rules_id' => $rules_id]);
+            $DB->delete(self::getTable(), ['plugin_mailtech_rules_id' => $rules_id]);
         }
     }
 }

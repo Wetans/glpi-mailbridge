@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Testa a conexão com o servidor de envio JÁ CONFIGURADO no GLPI (nunca um
@@ -37,7 +37,7 @@ final class SmtpProbe
             $ok      = (bool) $conf['mail_function'];
             $steps[] = self::step(
                 'connect',
-                __('Função de e-mail do servidor do GLPI disponível', 'mailbridge'),
+                __('Função de e-mail do servidor do GLPI disponível', 'mailtech'),
                 $ok ? self::OK : self::FAIL
             );
 
@@ -46,7 +46,7 @@ final class SmtpProbe
 
         $target = sprintf('%s:%d', $conf['smtp_host'], $conf['smtp_port']);
         if ($conf['smtp_host'] === '' || $conf['smtp_port'] <= 0) {
-            $steps[] = self::step('connect', __('Conectar ao servidor de envio', 'mailbridge'), self::FAIL);
+            $steps[] = self::step('connect', __('Conectar ao servidor de envio', 'mailtech'), self::FAIL);
 
             return ['ok' => false, 'steps' => $steps, 'error' => 'missing-server'];
         }
@@ -61,11 +61,11 @@ final class SmtpProbe
             return self::runSocketOnly($conf, $target);
         }
 
-        $connect_label = sprintf(__('Conectar a %s', 'mailbridge'), $target);
+        $connect_label = sprintf(__('Conectar a %s', 'mailtech'), $target);
         $secure_label  = $conf['security'] === 'ssl'
-            ? __('Conexão segura (SSL/TLS)', 'mailbridge')
-            : __('Conexão segura (STARTTLS)', 'mailbridge');
-        $auth_label    = __('Entrar com usuário e senha', 'mailbridge');
+            ? __('Conexão segura (SSL/TLS)', 'mailtech')
+            : __('Conexão segura (STARTTLS)', 'mailtech');
+        $auth_label    = __('Entrar com usuário e senha', 'mailtech');
 
         /** @var \PHPMailer\PHPMailer\SMTP $smtp */
         $smtp            = new $smtp_class();
@@ -104,9 +104,9 @@ final class SmtpProbe
             } else {
                 $steps[] = self::step(
                     'encryption',
-                    __('Conexão segura', 'mailbridge'),
+                    __('Conexão segura', 'mailtech'),
                     self::SKIP,
-                    __('Não usada: a segurança está em "Nenhuma".', 'mailbridge')
+                    __('Não usada: a segurança está em "Nenhuma".', 'mailtech')
                 );
             }
 
@@ -114,7 +114,7 @@ final class SmtpProbe
                 if (!$conf['has_password']) {
                     // Sem senha guardada o servidor recusaria o login e a mensagem dele ("usuário e
                     // senha não aceitos") esconderia o motivo real: nem tenta.
-                    $steps[] = self::step('auth', $auth_label, self::FAIL, __('Nenhuma senha está guardada.', 'mailbridge'));
+                    $steps[] = self::step('auth', $auth_label, self::FAIL, __('Nenhuma senha está guardada.', 'mailtech'));
 
                     return self::fail($steps, self::NO_PASSWORD, $smtp);
                 }
@@ -131,7 +131,7 @@ final class SmtpProbe
                     'auth',
                     $auth_label,
                     self::FAIL,
-                    sprintf(__('O %s exige login e nenhum usuário foi informado.', 'mailbridge'), Provider::name($conf['smtp_host']))
+                    sprintf(__('O %s exige login e nenhum usuário foi informado.', 'mailtech'), Provider::name($conf['smtp_host']))
                 );
 
                 return self::fail($steps, self::NO_LOGIN, $smtp);
@@ -140,7 +140,7 @@ final class SmtpProbe
                     'auth',
                     $auth_label,
                     self::SKIP,
-                    __('Não usado: nenhum usuário foi informado.', 'mailbridge')
+                    __('Não usado: nenhum usuário foi informado.', 'mailtech')
                 );
             }
 
@@ -157,7 +157,7 @@ final class SmtpProbe
 
     private static function runOauth(string $target): array
     {
-        $label = sprintf(__('Conectar e entrar em %s (login pelo provedor)', 'mailbridge'), $target);
+        $label = sprintf(__('Conectar e entrar em %s (login pelo provedor)', 'mailtech'), $target);
         try {
             $mailer          = new \GLPIMailer();
             $mailer->Timeout = self::TIMEOUT;
@@ -189,7 +189,7 @@ final class SmtpProbe
 
         return [
             'ok'    => $ok,
-            'steps' => [self::step('connect', sprintf(__('Conectar a %s', 'mailbridge'), $target), $ok ? self::OK : self::FAIL)],
+            'steps' => [self::step('connect', sprintf(__('Conectar a %s', 'mailtech'), $target), $ok ? self::OK : self::FAIL)],
             'error' => $ok ? '' : trim('Failed to connect to server ' . $errstr . ' (' . $errno . ')'),
         ];
     }

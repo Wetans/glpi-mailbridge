@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Consultas sobre as entidades do GLPI usadas pelo liga/desliga por entidade.

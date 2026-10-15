@@ -1,6 +1,6 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 /**
  * Reconhece os servidores públicos que sempre exigem login (Gmail, Microsoft)

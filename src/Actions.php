@@ -1,13 +1,13 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge;
+namespace GlpiPlugin\Mailtech;
 
 use QueuedNotification;
 use Session;
 use UserEmail;
 
 /**
- * Tudo que as telas do MailBridge podem MUDAR passa por aqui: cada ação confere
+ * Tudo que as telas do MailTech podem MUDAR passa por aqui: cada ação confere
  * a permissão, valida os dados e devolve um resultado único, usado tanto pelo
  * envio normal de formulário (front/action.php) quanto pelas chamadas sem
  * recarregar a página (ajax/action.php). O token CSRF é conferido pelo GLPI
@@ -20,7 +20,7 @@ final class Actions
         'save_sending'         => Rights::MANAGE,
         'test_connection'      => Rights::TEST,
         'send_test'            => Rights::TEST,
-        'toggle_mailbridge'      => Rights::MANAGE,
+        'toggle_mailtech'      => Rights::MANAGE,
         'toggle_rule'          => Rights::MANAGE,
         'save_rule'            => Rights::MANAGE,
         'delete_rule'          => Rights::MANAGE,
@@ -40,7 +40,7 @@ final class Actions
         'restore_defaults'     => Rights::MANAGE,
     ];
 
-    private const TEST_STAMPS = 'plugin_mailbridge_tests';
+    private const TEST_STAMPS = 'plugin_mailtech_tests';
 
     /**
      * @param array $in $_POST como o GLPI entrega
@@ -61,10 +61,10 @@ final class Actions
         ];
 
         if (!isset(self::RIGHTS[$action])) {
-            return ['message' => __('Não entendi o que foi pedido. Recarregue a página e tente de novo.', 'mailbridge'), 'status' => 400] + $result;
+            return ['message' => __('Não entendi o que foi pedido. Recarregue a página e tente de novo.', 'mailtech'), 'status' => 400] + $result;
         }
         if (!Rights::can(self::RIGHTS[$action])) {
-            return ['message' => __('Seu perfil não tem permissão para fazer isso no MailBridge.', 'mailbridge'), 'status' => 403] + $result;
+            return ['message' => __('Seu perfil não tem permissão para fazer isso no MailTech.', 'mailtech'), 'status' => 403] + $result;
         }
 
         $method = 'do' . str_replace('_', '', ucwords($action, '_'));
@@ -74,7 +74,7 @@ final class Actions
             Settings::log('ERRO na ação ' . $action . ': ' . get_class($e) . ': ' . $e->getMessage(), true);
 
             return [
-                'message' => __('Algo deu errado ao executar a ação. Nada foi alterado; tente de novo.', 'mailbridge'),
+                'message' => __('Algo deu errado ao executar a ação. Nada foi alterado; tente de novo.', 'mailtech'),
                 'status'  => 500,
             ] + $result;
         }
@@ -103,7 +103,7 @@ final class Actions
         $own_raw    = self::rawFields($in, $own_fields);
 
         [$clean, $errors]   = Validation::sending($raw);
-        [$own, $own_errors] = Validation::mailbridge($own_raw);
+        [$own, $own_errors] = Validation::mailtech($own_raw);
         $errors += $own_errors;
 
         if ($errors) {
@@ -119,11 +119,11 @@ final class Actions
         Settings::set($own);
         Facts::reset();
 
-        $message = __('Configuração de envio salva.', 'mailbridge');
+        $message = __('Configuração de envio salva.', 'mailtech');
         if ($before['mailing_on'] && !$clean['notifications_mailing']) {
-            $message = __('Configuração salva. O envio de e-mails do GLPI foi DESLIGADO.', 'mailbridge');
+            $message = __('Configuração salva. O envio de e-mails do GLPI foi DESLIGADO.', 'mailtech');
         } elseif (!$before['mailing_on'] && $clean['notifications_mailing']) {
-            $message = __('Configuração salva. O envio de e-mails do GLPI foi LIGADO.', 'mailbridge');
+            $message = __('Configuração salva. O envio de e-mails do GLPI foi LIGADO.', 'mailtech');
         }
 
         return ['ok' => true, 'message' => $message, 'redirect' => Page::url('sending')];
@@ -138,7 +138,7 @@ final class Actions
 
         $probe = SmtpProbe::run();
 
-        return self::testResult($probe, $probe['ok'] ? __('Conexão com o servidor de envio funcionando.', 'mailbridge') : '')
+        return self::testResult($probe, $probe['ok'] ? __('Conexão com o servidor de envio funcionando.', 'mailtech') : '')
             + ['redirect' => Page::url('sending', ['focus' => 'test'])];
     }
 
@@ -149,8 +149,8 @@ final class Actions
         $to = trim(Text::raw($in['test_email'] ?? ''));
         if (!Validation::isEmail($to)) {
             return [
-                'message' => __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge'),
-                'errors'  => ['test_email' => __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge')],
+                'message' => __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailtech'),
+                'errors'  => ['test_email' => __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailtech')],
             ] + $redirect;
         }
 
@@ -174,7 +174,7 @@ final class Actions
             return self::testResult($probe, '');
         }
 
-        $sent_label = sprintf(__('Enviar o e-mail para %s', 'mailbridge'), $to);
+        $sent_label = sprintf(__('Enviar o e-mail para %s', 'mailtech'), $to);
 
         // Gmail e Microsoft recusam um remetente que não existe ("admsys@localhost"): nem envia.
         $conf = Sending::current();
@@ -214,7 +214,7 @@ final class Actions
 
         $result = self::testResult(
             $probe,
-            sprintf(__('E-mail de teste enviado para %s. Confira a caixa de entrada (e a pasta de spam).', 'mailbridge'), $to)
+            sprintf(__('E-mail de teste enviado para %s. Confira a caixa de entrada (e a pasta de spam).', 'mailtech'), $to)
         );
         $result['data']['queue_url'] = Page::url('queue', ['id' => $id]);
 
@@ -232,15 +232,15 @@ final class Actions
         }
 
         if ($probe['error'] === 'missing-server') {
-            $data['title']  = __('Falta informar o servidor de envio e a porta.', 'mailbridge');
-            $data['advice'] = [__('Preencha o servidor e a porta, clique em Salvar e teste de novo.', 'mailbridge')];
+            $data['title']  = __('Falta informar o servidor de envio e a porta.', 'mailtech');
+            $data['advice'] = [__('Preencha o servidor e a porta, clique em Salvar e teste de novo.', 'mailtech')];
         } elseif ($probe['error'] === 'missing-sender') {
-            $data['title']  = __('Falta informar o e-mail do remetente.', 'mailbridge');
-            $data['advice'] = [__('Preencha o e-mail do remetente, clique em Salvar e teste de novo.', 'mailbridge')];
+            $data['title']  = __('Falta informar o e-mail do remetente.', 'mailtech');
+            $data['advice'] = [__('Preencha o e-mail do remetente, clique em Salvar e teste de novo.', 'mailtech')];
         } elseif ($probe['error'] === 'sender-not-real') {
-            $data['title']  = sprintf(__('O remetente "%s" não é um endereço de e-mail de verdade.', 'mailbridge'), Sending::senderEmail());
+            $data['title']  = sprintf(__('O remetente "%s" não é um endereço de e-mail de verdade.', 'mailtech'), Sending::senderEmail());
             $data['advice'] = [
-                sprintf(__('O %s recusa e-mails com esse remetente. Em "E-mail do remetente", informe o endereço da conta que faz o login, clique em Salvar e teste de novo.', 'mailbridge'), Provider::name(Sending::current()['smtp_host'])),
+                sprintf(__('O %s recusa e-mails com esse remetente. Em "E-mail do remetente", informe o endereço da conta que faz o login, clique em Salvar e teste de novo.', 'mailtech'), Provider::name(Sending::current()['smtp_host'])),
             ];
         } elseif ($probe['error'] === SmtpProbe::NO_PASSWORD || $probe['error'] === SmtpProbe::NO_LOGIN) {
             $explained      = ErrorExplainer::explain($probe['error']);
@@ -274,7 +274,7 @@ final class Actions
                     'Muitos testes em pouco tempo. Espere %d segundo e tente de novo.',
                     'Muitos testes em pouco tempo. Espere %d segundos e tente de novo.',
                     $check['retry_after'],
-                    'mailbridge'
+                    'mailtech'
                 ),
                 $check['retry_after']
             ),
@@ -286,7 +286,7 @@ final class Actions
     // Eventos e destinatários
     // ------------------------------------------------------------------
 
-    private static function doToggleMailBridge(array $in): array
+    private static function doToggleMailTech(array $in): array
     {
         $on = !empty($in['on']);
         Settings::set(['enabled' => $on ? 1 : 0]);
@@ -295,8 +295,8 @@ final class Actions
         return [
             'ok'       => true,
             'message'  => $on
-                ? __('Avisos do MailBridge ligados.', 'mailbridge')
-                : __('Avisos do MailBridge desligados: as regras não geram e-mails até você ligar de novo.', 'mailbridge'),
+                ? __('Avisos do MailTech ligados.', 'mailtech')
+                : __('Avisos do MailTech desligados: as regras não geram e-mails até você ligar de novo.', 'mailtech'),
             'redirect' => Page::url('events'),
         ];
     }
@@ -321,7 +321,7 @@ final class Actions
         [$id, $on] = self::readToggle($in);
         $rule = new Rule();
         if ($id <= 0 || !$rule->getFromDB($id)) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('events')];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('events')];
         }
         $rule->update(['id' => $id, 'is_active' => $on ? 1 : 0]);
         Facts::reset();
@@ -331,8 +331,8 @@ final class Actions
         return [
             'ok'       => true,
             'message'  => $on
-                ? sprintf(__('Regra "%s" ligada.', 'mailbridge'), $name)
-                : sprintf(__('Regra "%s" desligada: ela não gera mais e-mails.', 'mailbridge'), $name),
+                ? sprintf(__('Regra "%s" ligada.', 'mailtech'), $name)
+                : sprintf(__('Regra "%s" desligada: ela não gera mais e-mails.', 'mailtech'), $name),
             'redirect' => Page::url('events'),
         ];
     }
@@ -350,7 +350,7 @@ final class Actions
 
         $rule = new Rule();
         if ($id > 0 && !$rule->getFromDB($id)) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('events')];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('events')];
         }
 
         [$clean, $errors] = Validation::rule($raw, Rule::getEvents());
@@ -360,14 +360,14 @@ final class Actions
 
         if ($id > 0) {
             $rule->update(['id' => $id] + Text::sanitize($clean));
-            $message = sprintf(__('Regra "%s" salva.', 'mailbridge'), $clean['name']);
+            $message = sprintf(__('Regra "%s" salva.', 'mailtech'), $clean['name']);
         } else {
             // A regra nova nasce com o modelo padrão do evento (editável em Modelos).
             $id = (int) $rule->add(Text::sanitize($clean));
             if ($id <= 0) {
-                return ['message' => __('Não foi possível criar a regra. Tente de novo.', 'mailbridge'), 'redirect' => $back];
+                return ['message' => __('Não foi possível criar a regra. Tente de novo.', 'mailtech'), 'redirect' => $back];
             }
-            $message = sprintf(__('Regra "%s" criada com a mensagem padrão. Você pode ajustar o texto em Modelos.', 'mailbridge'), $clean['name']);
+            $message = sprintf(__('Regra "%s" criada com a mensagem padrão. Você pode ajustar o texto em Modelos.', 'mailtech'), $clean['name']);
         }
         Facts::reset();
 
@@ -379,7 +379,7 @@ final class Actions
         $id   = (int) ($in['id'] ?? 0);
         $rule = new Rule();
         if ($id <= 0 || !$rule->getFromDB($id)) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('events')];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('events')];
         }
         $name = Text::decode((string) $rule->fields['name']);
         $rule->delete(['id' => $id], 1);
@@ -387,7 +387,7 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => sprintf(__('Regra "%s" apagada, junto com a mensagem dela.', 'mailbridge'), $name),
+            'message'  => sprintf(__('Regra "%s" apagada, junto com a mensagem dela.', 'mailtech'), $name),
             'redirect' => Page::url('events'),
         ];
     }
@@ -406,7 +406,7 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => __('Escolhas por entidade salvas.', 'mailbridge'),
+            'message'  => __('Escolhas por entidade salvas.', 'mailtech'),
             'redirect' => Page::url('events', ['tab' => 'entities', 'estart' => max(0, (int) ($in['estart'] ?? 0))]),
         ];
     }
@@ -415,12 +415,12 @@ final class Actions
     {
         [$id, $on] = self::readToggle($in);
         if (!NativeNotifications::toggle($id, $on)) {
-            return ['message' => __('Esse aviso do GLPI não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('events', ['tab' => 'native'])];
+            return ['message' => __('Esse aviso do GLPI não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('events', ['tab' => 'native'])];
         }
 
         return [
             'ok'       => true,
-            'message'  => $on ? __('Aviso do GLPI ligado.', 'mailbridge') : __('Aviso do GLPI desligado.', 'mailbridge'),
+            'message'  => $on ? __('Aviso do GLPI ligado.', 'mailtech') : __('Aviso do GLPI desligado.', 'mailtech'),
             'redirect' => Page::url('events', ['tab' => 'native', 'nstart' => max(0, (int) ($in['nstart'] ?? 0))]),
         ];
     }
@@ -459,7 +459,7 @@ final class Actions
     {
         [$rule, $language, $raw, $clean, $errors, $unknown] = self::readTemplate($in);
         if ($rule === null) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('templates')];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('templates')];
         }
         $id   = (int) $rule->getID();
         $back = Page::url('templates', ['rule' => $id] + ($language !== '' ? ['lang' => $language] : []));
@@ -476,10 +476,10 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => __('Modelo salvo.', 'mailbridge'),
+            'message'  => __('Modelo salvo.', 'mailtech'),
             'warning'  => $unknown
                 ? sprintf(
-                    __('Estas variáveis não existem e vão aparecer no e-mail como texto: %s', 'mailbridge'),
+                    __('Estas variáveis não existem e vão aparecer no e-mail como texto: %s', 'mailtech'),
                     '##' . implode('##, ##', $unknown) . '##'
                 )
                 : '',
@@ -495,7 +495,7 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => __('Tradução apagada. Quem usa esse idioma volta a receber o modelo padrão.', 'mailbridge'),
+            'message'  => __('Tradução apagada. Quem usa esse idioma volta a receber o modelo padrão.', 'mailtech'),
             'redirect' => Page::url('templates', ['rule' => $id]),
         ];
     }
@@ -504,7 +504,7 @@ final class Actions
     {
         [$rule, , , $clean, $errors, $unknown] = self::readTemplate($in);
         if ($rule === null) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404];
         }
         if ($errors) {
             return ['message' => (string) reset($errors), 'errors' => $errors];
@@ -527,7 +527,7 @@ final class Actions
     {
         [$rule, $language, , $clean, $errors] = self::readTemplate($in);
         if ($rule === null) {
-            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailbridge'), 'status' => 404, 'redirect' => Page::url('templates')];
+            return ['message' => __('Essa regra não existe mais. Recarregue a página.', 'mailtech'), 'status' => 404, 'redirect' => Page::url('templates')];
         }
         $back = ['redirect' => Page::url('templates', ['rule' => (int) $rule->getID()] + ($language !== '' ? ['lang' => $language] : []))];
         if ($errors) {
@@ -536,13 +536,13 @@ final class Actions
 
         $to = trim(Text::raw($in['test_email'] ?? ''));
         if (!Validation::isEmail($to)) {
-            $message = __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailbridge');
+            $message = __('Informe um e-mail válido para receber o teste. Exemplo: voce@suaempresa.com.br', 'mailtech');
 
             return ['message' => $message, 'errors' => ['test_email' => $message]] + $back;
         }
 
         $mail = Template::compose($clean, self::sampleFor($rule));
-        $mail['subject'] = sprintf(__('[TESTE] %s', 'mailbridge'), $mail['subject']);
+        $mail['subject'] = sprintf(__('[TESTE] %s', 'mailtech'), $mail['subject']);
 
         return self::sendTestMail($to, $mail) + $back;
     }
@@ -594,10 +594,10 @@ final class Actions
         }
 
         if (!in_array($do, ['resend', 'cancel', 'delete'], true)) {
-            return ['message' => __('Escolha o que fazer com os e-mails marcados.', 'mailbridge'), 'redirect' => $back];
+            return ['message' => __('Escolha o que fazer com os e-mails marcados.', 'mailtech'), 'redirect' => $back];
         }
         if (!$ids) {
-            return ['message' => __('Marque pelo menos um e-mail da lista.', 'mailbridge'), 'redirect' => $back];
+            return ['message' => __('Marque pelo menos um e-mail da lista.', 'mailtech'), 'redirect' => $back];
         }
         $ids = array_slice($ids, 0, 100);
 
@@ -633,16 +633,16 @@ final class Actions
 
         $labels = [
             'resend' => [
-                _n('%d e-mail reenviado.', '%d e-mails reenviados.', $done, 'mailbridge'),
-                _n('%d e-mail não pôde ser reenviado.', '%d e-mails não puderam ser reenviados.', $failed, 'mailbridge'),
+                _n('%d e-mail reenviado.', '%d e-mails reenviados.', $done, 'mailtech'),
+                _n('%d e-mail não pôde ser reenviado.', '%d e-mails não puderam ser reenviados.', $failed, 'mailtech'),
             ],
             'cancel' => [
-                _n('%d e-mail cancelado.', '%d e-mails cancelados.', $done, 'mailbridge'),
-                _n('%d e-mail não pôde ser cancelado (só dá para cancelar o que ainda está na fila).', '%d e-mails não puderam ser cancelados (só dá para cancelar o que ainda está na fila).', $failed, 'mailbridge'),
+                _n('%d e-mail cancelado.', '%d e-mails cancelados.', $done, 'mailtech'),
+                _n('%d e-mail não pôde ser cancelado (só dá para cancelar o que ainda está na fila).', '%d e-mails não puderam ser cancelados (só dá para cancelar o que ainda está na fila).', $failed, 'mailtech'),
             ],
             'delete' => [
-                _n('%d e-mail apagado.', '%d e-mails apagados.', $done, 'mailbridge'),
-                _n('%d e-mail não pôde ser apagado (cancele antes o que ainda está na fila).', '%d e-mails não puderam ser apagados (cancele antes o que ainda está na fila).', $failed, 'mailbridge'),
+                _n('%d e-mail apagado.', '%d e-mails apagados.', $done, 'mailtech'),
+                _n('%d e-mail não pôde ser apagado (cancele antes o que ainda está na fila).', '%d e-mails não puderam ser apagados (cancele antes o que ainda está na fila).', $failed, 'mailtech'),
             ],
         ];
 
@@ -652,7 +652,7 @@ final class Actions
             $warning = sprintf($labels[$do][1], $failed);
             if ($do === 'resend' && $error !== '') {
                 $explained = ErrorExplainer::explain($error);
-                $warning  .= ' ' . $explained['title'] . ' ' . __('O que tentar:', 'mailbridge') . ' ' . $explained['advice'][0];
+                $warning  .= ' ' . $explained['title'] . ' ' . __('O que tentar:', 'mailtech') . ' ' . $explained['advice'][0];
             }
         }
 
@@ -672,8 +672,8 @@ final class Actions
         return [
             'ok'       => true,
             'message'  => $count > 0
-                ? sprintf(_n('%d e-mail cancelado: a fila está vazia.', '%d e-mails cancelados: a fila está vazia.', $count, 'mailbridge'), $count)
-                : __('Não havia e-mails esperando na fila.', 'mailbridge'),
+                ? sprintf(_n('%d e-mail cancelado: a fila está vazia.', '%d e-mails cancelados: a fila está vazia.', $count, 'mailtech'), $count)
+                : __('Não havia e-mails esperando na fila.', 'mailtech'),
             'redirect' => Page::url('queue'),
         ];
     }
@@ -687,14 +687,14 @@ final class Actions
             $explained = ErrorExplainer::explain($result['error']);
 
             return [
-                'message' => $explained['title'] . ' ' . __('O que tentar:', 'mailbridge') . ' ' . $explained['advice'][0],
+                'message' => $explained['title'] . ' ' . __('O que tentar:', 'mailtech') . ' ' . $explained['advice'][0],
                 'data'    => ['technical' => $result['error']],
             ] + $back;
         }
 
         $message = $result['sent'] > 0
-            ? sprintf(_n('Fila processada: %d e-mail enviado.', 'Fila processada: %d e-mails enviados.', $result['sent'], 'mailbridge'), $result['sent'])
-            : __('Fila processada: não havia e-mails prontos para envio.', 'mailbridge');
+            ? sprintf(_n('Fila processada: %d e-mail enviado.', 'Fila processada: %d e-mails enviados.', $result['sent'], 'mailtech'), $result['sent'])
+            : __('Fila processada: não havia e-mails prontos para envio.', 'mailtech');
         $warning = '';
         if ($result['left'] > 0) {
             $warning = sprintf(
@@ -702,7 +702,7 @@ final class Actions
                     '%d e-mail continua na fila (agendado para depois ou com falha).',
                     '%d e-mails continuam na fila (agendados para depois ou com falha).',
                     $result['left'],
-                    'mailbridge'
+                    'mailtech'
                 ),
                 $result['left']
             );
@@ -718,7 +718,7 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => __('Rotina automática reativada: a fila volta a ser enviada sozinha.', 'mailbridge'),
+            'message'  => __('Rotina automática reativada: a fila volta a ser enviada sozinha.', 'mailtech'),
             'redirect' => Page::url('queue', ['focus' => 'routine']),
         ];
     }
@@ -734,7 +734,7 @@ final class Actions
         }
         Queue::savePolicy($clean);
 
-        return ['ok' => true, 'message' => __('Regras da fila salvas.', 'mailbridge'), 'redirect' => $back];
+        return ['ok' => true, 'message' => __('Regras da fila salvas.', 'mailtech'), 'redirect' => $back];
     }
 
     // ------------------------------------------------------------------
@@ -743,14 +743,14 @@ final class Actions
 
     private static function doSaveOptions(array $in): array
     {
-        [$clean] = Validation::mailbridge(['purge_on_uninstall' => Text::raw($in['purge_on_uninstall'] ?? '0')]);
+        [$clean] = Validation::mailtech(['purge_on_uninstall' => Text::raw($in['purge_on_uninstall'] ?? '0')]);
         Settings::set($clean);
 
         return [
             'ok'       => true,
             'message'  => $clean['purge_on_uninstall']
-                ? __('Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge SERÃO apagados.', 'mailbridge')
-                : __('Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailBridge ficam guardados.', 'mailbridge'),
+                ? __('Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailTech SERÃO apagados.', 'mailtech')
+                : __('Salvo: ao desinstalar o plugin, as regras, modelos e ajustes do MailTech ficam guardados.', 'mailtech'),
             'redirect' => Page::url('diagnostics'),
         ];
     }
@@ -760,10 +760,10 @@ final class Actions
         $back = ['redirect' => Page::url('diagnostics')];
         $file = $_FILES['file'] ?? null;
         if (!is_array($file) || (int) ($file['error'] ?? 1) !== UPLOAD_ERR_OK || !is_uploaded_file((string) $file['tmp_name'])) {
-            return ['message' => __('Escolha o arquivo .json gerado pelo botão "Exportar" antes de importar.', 'mailbridge')] + $back;
+            return ['message' => __('Escolha o arquivo .json gerado pelo botão "Exportar" antes de importar.', 'mailtech')] + $back;
         }
         if ((int) $file['size'] > 2 * 1024 * 1024) {
-            return ['message' => __('Arquivo grande demais: o limite é 2 MB.', 'mailbridge')] + $back;
+            return ['message' => __('Arquivo grande demais: o limite é 2 MB.', 'mailtech')] + $back;
         }
 
         [$data, $error] = Porter::parse((string) file_get_contents((string) $file['tmp_name']));
@@ -775,12 +775,12 @@ final class Actions
         Facts::reset();
 
         $message = sprintf(
-            __('Importação concluída: %1$d regra(s) criada(s), %2$d atualizada(s).', 'mailbridge'),
+            __('Importação concluída: %1$d regra(s) criada(s), %2$d atualizada(s).', 'mailtech'),
             $report['created'],
             $report['updated']
         );
         if ($report['sending']) {
-            $message .= ' ' . __('Servidor de envio importado: digite a senha de novo em Envio.', 'mailbridge');
+            $message .= ' ' . __('Servidor de envio importado: digite a senha de novo em Envio.', 'mailtech');
         }
 
         return [
@@ -799,7 +799,7 @@ final class Actions
 
         return [
             'ok'       => true,
-            'message'  => __('Ajustes do MailBridge restaurados para o padrão. As regras, os modelos e o servidor de envio não foram alterados.', 'mailbridge'),
+            'message'  => __('Ajustes do MailTech restaurados para o padrão. As regras, os modelos e o servidor de envio não foram alterados.', 'mailtech'),
             'redirect' => Page::url('diagnostics'),
         ];
     }

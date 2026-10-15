@@ -1,5 +1,5 @@
-{% extends '@mailbridge/layout.html.twig' %}
-{% import '@mailbridge/macros.html.twig' as f %}
+{% extends '@mailtech/layout.html.twig' %}
+{% import '@mailtech/macros.html.twig' as f %}
 
 {% block content %}
    <div class="row g-3">
@@ -15,15 +15,15 @@
                <div class="flex-fill tm-minw">
                   <h2 class="h3 mb-1">
                      {% if tm.status == 'active' %}
-                        {{ __('Ativo: os e-mails estão saindo normalmente.', 'mailbridge') }}
+                        {{ __('Ativo: os e-mails estão saindo normalmente.', 'mailtech') }}
                      {% elseif tm.status == 'inactive' %}
-                        {{ __('Inativo: os e-mails não estão saindo.', 'mailbridge') }}
+                        {{ __('Inativo: os e-mails não estão saindo.', 'mailtech') }}
                      {% else %}
-                        {{ __('Precisa de atenção.', 'mailbridge') }}
+                        {{ __('Precisa de atenção.', 'mailtech') }}
                      {% endif %}
                   </h2>
                   {% if issues is empty %}
-                     <p class="mb-0 tm-soft">{{ __('Nada pendente. Você pode acompanhar os envios em "Fila e histórico".', 'mailbridge') }}</p>
+                     <p class="mb-0 tm-soft">{{ __('Nada pendente. Você pode acompanhar os envios em "Fila e histórico".', 'mailtech') }}</p>
                   {% else %}
                      <ul class="list-unstyled mb-0">
                         {% for issue in issues %}
@@ -49,11 +49,11 @@
       <div class="col-12 col-lg-5">
          <div class="card h-100">
             <div class="card-header">
-               <h2 class="card-title h4 m-0">{{ __('Primeiros passos', 'mailbridge') }}</h2>
-               <span class="ms-auto tm-soft">{{ __('%1$d de %2$d concluídos', 'mailbridge')|format(progress, checklist|length) }}</span>
+               <h2 class="card-title h4 m-0">{{ __('Primeiros passos', 'mailtech') }}</h2>
+               <span class="ms-auto tm-soft">{{ __('%1$d de %2$d concluídos', 'mailtech')|format(progress, checklist|length) }}</span>
             </div>
             <div class="card-body">
-               <div class="progress mb-3" role="progressbar" aria-label="{{ __('Progresso dos primeiros passos', 'mailbridge') }}"
+               <div class="progress mb-3" role="progressbar" aria-label="{{ __('Progresso dos primeiros passos', 'mailtech') }}"
                     aria-valuemin="0" aria-valuemax="{{ checklist|length }}" aria-valuenow="{{ progress }}">
                   <div class="progress-bar bg-success" style="width: {{ (progress * 100 / checklist|length)|round }}%"></div>
                </div>
@@ -62,11 +62,11 @@
                      <li class="d-flex align-items-center gap-2 py-1">
                         {% if step.done %}
                            <i class="ti ti-circle-check text-success" aria-hidden="true"></i>
-                           <span class="visually-hidden">{{ __('Concluído:', 'mailbridge') }}</span>
+                           <span class="visually-hidden">{{ __('Concluído:', 'mailtech') }}</span>
                            <span class="flex-fill">{{ step.label }}</span>
                         {% else %}
                            <i class="ti ti-circle" aria-hidden="true"></i>
-                           <span class="visually-hidden">{{ __('Falta:', 'mailbridge') }}</span>
+                           <span class="visually-hidden">{{ __('Falta:', 'mailtech') }}</span>
                            <a class="flex-fill" href="{{ step.url }}">{{ step.label }}</a>
                         {% endif %}
                      </li>
@@ -80,32 +80,32 @@
       <div class="col-12 col-sm-6 col-lg-4">
          <div class="card h-100">
             <div class="card-header">
-               <h2 class="card-title h4 m-0">{{ __('Fila de e-mails', 'mailbridge') }}</h2>
+               <h2 class="card-title h4 m-0">{{ __('Fila de e-mails', 'mailtech') }}</h2>
             </div>
             <div class="card-body">
                <div class="d-flex gap-4 mb-2">
                   <a class="text-reset text-decoration-none" href="{{ urls.queue }}">
                      <div class="tm-counter">{{ counters.pending }}</div>
-                     <div class="tm-soft">{{ __('esperando envio', 'mailbridge') }}</div>
+                     <div class="tm-soft">{{ __('esperando envio', 'mailtech') }}</div>
                   </a>
                   <a class="text-reset text-decoration-none" href="{{ urls.failures }}">
                      <div class="tm-counter{{ counters.failing > 0 ? ' text-danger' }}">{{ counters.failing }}</div>
-                     <div class="tm-soft">{{ __('com falha (7 dias)', 'mailbridge') }}</div>
+                     <div class="tm-soft">{{ __('com falha (7 dias)', 'mailtech') }}</div>
                   </a>
                </div>
                <p class="tm-soft mb-0">
                   {% if last_sent %}
-                     {{ __('Último e-mail enviado: %s.', 'mailbridge')|format(last_sent) }}
+                     {{ __('Último e-mail enviado: %s.', 'mailtech')|format(last_sent) }}
                   {% else %}
-                     {{ __('Nenhum e-mail enviado ainda.', 'mailbridge') }}
+                     {{ __('Nenhum e-mail enviado ainda.', 'mailtech') }}
                   {% endif %}
                </p>
             </div>
             <div class="card-footer d-flex flex-wrap gap-2">
                <a class="btn btn-sm {{ counters.failing > 0 ? 'btn-danger' : 'btn-outline-secondary' }}" href="{{ urls.failures }}">
-                  <i class="ti ti-mail-x" aria-hidden="true"></i> {{ __('Ver falhas', 'mailbridge') }}
+                  <i class="ti ti-mail-x" aria-hidden="true"></i> {{ __('Ver falhas', 'mailtech') }}
                </a>
-               <a class="btn btn-sm btn-outline-secondary" href="{{ urls.queue }}">{{ __('Ver a fila', 'mailbridge') }}</a>
+               <a class="btn btn-sm btn-outline-secondary" href="{{ urls.queue }}">{{ __('Ver a fila', 'mailtech') }}</a>
             </div>
          </div>
       </div>
@@ -114,15 +114,15 @@
       <div class="col-12 col-sm-6 col-lg-3">
          <div class="card h-100">
             <div class="card-header">
-               <h2 class="card-title h4 m-0">{{ __('Ações rápidas', 'mailbridge') }}</h2>
+               <h2 class="card-title h4 m-0">{{ __('Ações rápidas', 'mailtech') }}</h2>
             </div>
             <div class="card-body d-grid gap-2">
                <a class="btn btn-primary" href="{{ urls.test }}">
-                  <i class="ti ti-send" aria-hidden="true"></i> {{ __('Enviar e-mail de teste', 'mailbridge') }}
+                  <i class="ti ti-send" aria-hidden="true"></i> {{ __('Enviar e-mail de teste', 'mailtech') }}
                </a>
-               <a class="btn btn-outline-secondary" href="{{ urls.sending }}">{{ __('Configurar envio', 'mailbridge') }}</a>
-               <a class="btn btn-outline-secondary" href="{{ urls.events }}">{{ __('Ver regras de aviso', 'mailbridge') }}</a>
-               <a class="btn btn-outline-secondary" href="{{ urls.diag }}">{{ __('Abrir o diagnóstico', 'mailbridge') }}</a>
+               <a class="btn btn-outline-secondary" href="{{ urls.sending }}">{{ __('Configurar envio', 'mailtech') }}</a>
+               <a class="btn btn-outline-secondary" href="{{ urls.events }}">{{ __('Ver regras de aviso', 'mailtech') }}</a>
+               <a class="btn btn-outline-secondary" href="{{ urls.diag }}">{{ __('Abrir o diagnóstico', 'mailtech') }}</a>
             </div>
          </div>
       </div>

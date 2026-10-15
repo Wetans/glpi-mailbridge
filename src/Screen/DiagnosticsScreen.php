@@ -1,13 +1,13 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
-use GlpiPlugin\Mailbridge\Audit;
-use GlpiPlugin\Mailbridge\Facts;
-use GlpiPlugin\Mailbridge\LegacyImport;
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Rights;
-use GlpiPlugin\Mailbridge\Settings;
+use GlpiPlugin\Mailtech\Audit;
+use GlpiPlugin\Mailtech\Facts;
+use GlpiPlugin\Mailtech\LegacyImport;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Rights;
+use GlpiPlugin\Mailtech\Settings;
 
 /**
  * Diagnóstico: verificações com a ação sugerida, alterações recentes,
@@ -38,7 +38,7 @@ final class DiagnosticsScreen
             'rights'      => Rights::labels(),
             'imported'    => LegacyImport::report(),
             'about'       => [
-                'plugin' => PLUGIN_MAILBRIDGE_VERSION,
+                'plugin' => PLUGIN_MAILTECH_VERSION,
                 'glpi'   => GLPI_VERSION,
                 'php'    => PHP_VERSION,
             ],

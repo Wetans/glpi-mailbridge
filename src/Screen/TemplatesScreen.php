@@ -1,14 +1,14 @@
 <?php
 
-namespace GlpiPlugin\Mailbridge\Screen;
+namespace GlpiPlugin\Mailtech\Screen;
 
 use Glpi\Toolbox\FrontEnd;
-use GlpiPlugin\Mailbridge\Actions;
-use GlpiPlugin\Mailbridge\Page;
-use GlpiPlugin\Mailbridge\Rule;
-use GlpiPlugin\Mailbridge\Template;
-use GlpiPlugin\Mailbridge\Text;
-use GlpiPlugin\Mailbridge\Translation;
+use GlpiPlugin\Mailtech\Actions;
+use GlpiPlugin\Mailtech\Page;
+use GlpiPlugin\Mailtech\Rule;
+use GlpiPlugin\Mailtech\Template;
+use GlpiPlugin\Mailtech\Text;
+use GlpiPlugin\Mailtech\Translation;
 use Html;
 
 /**
@@ -82,7 +82,7 @@ final class TemplatesScreen
         // Abas de idioma.
         $tabs = [[
             'code'    => '',
-            'label'   => __('Padrão (todos os idiomas)', 'mailbridge'),
+            'label'   => __('Padrão (todos os idiomas)', 'mailtech'),
             'url'     => Page::url('templates', ['rule' => $id]),
             'current' => $language === '',
         ]];
@@ -97,7 +97,7 @@ final class TemplatesScreen
         if ($language !== '' && !isset($translations[$language])) {
             $tabs[] = [
                 'code'    => $language,
-                'label'   => sprintf(__('%s (nova tradução)', 'mailbridge'), $all[$language]),
+                'label'   => sprintf(__('%s (nova tradução)', 'mailtech'), $all[$language]),
                 'url'     => Page::url('templates', ['rule' => $id, 'lang' => $language]),
                 'current' => true,
             ];
@@ -121,8 +121,8 @@ final class TemplatesScreen
             }
         }
 
-        $result = $_SESSION['plugin_mailbridge_result'] ?? null;
-        unset($_SESSION['plugin_mailbridge_result']);
+        $result = $_SESSION['plugin_mailtech_result'] ?? null;
+        unset($_SESSION['plugin_mailtech_result']);
 
         $placeholders = [];
         foreach (Template::placeholders() as $name => $description) {
